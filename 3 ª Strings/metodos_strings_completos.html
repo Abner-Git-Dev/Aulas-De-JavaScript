@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos Completos de Strings em JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .metodo {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Métodos Completos de Strings em JavaScript</h1>
+        <p>Guia completo com explicação detalhada de cada método de strings em JavaScript.</p>
+        
+        <input type="text" id="textoTeste" class="input-field" value="JavaScript é incrível!" placeholder="Digite um texto para testar">
+        <button onclick="testarTodosMetodos()">Testar Todos os Métodos</button>
+        
+        <div id="resultados"></div>
+
+        <!-- ============================================ -->
+        <!-- 1. LENGTH -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>1. length</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o número de caracteres (tamanho) da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa saber quantos caracteres tem uma string.<br>
+                <strong>Importante:</strong> Conta espaços em branco e caracteres especiais. Começa do 1, não do 0.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.length); // 10
+            </div>
+            <div class="resultado" id="res-length"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. CHARAT -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>2. charAt()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o caractere em uma posição específica (índice).<br>
+                <strong>Quando usar:</strong> Quando você precisa pegar uma letra específica da string.<br>
+                <strong>Importante:</strong> Os índices começam em 0. Se o índice não existir, retorna string vazia.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.charAt(0)); // "J" (primeira letra)<br>
+                console.log(texto.charAt(4)); // "S"<br>
+                console.log(texto.charAt(10)); // "" (vazio, não existe)
+            </div>
+            <div class="resultado" id="res-charAt"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. CHARCODEAT -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>3. charCodeAt()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o código Unicode (número) do caractere em uma posição específica.<br>
+                <strong>Quando usar:</strong> Quando você precisa do código numérico de um caractere.<br>
+                <strong>Importante:</strong> Útil para comparações ou operações com códigos de caracteres.
+            </div>
+            <div class="exemplo">
+                let texto = "A";<br>
+                console.log(texto.charCodeAt(0)); // 65 (código Unicode de "A")
+            </div>
+            <div class="resultado" id="res-charCodeAt"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. CONCAT -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>4. concat()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Junta (concatena) duas ou mais strings em uma única string.<br>
+                <strong>Quando usar:</strong> Quando você precisa combinar textos.<br>
+                <strong>Importante:</strong> Hoje em dia é mais comum usar template literals (`${}`) ou o operador `+`.
+            </div>
+            <div class="exemplo">
+                let texto1 = "Olá";<br>
+                let texto2 = "Mundo";<br>
+                console.log(texto1.concat(" ", texto2)); // "Olá Mundo"<br>
+                console.log(texto1 + " " + texto2); // "Olá Mundo" (mais comum)
+            </div>
+            <div class="resultado" id="res-concat"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. INDEXOF -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>5. indexOf()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o índice da PRIMEIRA ocorrência de um texto dentro da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa saber onde um texto aparece pela primeira vez.<br>
+                <strong>Importante:</strong> Se não encontrar, retorna -1. Diferencia maiúsculas de minúsculas.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                console.log(texto.indexOf("a")); // 1 (primeiro "a")<br>
+                console.log(texto.indexOf("é")); // 11<br>
+                console.log(texto.indexOf("z")); // -1 (não existe)
+            </div>
+            <div class="resultado" id="res-indexOf"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. LASTINDEXOF -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>6. lastIndexOf()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o índice da ÚLTIMA ocorrência de um texto dentro da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa saber onde um texto aparece pela última vez.<br>
+                <strong>Importante:</strong> Se não encontrar, retorna -1. Busca de trás para frente.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                console.log(texto.lastIndexOf("a")); // 14 (último "a")<br>
+                console.log(texto.lastIndexOf("i")); // 18
+            </div>
+            <div class="resultado" id="res-lastIndexOf"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. INCLUDES -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>7. includes()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se um texto está contido na string. Retorna true ou false.<br>
+                <strong>Quando usar:</strong> Quando você precisa saber se um texto existe dentro de outro.<br>
+                <strong>Importante:</strong> Diferencia maiúsculas de minúsculas. Mais moderno que indexOf.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                console.log(texto.includes("Java")); // true<br>
+                console.log(texto.includes("python")); // false
+            </div>
+            <div class="resultado" id="res-includes"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. STARTSWITH -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>8. startsWith()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se a string COMEÇA com um texto específico. Retorna true ou false.<br>
+                <strong>Quando usar:</strong> Quando você precisa validar se um texto começa de uma certa forma.<br>
+                <strong>Importante:</strong> Diferencia maiúsculas de minúsculas.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript教程";<br>
+                console.log(texto.startsWith("Java")); // true<br>
+                console.log(texto.startsWith("java")); // false (maiúscula diferente)
+            </div>
+            <div class="resultado" id="res-startsWith"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. ENDSWITH -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>9. endsWith()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se a string TERMINA com um texto específico. Retorna true ou false.<br>
+                <strong>Quando usar:</strong> Quando você precisa validar se um texto termina de uma certa forma.<br>
+                <strong>Importante:</strong> Diferencia maiúsculas de minúsculas.
+            </div>
+            <div class="exemplo">
+                let texto = "arquivo.pdf";<br>
+                console.log(texto.endsWith(".pdf")); // true<br>
+                console.log(texto.endsWith(".doc")); // false
+            </div>
+            <div class="resultado" id="res-endsWith"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. SLICE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>10. slice()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Extrai uma parte da string e retorna uma nova string.<br>
+                <strong>Quando usar:</strong> Quando você precisa pegar um pedaço específico do texto.<br>
+                <strong>Importante:</strong> Aceita índices negativos (conta de trás para frente). Não altera a string original.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.slice(0, 4)); // "Java" (do índice 0 até 4)<br>
+                console.log(texto.slice(4)); // "Script" (do índice 4 até o fim)<br>
+                console.log(texto.slice(-6)); // "Script" (últimos 6 caracteres)<br>
+                console.log(texto.slice(-6, -3)); // "Scr"
+            </div>
+            <div class="resultado" id="res-slice"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. SUBSTRING -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>11. substring()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Similar ao slice(), extrai uma parte da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa pegar um pedaço do texto.<br>
+                <strong>Importante:</strong> NÃO aceita índices negativos. Se o primeiro parâmetro for maior que o segundo, ele inverte automaticamente.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.substring(0, 4)); // "Java"<br>
+                console.log(texto.substring(4, 0)); // "Java" (inverte automaticamente)<br>
+                console.log(texto.substring(-3)); // "JavaScript" (ignora negativo)
+            </div>
+            <div class="resultado" id="res-substring"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. SUBSTR -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>12. substr()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Extrai uma parte da string a partir de uma posição e com um comprimento específico.<br>
+                <strong>Quando usar:</strong> Quando você precisa pegar um pedaço definindo o tamanho.<br>
+                <strong>Importante:</strong> Está sendo descontinuado (obsoleto). Prefira usar slice() ou substring().
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.substr(0, 4)); // "Java" (começa em 0, pega 4 caracteres)<br>
+                console.log(texto.substr(4, 6)); // "Script" (começa em 4, pega 6 caracteres)
+            </div>
+            <div class="resultado" id="res-substr"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. REPLACE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>13. replace()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Substitui um texto por outro na string.<br>
+                <strong>Quando usar:</strong> Quando você precisa trocar palavras ou caracteres.<br>
+                <strong>Importante:</strong> Por padrão, substitui apenas a PRIMEIRA ocorrência. Para substituir todas, use regex com flag /g.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível, JavaScript é poderoso";<br>
+                console.log(texto.replace("JavaScript", "JS")); // "JS é incrível, JavaScript é poderoso" (só a primeira)<br>
+                console.log(texto.replace(/JavaScript/g, "JS")); // "JS é incrível, JS é poderoso" (todas)
+            </div>
+            <div class="resultado" id="res-replace"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 14. REPLACEALL -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>14. replaceAll()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Substitui TODAS as ocorrências de um texto por outro.<br>
+                <strong>Quando usar:</strong> Quando você precisa trocar todas as ocorrências sem usar regex.<br>
+                <strong>Importante:</strong> Método mais moderno (ES2021). Funciona como replace() com /g.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível, JavaScript é poderoso";<br>
+                console.log(texto.replaceAll("JavaScript", "JS")); // "JS é incrível, JS é poderoso"
+            </div>
+            <div class="resultado" id="res-replaceAll"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 15. TOUPPERCASE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>15. toUpperCase()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte toda a string para letras MAIÚSCULAS.<br>
+                <strong>Quando usar:</strong> Quando você precisa normalizar texto para comparações ou exibição.<br>
+                <strong>Importante:</strong> Não altera a string original, retorna uma nova string.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.toUpperCase()); // "JAVASCRIPT"
+            </div>
+            <div class="resultado" id="res-toUpperCase"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 16. TOLOWERCASE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>16. toLowerCase()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte toda a string para letras MINÚSCULAS.<br>
+                <strong>Quando usar:</strong> Quando você precisa normalizar texto para comparações ou exibição.<br>
+                <strong>Importante:</strong> Não altera a string original, retorna uma nova string.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.toLowerCase()); // "javascript"
+            </div>
+            <div class="resultado" id="res-toLowerCase"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 17. TOLOCALEUPPERCASE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>17. toLocaleUpperCase()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte para maiúsculas considerando o idioma/local do usuário.<br>
+                <strong>Quando usar:</strong> Quando você precisa respeitar regras específicas de idiomas (como turco, alemão).<br>
+                <strong>Importante:</strong> Para português, funciona igual ao toUpperCase().
+            </div>
+            <div class="exemplo">
+                let texto = "javascript";<br>
+                console.log(texto.toLocaleUpperCase()); // "JAVASCRIPT"
+            </div>
+            <div class="resultado" id="res-toLocaleUpperCase"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 18. TOLOCALELOWERCASE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>18. toLocaleLowerCase()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte para minúsculas considerando o idioma/local do usuário.<br>
+                <strong>Quando usar:</strong> Quando você precisa respeitar regras específicas de idiomas.<br>
+                <strong>Importante:</strong> Para português, funciona igual ao toLowerCase().
+            </div>
+            <div class="exemplo">
+                let texto = "JAVASCRIPT";<br>
+                console.log(texto.toLocaleLowerCase()); // "javascript"
+            </div>
+            <div class="resultado" id="res-toLocaleLowerCase"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 19. TRIM -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>19. trim()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove espaços em branco do INÍCIO e do FIM da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa limpar inputs de formulários ou textos com espaços extras.<br>
+                <strong>Importante:</strong> Não remove espaços no meio da string.
+            </div>
+            <div class="exemplo">
+                let texto = "   JavaScript   ";<br>
+                console.log(texto.trim()); // "JavaScript" (sem espaços nas pontas)
+            </div>
+            <div class="resultado" id="res-trim"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 20. TRIMSTART -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>20. trimStart()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove espaços em branco apenas do INÍCIO da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa limpar apenas o começo do texto.<br>
+                <strong>Importante:</strong> Também conhecido como trimLeft().
+            </div>
+            <div class="exemplo">
+                let texto = "   JavaScript   ";<br>
+                console.log(texto.trimStart()); // "JavaScript   " (sem espaços no início)
+            </div>
+            <div class="resultado" id="res-trimStart"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 21. TRIMEND -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>21. trimEnd()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove espaços em branco apenas do FIM da string.<br>
+                <strong>Quando usar:</strong> Quando você precisa limpar apenas o final do texto.<br>
+                <strong>Importante:</strong> Também conhecido como trimRight().
+            </div>
+            <div class="exemplo">
+                let texto = "   JavaScript   ";<br>
+                console.log(texto.trimEnd()); // "   JavaScript" (sem espaços no final)
+            </div>
+            <div class="resultado" id="res-trimEnd"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 22. PADSTART -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>22. padStart()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona caracteres no INÍCIO da string até atingir um tamanho específico.<br>
+                <strong>Quando usar:</strong> Para formatar números (001, 002), alinhar textos, criar IDs.<br>
+                <strong>Importante:</strong> Se a string já for maior que o tamanho, não faz nada.
+            </div>
+            <div class="exemplo">
+                let texto = "5";<br>
+                console.log(texto.padStart(3, "0")); // "005" (completa com zeros até ter 3 caracteres)<br>
+                console.log(texto.padStart(5, "*")); // "****5"
+            </div>
+            <div class="resultado" id="res-padStart"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 23. PADEND -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>23. padEnd()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona caracteres no FIM da string até atingir um tamanho específico.<br>
+                <strong>Quando usar:</strong> Para alinhar textos à direita, formatar tabelas.<br>
+                <strong>Importante:</strong> Se a string já for maior que o tamanho, não faz nada.
+            </div>
+            <div class="exemplo">
+                let texto = "5";<br>
+                console.log(texto.padEnd(3, "0")); // "500" (completa com zeros até ter 3 caracteres)<br>
+                console.log(texto.padEnd(5, "*")); // "5****"
+            </div>
+            <div class="resultado" id="res-padEnd"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 24. SPLIT -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>24. split()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Divide a string em um array baseado em um separador.<br>
+                <strong>Quando usar:</strong> Quando você precisa separar palavras, dados CSV, processar texto.<br>
+                <strong>Importante:</strong> Se não encontrar o separador, retorna array com a string inteira. Pode limitar o número de divisões.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                console.log(texto.split(" ")); // ["JavaScript", "é", "incrível"]<br>
+                console.log(texto.split(" ", 2)); // ["JavaScript", "é"] (limita a 2 divisões)
+            </div>
+            <div class="resultado" id="res-split"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 25. REPEAT -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>25. repeat()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Repete a string um número específico de vezes.<br>
+                <strong>Quando usar:</strong> Para criar padrões, repetir caracteres, formatar texto.<br>
+                <strong>Importante:</strong> Se o número for 0, retorna string vazia. Se negativo, lança erro.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript ";<br>
+                console.log(texto.repeat(3)); // "JavaScript JavaScript JavaScript "<br>
+                console.log("*".repeat(10)); // "**********"
+            </div>
+            <div class="resultado" id="res-repeat"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 26. MATCH -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>26. match()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Busca correspondências de uma expressão regular (regex) na string.<br>
+                <strong>Quando usar:</strong> Quando você precisa buscar padrões complexos no texto.<br>
+                <strong>Importante:</strong> Retorna um array com as correspondências ou null se não encontrar. Com flag /g, retorna todas as ocorrências.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                console.log(texto.match(/[a-z]/g)); // ["a", "v", "a", "s", "c", "r", "i", "p", "t", "é", "n", "c", "r", "í", "v", "e", "l"] (todas as letras minúsculas)
+            </div>
+            <div class="resultado" id="res-match"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 27. MATCHALL -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>27. matchAll()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna todas as correspondências de uma expressão regular (regex) na string.<br>
+                <strong>Quando usar:</strong> Quando você precisa buscar TODAS as ocorrências de um padrão.<br>
+                <strong>Importante:</strong> Requer que a regex tenha a flag /g. Retorna um iterador, não um array.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                const matches = texto.matchAll(/[a-z]/g);<br>
+                console.log([...matches]); // Array com todas as correspondências
+            </div>
+            <div class="resultado" id="res-matchAll"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 28. SEARCH -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>28. search()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Procura uma expressão regular (regex) na string e retorna o índice da primeira ocorrência.<br>
+                <strong>Quando usar:</strong> Quando você precisa encontrar a posição de um padrão no texto.<br>
+                <strong>Importante:</strong> Se não encontrar, retorna -1. Similar ao indexOf() mas aceita regex.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript é incrível";<br>
+                console.log(texto.search(/[a-z]/)); // 1 (índice do primeiro caractere minúsculo)<br>
+                console.log(texto.search("é")); // 11
+            </div>
+            <div class="resultado" id="res-search"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 29. LOCALECOMPARE -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>29. localeCompare()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Compara duas strings considerando o idioma/local. Retorna -1, 0 ou 1.<br>
+                <strong>Quando usar:</strong> Para ordenar strings em ordem alfabética correta do idioma.<br>
+                <strong>Importante:</strong> -1 se a primeira for menor, 0 se iguais, 1 se a primeira for maior.
+            </div>
+            <div class="exemplo">
+                let texto1 = "a";<br>
+                let texto2 = "b";<br>
+                console.log(texto1.localeCompare(texto2)); // -1 (a vem antes de b)<br>
+                console.log(texto2.localeCompare(texto1)); // 1 (b vem depois de a)<br>
+                console.log(texto1.localeCompare("a")); // 0 (iguais)
+            </div>
+            <div class="resultado" id="res-localeCompare"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 30. VALUEOF -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>30. valueOf()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o valor primitivo da string (a própria string).<br>
+                <strong>Quando usar:</strong> Raramente usado diretamente. JavaScript chama automaticamente quando necessário.<br>
+                <strong>Importante:</strong> Em JavaScript, strings já são valores primitivos, então este método retorna a própria string.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.valueOf()); // "JavaScript"
+            </div>
+            <div class="resultado" id="res-valueOf"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 31. TOSTRING -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>31. toString()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna a string como uma string (parece redundante, mas é útil para outros tipos).<br>
+                <strong>Quando usar:</strong> Quando você precisa converter outros tipos em string.<br>
+                <strong>Importante:</strong> Para strings, retorna a própria string.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.toString()); // "JavaScript"<br>
+                let numero = 123;<br>
+                console.log(numero.toString()); // "123"
+            </div>
+            <div class="resultado" id="res-toString"></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 32. AT -->
+        <!-- ============================================ -->
+        <div class="metodo">
+            <h2>32. at()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o caractere em uma posição específica. Similar ao charAt().<br>
+                <strong>Quando usar:</strong> Alternativa moderna ao charAt(). Aceita índices negativos.<br>
+                <strong>Importante:</strong> Método mais moderno (ES2022). Com índice negativo, conta de trás para frente.
+            </div>
+            <div class="exemplo">
+                let texto = "JavaScript";<br>
+                console.log(texto.at(0)); // "J"<br>
+                console.log(texto.at(-1)); // "t" (último caractere)<br>
+                console.log(texto.at(100)); // undefined (não existe)
+            </div>
+            <div class="resultado" id="res-at"></div>
+        </div>
+
+        <div class="observacao">
+            <strong>📝 Observação Importante:</strong> Todos esses métodos NÃO alteram a string original (exceto alguns casos específicos). Eles retornam uma NOVA string com o resultado. Strings em JavaScript são imutáveis.
+        </div>
+    </div>
+
+    <script>
+        function testarTodosMetodos() {
+            const texto = document.getElementById('textoTeste').value;
+            const resultados = document.getElementById('resultados');
+            
+            // Limpar resultados anteriores
+            resultados.innerHTML = '<h2>Resultados para: "' + texto + '"</h2>';
+            
+            // 1. length
+            document.getElementById('res-length').innerHTML = 
+                '<strong>Resultado:</strong> ' + texto.length + ' caracteres';
+            
+            // 2. charAt
+            document.getElementById('res-charAt').innerHTML = 
+                '<strong>charAt(0):</strong> "' + texto.charAt(0) + '" | ' +
+                '<strong>charAt(4):</strong> "' + texto.charAt(4) + '"';
+            
+            // 3. charCodeAt
+            document.getElementById('res-charCodeAt').innerHTML = 
+                '<strong>charCodeAt(0):</strong> ' + texto.charCodeAt(0);
+            
+            // 4. concat
+            document.getElementById('res-concat').innerHTML = 
+                '<strong>concat(" Teste"):</strong> "' + texto.concat(" Teste") + '"';
+            
+            // 5. indexOf
+            document.getElementById('res-indexOf').innerHTML = 
+                '<strong>indexOf("a"):</strong> ' + texto.indexOf('a') + ' | ' +
+                '<strong>indexOf("z"):</strong> ' + texto.indexOf('z');
+            
+            // 6. lastIndexOf
+            document.getElementById('res-lastIndexOf').innerHTML = 
+                '<strong>lastIndexOf("a"):</strong> ' + texto.lastIndexOf('a');
+            
+            // 7. includes
+            document.getElementById('res-includes').innerHTML = 
+                '<strong>includes("Java"):</strong> ' + texto.includes('Java') + ' | ' +
+                '<strong>includes("python"):</strong> ' + texto.includes('python');
+            
+            // 8. startsWith
+            document.getElementById('res-startsWith').innerHTML = 
+                '<strong>startsWith("Java"):</strong> ' + texto.startsWith('Java');
+            
+            // 9. endsWith
+            document.getElementById('res-endsWith').innerHTML = 
+                '<strong>endsWith("!"):</strong> ' + texto.endsWith('!');
+            
+            // 10. slice
+            document.getElementById('res-slice').innerHTML = 
+                '<strong>slice(0, 4):</strong> "' + texto.slice(0, 4) + '" | ' +
+                '<strong>slice(-3):</strong> "' + texto.slice(-3) + '"';
+            
+            // 11. substring
+            document.getElementById('res-substring').innerHTML = 
+                '<strong>substring(0, 4):</strong> "' + texto.substring(0, 4) + '"';
+            
+            // 12. substr
+            document.getElementById('res-substr').innerHTML = 
+                '<strong>substr(0, 4):</strong> "' + texto.substr(0, 4) + '"';
+            
+            // 13. replace
+            document.getElementById('res-replace').innerHTML = 
+                '<strong>replace("a", "@"):</strong> "' + texto.replace('a', '@') + '"';
+            
+            // 14. replaceAll
+            document.getElementById('res-replaceAll').innerHTML = 
+                '<strong>replaceAll("a", "@"):</strong> "' + texto.replaceAll('a', '@') + '"';
+            
+            // 15. toUpperCase
+            document.getElementById('res-toUpperCase').innerHTML = 
+                '<strong>Resultado:</strong> "' + texto.toUpperCase() + '"';
+            
+            // 16. toLowerCase
+            document.getElementById('res-toLowerCase').innerHTML = 
+                '<strong>Resultado:</strong> "' + texto.toLowerCase() + '"';
+            
+            // 17. toLocaleUpperCase
+            document.getElementById('res-toLocaleUpperCase').innerHTML = 
+                '<strong>Resultado:</strong> "' + texto.toLocaleUpperCase() + '"';
+            
+            // 18. toLocaleLowerCase
+            document.getElementById('res-toLocaleLowerCase').innerHTML = 
+                '<strong>Resultado:</strong> "' + texto.toLocaleLowerCase() + '"';
+            
+            // 19. trim
+            const textoComEspacos = "   " + texto + "   ";
+            document.getElementById('res-trim').innerHTML = 
+                '<strong>Original:</strong> "' + textoComEspacos + '" | ' +
+                '<strong>trim():</strong> "' + textoComEspacos.trim() + '"';
+            
+            // 20. trimStart
+            document.getElementById('res-trimStart').innerHTML = 
+                '<strong>trimStart():</strong> "' + textoComEspacos.trimStart() + '"';
+            
+            // 21. trimEnd
+            document.getElementById('res-trimEnd').innerHTML = 
+                '<strong>trimEnd():</strong> "' + textoComEspacos.trimEnd() + '"';
+            
+            // 22. padStart
+            document.getElementById('res-padStart').innerHTML = 
+                '<strong>padStart(20, "*"):</strong> "' + texto.padStart(20, '*') + '"';
+            
+            // 23. padEnd
+            document.getElementById('res-padEnd').innerHTML = 
+                '<strong>padEnd(20, "*"):</strong> "' + texto.padEnd(20, '*') + '"';
+            
+            // 24. split
+            document.getElementById('res-split').innerHTML = 
+                '<strong>split(" "):</strong> [' + texto.split(' ').join(', ') + ']';
+            
+            // 25. repeat
+            document.getElementById('res-repeat').innerHTML = 
+                '<strong>repeat(2):</strong> "' + texto.repeat(2) + '"';
+            
+            // 26. match
+            const matchResult = texto.match(/[a-z]/g);
+            document.getElementById('res-match').innerHTML = 
+                '<strong>match(/[a-z]/g):</strong> [' + (matchResult?.join(', ') || 'nenhum') + ']';
+            
+            // 27. matchAll
+            document.getElementById('res-matchAll').innerHTML = 
+                '<strong>matchAll(/[a-z]/g):</strong> Retorna iterador com todas as correspondências';
+            
+            // 28. search
+            document.getElementById('res-search').innerHTML = 
+                '<strong>search(/[a-z]/):</strong> ' + texto.search(/[a-z]/);
+            
+            // 29. localeCompare
+            document.getElementById('res-localeCompare').innerHTML = 
+                '<strong>localeCompare("Python"):</strong> ' + texto.localeCompare('Python');
+            
+            // 30. valueOf
+            document.getElementById('res-valueOf').innerHTML = 
+                '<strong>Resultado:</strong> "' + texto.valueOf() + '"';
+            
+            // 31. toString
+            document.getElementById('res-toString').innerHTML = 
+                '<strong>Resultado:</strong> "' + texto.toString() + '"';
+            
+            // 32. at
+            document.getElementById('res-at').innerHTML = 
+                '<strong>at(0):</strong> "' + texto.at(0) + '" | ' +
+                '<strong>at(-1):</strong> "' + texto.at(-1) + '"';
+            
+            // Scroll para resultados
+            resultados.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Testar automaticamente ao carregar
+        window.onload = function() {
+            testarTodosMetodos();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Arrays em JavaScript - Guia Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        . secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .importante {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Métodos de Arrays em JavaScript - Guia Completo</h1>
+        <p>Guia completo com todos os métodos de arrays explicados detalhadamente.</p>
+
+        <!-- ============================================ -->
+        <!-- 1. CRIAÇÃO DE ARRAYS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. Criação de Arrays</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Cria uma lista ordenada de valores.<br>
+                <strong>Quando usar:</strong> Quando você precisa armazenar múltiplos valores em uma única variável.<br>
+                <strong>Importante:</strong> Arrays são indexados a partir de 0 (primeiro elemento é índice 0).
+            </div>
+            <div class="exemplo">
+                // Array de strings<br>
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                // Array de números<br>
+                const numeros = [1, 2, 3, 4, 5];<br>
+                <br>
+                // Array vazio<br>
+                const vazio = [];<br>
+                <br>
+                // Array misto<br>
+                const misto = ['texto', 10, true, null];
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Arrays criados com diferentes tipos de dados
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. ACESSO POR ÍNDICE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. Acesso por Índice</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Acessa elementos específicos do array usando seu índice.<br>
+                <strong>Quando usar:</strong> Quando você precisa obter ou modificar um elemento específico.<br>
+                <strong>Importante:</strong> Índices começam em 0. Último índice = length - 1.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                //             0        1          2<br>
+                <br>
+                console.log(alunos[0]); // 'Luiz'<br>
+                console.log(alunos[1]); // 'Samira'<br>
+                console.log(alunos[2]); // 'João'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Luiz', 'Samira', 'João'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. PUSH() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. push()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona um ou mais elementos ao final do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa adicionar novos elementos ao final da lista.<br>
+                <strong>Importante:</strong> Modifica o array original e retorna o novo tamanho.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                alunos.push('Abner');<br>
+                console.log(alunos); // ['Luiz', 'Samira', 'João', 'Abner']<br>
+                <br>
+                alunos.push('Felipe', 'Diego'); // Adiciona múltiplos<br>
+                console.log(alunos); // ['Luiz', 'Samira', 'João', 'Abner', 'Felipe', 'Diego']
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Elementos adicionados ao final do array
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. UNSHIFT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. unshift()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona um ou mais elementos no início do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa adicionar novos elementos no começo da lista.<br>
+                <strong>Importante:</strong> Modifica o array original e retorna o novo tamanho.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                alunos.unshift('Rafael');<br>
+                console.log(alunos); // ['Rafael', 'Luiz', 'Samira', 'João']<br>
+                <br>
+                alunos.unshift('Kaio', 'Pedro'); // Adiciona múltiplos<br>
+                console.log(alunos); // ['Kaio', 'Pedro', 'Rafael', 'Luiz', 'Samira', 'João']
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Elementos adicionados no início do array
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. POP() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. pop()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove o último elemento do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa remover o último elemento da lista.<br>
+                <strong>Importante:</strong> Modifica o array original e retorna o elemento removido.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                const removido = alunos.pop();<br>
+                console.log(removido); // 'João'<br>
+                console.log(alunos); // ['Luiz', 'Samira']
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'João' removido, array agora é ['Luiz', 'Samira']
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. SHIFT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. shift()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove o primeiro elemento do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa remover o primeiro elemento da lista.<br>
+                <strong>Importante:</strong> Modifica o array original e retorna o elemento removido.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                const removido = alunos.shift();<br>
+                console.log(removido); // 'Luiz'<br>
+                console.log(alunos); // ['Samira', 'João']
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Luiz' removido, array agora é ['Samira', 'João']
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. LENGTH -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>7. length</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o número de elementos no array.<br>
+                <strong>Quando usar:</strong> Quando você precisa saber quantos elementos existem no array.<br>
+                <strong>Importante:</strong> É uma propriedade, não um método (não usa parênteses).
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                console.log(alunos.length); // 3<br>
+                <br>
+                alunos.push('Abner');<br>
+                console.log(alunos.length); // 4
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3, depois 4
+            </div>
+            <div class="observacao">
+                <strong>Adicionar usando length:</strong> alunos[alunos.length] = 'novo' adiciona ao final
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. SPLICE() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>8. splice()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove ou adiciona elementos em qualquer posição do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa modificar o array em uma posição específica.<br>
+                <strong>Importante:</strong> Modifica o array original. Primeiro parâmetro = índice, segundo = quantidade a remover.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João', 'Abner'];<br>
+                <br>
+                // Remover 1 elemento a partir do índice 1<br>
+                alunos.splice(1, 1);<br>
+                console.log(alunos); // ['Luiz', 'João', 'Abner']<br>
+                <br>
+                // Adicionar 'Felipe' no índice 1<br>
+                alunos.splice(1, 0, 'Felipe');<br>
+                console.log(alunos); // ['Luiz', 'Felipe', 'João', 'Abner']
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Elementos removidos/adicionados em posição específica
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. SLICE() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>9. slice()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna uma cópia de parte do array sem modificar o original.<br>
+                <strong>Quando usar:</strong> Quando você precisa obter uma parte do array sem alterá-lo.<br>
+                <strong>Importante:</strong> Não modifica o array original. Primeiro parâmetro = início, segundo = fim (exclusivo).
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João', 'Abner', 'Felipe'];<br>
+                <br>
+                const parte = alunos.slice(1, 3);<br>
+                console.log(parte); // ['Samira', 'João']<br>
+                console.log(alunos); // ['Luiz', 'Samira', 'João', 'Abner', 'Felipe'] (original intacto)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> ['Samira', 'João'] (cópia, original não modificado)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. INDEXOF() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>10. indexOf()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o índice da primeira ocorrência de um elemento.<br>
+                <strong>Quando usar:</strong> Quando você precisa encontrar a posição de um elemento no array.<br>
+                <strong>Importante:</strong> Retorna -1 se o elemento não for encontrado.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João', 'Samira'];<br>
+                <br>
+                console.log(alunos.indexOf('Samira')); // 1 (primeira ocorrência)<br>
+                console.log(alunos.indexOf('João')); // 2<br>
+                console.log(alunos.indexOf('Diego')); // -1 (não encontrado)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 1, 2, -1
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. LASTINDEXOF() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>11. lastIndexOf()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o índice da última ocorrência de um elemento.<br>
+                <strong>Quando usar:</strong> Quando você precisa encontrar a última posição de um elemento.<br>
+                <strong>Importante:</strong> Retorna -1 se o elemento não for encontrado.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João', 'Samira'];<br>
+                <br>
+                console.log(alunos.lastIndexOf('Samira')); // 3 (última ocorrência)<br>
+                console.log(alunos.lastIndexOf('João')); // 2<br>
+                console.log(alunos.lastIndexOf('Diego')); // -1 (não encontrado)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3, 2, -1
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. INCLUDES() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>12. includes()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se um elemento existe no array. Retorna true ou false.<br>
+                <strong>Quando usar:</strong> Quando você precisa saber se um elemento está presente no array.<br>
+                <strong>Importante:</strong> Mais moderno e legível que indexOf().
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                console.log(alunos.includes('Samira')); // true<br>
+                console.log(alunos.includes('Diego')); // false
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> true, false
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. JOIN() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>13. join()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Junta todos os elementos do array em uma string.<br>
+                <strong>Quando usar:</strong> Quando você precisa converter um array em string.<br>
+                <strong>Importante:</strong> Por padrão usa vírgula como separador, mas pode personalizar.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                console.log(alunos.join()); // 'Luiz,Samira,João'<br>
+                console.log(alunos.join(' - ')); // 'Luiz - Samira - João'<br>
+                console.log(alunos.join(' / ')); // 'Luiz / Samira / João'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Luiz,Samira,João', 'Luiz - Samira - João', 'Luiz / Samira / João'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 14. REVERSE() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>14. reverse()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Inverte a ordem dos elementos do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa inverter a ordem dos elementos.<br>
+                <strong>Importante:</strong> Modifica o array original.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                <br>
+                alunos.reverse();<br>
+                console.log(alunos); // ['João', 'Samira', 'Luiz']
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> ['João', 'Samira', 'Luiz'] (ordem invertida)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 15. SORT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>15. sort()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Ordena os elementos do array.<br>
+                <strong>Quando usar:</strong> Quando você precisa organizar os elementos em ordem.<br>
+                <strong>Importante:</strong> Modifica o array original. Por padrão converte para string e ordena.
+            </div>
+            <div class="exemplo">
+                const numeros = [3, 1, 4, 1, 5, 9, 2, 6];<br>
+                <br>
+                numeros.sort();<br>
+                console.log(numeros); // [1, 1, 2, 3, 4, 5, 6, 9]<br>
+                <br>
+                const nomes = ['Luiz', 'Samira', 'João'];<br>
+                nomes.sort();<br>
+                console.log(nomes); // ['João', 'Luiz', 'Samira'] (ordem alfabética)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Array ordenado
+            </div>
+            <div class="observacao">
+                <strong>Para números:</strong> sort((a, b) => a - b) ordena numericamente
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 16. INSTANCEOF ARRAY -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>16. instanceof Array</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se uma variável é um array. Retorna true ou false.<br>
+                <strong>Quando usar:</strong> Quando você precisa validar se uma variável é do tipo array.<br>
+                <strong>Importante:</strong> Útil para verificar tipos de dados.
+            </div>
+            <div class="exemplo">
+                const alunos = ['Luiz', 'Samira', 'João'];<br>
+                const texto = 'Não é array';<br>
+                const numero = 10;<br>
+                <br>
+                console.log(alunos instanceof Array); // true<br>
+                console.log(texto instanceof Array); // false<br>
+                console.log(numero instanceof Array); // false
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> true, false, false
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 17. CONCAT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>17. concat()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Junta dois ou mais arrays em um novo array.<br>
+                <strong>Quando usar:</strong> Quando você precisa combinar múltiplos arrays.<br>
+                <strong>Importante:</strong> Não modifica os arrays originais, retorna um novo array.
+            </div>
+            <div class="exemplo">
+                const alunos1 = ['Luiz', 'Samira'];<br>
+                const alunos2 = ['João', 'Abner'];<br>
+                <br>
+                const todos = alunos1.concat(alunos2);<br>
+                console.log(todos); // ['Luiz', 'Samira', 'João', 'Abner']<br>
+                console.log(alunos1); // ['Luiz', 'Samira'] (original intacto)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> ['Luiz', 'Samira', 'João', 'Abner'] (novo array)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TESTE INTERATIVO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>🧪 Teste Interativo</h2>
+            <input type="text" id="inputArray" class="input-field" placeholder="Digite elementos separados por vírgula (ex: Luiz,Samira,João)">
+            <input type="text" id="inputNovo" class="input-field" placeholder="Novo elemento para adicionar">
+            <button onclick="testarArray()">Testar Métodos</button>
+            
+            <div class="resultado" id="res-original"></div>
+            <div class="resultado" id="res-push"></div>
+            <div class="resultado" id="res-pop"></div>
+            <div class="resultado" id="res-length"></div>
+            <div class="resultado" id="res-includes"></div>
+            <div class="resultado" id="res-indexof"></div>
+            <div class="resultado" id="res-join"></div>
+        </div>
+
+        <div class="importante">
+            <strong>📝 Resumo dos Métodos de Arrays:</strong><br>
+            ✅ Criação de arrays<br>
+            ✅ Acesso por índice<br>
+            ✅ push() - Adicionar ao final<br>
+            ✅ unshift() - Adicionar no início<br>
+            ✅ pop() - Remover do final<br>
+            ✅ shift() - Remover do início<br>
+            ✅ length - Tamanho do array<br>
+            ✅ splice() - Remover/adicionar em posição específica<br>
+            ✅ slice() - Copiar parte do array<br>
+            ✅ indexOf() - Encontrar índice<br>
+            ✅ lastIndexOf() - Encontrar último índice<br>
+            ✅ includes() - Verificar se existe<br>
+            ✅ join() - Juntar em string<br>
+            ✅ reverse() - Inverter ordem<br>
+            ✅ sort() - Ordenar<br>
+            ✅ instanceof Array - Verificar tipo<br>
+            ✅ concat() - Juntar arrays
+        </div>
+    </div>
+
+    <script>
+        function testarArray() {
+            const input = document.getElementById('inputArray').value;
+            const novo = document.getElementById('inputNovo').value;
+            
+            if (!input) {
+                alert('Por favor, digite elementos separados por vírgula.');
+                return;
+            }
+            
+            let array = input.split(',').map(item => item.trim());
+            
+            document.getElementById('res-original').innerHTML = 
+                `Array original: [${array.join(', ')}]`;
+            
+            // Teste push
+            let arrayPush = [...array];
+            if (novo) {
+                arrayPush.push(novo);
+                document.getElementById('res-push').innerHTML = 
+                    `push('${novo}'): [${arrayPush.join(', ')}]`;
+            } else {
+                document.getElementById('res-push').innerHTML = 
+                    `push(): Adicione um elemento para testar`;
+            }
+            
+            // Teste pop
+            let arrayPop = [...array];
+            const removido = arrayPop.pop();
+            document.getElementById('res-pop').innerHTML = 
+                `pop(): [${arrayPop.join(', ')}] (removido: '${removido}')`;
+            
+            // Teste length
+            document.getElementById('res-length').innerHTML = 
+                `length: ${array.length}`;
+            
+            // Teste includes
+            if (novo) {
+                document.getElementById('res-includes').innerHTML = 
+                    `includes('${novo}'): ${array.includes(novo)}`;
+            } else {
+                document.getElementById('res-includes').innerHTML = 
+                    `includes(): Adicione um elemento para testar`;
+            }
+            
+            // Teste indexOf
+            if (novo) {
+                document.getElementById('res-indexof').innerHTML = 
+                    `indexOf('${novo}'): ${array.indexOf(novo)}`;
+            } else {
+                document.getElementById('res-indexof').innerHTML = 
+                    `indexOf(): Adicione um elemento para testar`;
+            }
+            
+            // Teste join
+            document.getElementById('res-join').innerHTML = 
+                `join(' - '): '${array.join(' - ')}'`;
+        }
+    </script>
+</body>
+</html>

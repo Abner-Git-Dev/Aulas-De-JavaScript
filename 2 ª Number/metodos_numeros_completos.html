@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Números em JavaScript - Guia Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .importante {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Métodos de Números em JavaScript - Guia Completo</h1>
+        <p>Guia completo com todos os métodos de números e do objeto Math explicados detalhadamente.</p>
+
+        <!-- ============================================ -->
+        <!-- 1. TOSTRING() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. toString()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte um número para string.<br>
+                <strong>Quando usar:</strong> Quando você precisa concatenar números com strings ou tratar números como texto.<br>
+                <strong>Importante:</strong> Pode receber parâmetros para converter para diferentes bases (binário, hexadecimal, etc).
+            </div>
+            <div class="exemplo">
+                let num = 10;<br>
+                console.log(num.toString()); // "10"<br>
+                console.log(typeof num.toString()); // "string"
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> "10" (string)
+            </div>
+            <div class="observacao">
+                <strong>toString(2):</strong> Converte para binário (base 2)<br>
+                <strong>toString(16):</strong> Converte para hexadecimal (base 16)
+            </div>
+            <div class="exemplo">
+                let num = 10;<br>
+                console.log(num.toString(2)); // "1010" (binário)<br>
+                console.log(num.toString(16)); // "a" (hexadecimal)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. TOFIXED() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. toFixed()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Formata um número com um número fixo de casas decimais e retorna como string.<br>
+                <strong>Quando usar:</strong> Quando você precisa exibir números com precisão específica (preços, medições, etc).<br>
+                <strong>Importante:</strong> Arredonda o número e sempre retorna uma string.
+            </div>
+            <div class="exemplo">
+                let num = 10.5789;<br>
+                console.log(num.toFixed(2)); // "10.58"<br>
+                console.log(num.toFixed(0)); // "11"<br>
+                console.log(num.toFixed(4)); // "10.5789"
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> "10.58" (string com 2 casas decimais)
+            </div>
+            <div class="importante">
+                <strong>⚠️ IMPORTANTE:</strong> toFixed() sempre retorna string. Se precisar do número, use parseFloat() ou Number().
+            </div>
+            <div class="exemplo">
+                let num = 10.5789;<br>
+                let resultado = parseFloat(num.toFixed(2));<br>
+                console.log(resultado); // 10.58 (número)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. NUMBER.ISINTEGER() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. Number.isInteger()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se um valor é um número inteiro. Retorna true ou false.<br>
+                <strong>Quando usar:</strong> Quando você precisa validar se um número não tem casas decimais.<br>
+                <strong>Importante:</strong> Diferente de verificar se é número, verifica especificamente se é inteiro.
+            </div>
+            <div class="exemplo">
+                let num1 = 10;<br>
+                let num2 = 10.5;<br>
+                <br>
+                console.log(Number.isInteger(num1)); // true<br>
+                console.log(Number.isInteger(num2)); // false
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> true para 10, false para 10.5
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. NUMBER.ISNAN() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. Number.isNaN()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se um valor é NaN (Not a Number). Retorna true se for NaN, false caso contrário.<br>
+                <strong>Quando usar:</strong> Quando você precisa validar se uma operação matemática resultou em um valor inválido.<br>
+                <strong>Importante:</strong> true significa que o valor é inválido (NaN), false significa que é um número válido.
+            </div>
+            <div class="exemplo">
+                let temp1 = 0 / 0; // NaN<br>
+                let temp2 = 10 * '5'; // 50 (válido)<br>
+                <br>
+                console.log(Number.isNaN(temp1)); // true (inválido)<br>
+                console.log(Number.isNaN(temp2)); // false (válido)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> true para NaN, false para número válido
+            </div>
+            <div class="observacao">
+                <strong>Exemplos que geram NaN:</strong> 0/0, parseInt('texto'), Math.sqrt(-1)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. PARSEFLOAT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. parseFloat()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte uma string em um número de ponto flutuante (decimal).<br>
+                <strong>Quando usar:</strong> Quando você precisa converter strings que representam números decimais.<br>
+                <strong>Importante:</strong> Mantém as casas decimais, diferente de parseInt().
+            </div>
+            <div class="exemplo">
+                let str1 = "10.5";<br>
+                let str2 = "10.999";<br>
+                let str3 = "10";<br>
+                <br>
+                console.log(parseFloat(str1)); // 10.5<br>
+                console.log(parseFloat(str2)); // 10.999<br>
+                console.log(parseFloat(str3)); // 10
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 10.5, 10.999, 10 (mantém decimais)
+            </div>
+            <div class="observacao">
+                <strong>Diferença de parseInt:</strong> parseFloat("10.5") = 10.5, parseInt("10.5") = 10
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. PARSEINT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. parseInt()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte uma string em um número inteiro.<br>
+                <strong>Quando usar:</strong> Quando você precisa converter strings e remover casas decimais.<br>
+                <strong>Importante:</strong> Remove as casas decimais (arredonda para baixo).
+            </div>
+            <div class="exemplo">
+                let str1 = "10.5";<br>
+                let str2 = "10.999";<br>
+                let str3 = "10";<br>
+                <br>
+                console.log(parseInt(str1)); // 10<br>
+                console.log(parseInt(str2)); // 10<br>
+                console.log(parseInt(str3)); // 10
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 10, 10, 10 (remove decimais)
+            </div>
+            <div class="observacao">
+                <strong>Diferença de parseFloat:</strong> parseInt("10.5") = 10, parseFloat("10.5") = 10.5
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. NUMBER() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>7. Number()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Converte um valor em número. Pode converter strings, booleanos, etc.<br>
+                <strong>Quando usar:</strong> Quando você precisa converter qualquer tipo para número.<br>
+                <strong>Importante:</strong> Mais estrito que parseFloat/parseInt, retorna NaN se não conseguir converter.
+            </div>
+            <div class="exemplo">
+                let str1 = "10.5";<br>
+                let str2 = "10";<br>
+                let bool = true;<br>
+                <br>
+                console.log(Number(str1)); // 10.5<br>
+                console.log(Number(str2)); // 10<br>
+                console.log(Number(bool)); // 1
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 10.5, 10, 1
+            </div>
+            <div class="observacao">
+                <strong>Uso com toFixed:</strong> Number("10.58") = 10.58 (converte string de toFixed de volta para número)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. MATH.FLOOR() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>8. Math.floor()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Arredonda um número para baixo (para o menor inteiro mais próximo).<br>
+                <strong>Quando usar:</strong> Quando você precisa remover casas decimais arredondando para baixo.<br>
+                <strong>Importante:</strong> Sempre arredonda para baixo, independente do valor decimal.
+            </div>
+            <div class="exemplo">
+                let num1 = 10.7;<br>
+                let num2 = 10.1;<br>
+                let num3 = 10.9;<br>
+                let num4 = 10.0;<br>
+                <br>
+                console.log(Math.floor(num1)); // 10<br>
+                console.log(Math.floor(num2)); // 10<br>
+                console.log(Math.floor(num3)); // 10<br>
+                console.log(Math.floor(num4)); // 10
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 10, 10, 10, 10 (sempre para baixo)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. MATH.CEIL() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>9. Math.ceil()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Arredonda um número para cima (para o maior inteiro mais próximo).<br>
+                <strong>Quando usar:</strong> Quando você precisa arredondar para cima.<br>
+                <strong>Importante:</strong> Sempre arredonda para cima, mesmo se o decimal for pequeno.
+            </div>
+            <div class="exemplo">
+                let num1 = 10.1;<br>
+                let num2 = 10.7;<br>
+                let num3 = 10.9;<br>
+                let num4 = 10.0;<br>
+                <br>
+                console.log(Math.ceil(num1)); // 11<br>
+                console.log(Math.ceil(num2)); // 11<br>
+                console.log(Math.ceil(num3)); // 11<br>
+                console.log(Math.ceil(num4)); // 10
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 11, 11, 11, 10 (sempre para cima, exceto se já for inteiro)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. MATH.ROUND() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>10. Math.round()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Arredonda um número para o inteiro mais próximo.<br>
+                <strong>Quando usar:</strong> Quando você precisa arredondar de forma padrão (para o mais próximo).<br>
+                <strong>Importante:</strong> Arredonda para cima se decimal ≥ 0.5, para baixo se decimal < 0.5.
+            </div>
+            <div class="exemplo">
+                let num1 = 10.4;<br>
+                let num2 = 10.5;<br>
+                let num3 = 10.6;<br>
+                <br>
+                console.log(Math.round(num1)); // 10<br>
+                console.log(Math.round(num2)); // 11<br>
+                console.log(Math.round(num3)); // 11
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 10, 11, 11 (arredonda para o mais próximo)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. MATH.MAX() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>11. Math.max()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o maior número entre os argumentos fornecidos.<br>
+                <strong>Quando usar:</strong> Quando você precisa encontrar o valor máximo em uma lista de números.<br>
+                <strong>Importante:</strong> Pode receber múltiplos argumentos separados por vírgula.
+            </div>
+            <div class="exemplo">
+                console.log(Math.max(1, 2, 3, 4, 5)); // 5<br>
+                console.log(Math.max(10, -10, 100, 50)); // 100<br>
+                console.log(Math.max(-10, -50, -1)); // -1
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 5, 100, -1 (maior número de cada lista)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. MATH.MIN() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>12. Math.min()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o menor número entre os argumentos fornecidos.<br>
+                <strong>Quando usar:</strong> Quando você precisa encontrar o valor mínimo em uma lista de números.<br>
+                <strong>Importante:</strong> Pode receber múltiplos argumentos separados por vírgula.
+            </div>
+            <div class="exemplo">
+                console.log(Math.min(1, 2, 3, 4, 5)); // 1<br>
+                console.log(Math.min(10, -10, 100, 50)); // -10<br>
+                console.log(Math.min(-10, -50, -1)); // -50
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 1, -10, -50 (menor número de cada lista)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. MATH.RANDOM() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>13. Math.random()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Gera um número aleatório entre 0 (inclusive) e 1 (exclusivo).<br>
+                <strong>Quando usar:</strong> Quando você precisa gerar números aleatórios para jogos, testes, simulações.<br>
+                <strong>Importante:</strong> Sempre retorna entre 0 e 1. Para outros intervalos, use a fórmula.
+            </div>
+            <div class="exemplo">
+                console.log(Math.random()); // 0.123... (entre 0 e 1)<br>
+                console.log(Math.random()); // 0.789... (entre 0 e 1)<br>
+                console.log(Math.random()); // 0.456... (entre 0 e 1)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Números aleatórios entre 0 e 1
+            </div>
+            <div class="observacao">
+                <strong>Fórmula para intervalo:</strong> Math.round(Math.random() * (max - min) + min)
+            </div>
+            <div class="exemplo">
+                // Número aleatório entre 5 e 10<br>
+                const aleatorio = Math.round(Math.random() * (10 - 5) + 5);<br>
+                console.log(aleatorio); // 5, 6, 7, 8, 9 ou 10
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 14. MATH.POW() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>14. Math.pow()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Calcula a potência de um número (base elevada ao expoente).<br>
+                <strong>Quando usar:</strong> Quando você precisa calcular potências matemáticas.<br>
+                <strong>Importante:</strong> Primeiro argumento é a base, segundo é o expoente.
+            </div>
+            <div class="exemplo">
+                console.log(Math.pow(2, 3)); // 8 (2³)<br>
+                console.log(Math.pow(2, 10)); // 1024 (2¹⁰)<br>
+                console.log(Math.pow(3, 2)); // 9 (3²)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 8, 1024, 9
+            </div>
+            <div class="observacao">
+                <strong>Operador moderno:</strong> 2 ** 3 = 8 (mesmo que Math.pow(2, 3))
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 15. OPERADOR ** -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>15. Operador ** (Potência)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Calcula potência de forma mais moderna e legível que Math.pow().<br>
+                <strong>Quando usar:</strong> Quando você precisa calcular potências (preferível ao Math.pow()).<br>
+                <strong>Importante:</strong> Sintaxe mais limpa e moderna (ES6+).
+            </div>
+            <div class="exemplo">
+                console.log(2 ** 3); // 8 (2³)<br>
+                console.log(2 ** 10); // 1024 (2¹⁰)<br>
+                console.log(3 ** 2); // 9 (3²)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 8, 1024, 9
+            </div>
+            <div class="observacao">
+                <strong>Raiz quadrada:</strong> num ** 0.5 ou num ** (1/2)
+            </div>
+            <div class="exemplo">
+                let num = 9;<br>
+                console.log(num ** 0.5); // 3 (raiz quadrada)<br>
+                console.log(num ** (1/2)); // 3 (raiz quadrada)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 16. MATH.SQRT() -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>16. Math.sqrt()</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Calcula a raiz quadrada de um número.<br>
+                <strong>Quando usar:</strong> Quando você precisa calcular raiz quadrada.<br>
+                <strong>Importante:</strong> Retorna NaN se o número for negativo.
+            </div>
+            <div class="exemplo">
+                console.log(Math.sqrt(9)); // 3<br>
+                console.log(Math.sqrt(16)); // 4<br>
+                console.log(Math.sqrt(25)); // 5
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3, 4, 5
+            </div>
+            <div class="observacao">
+                <strong>Alternativa:</strong> num ** 0.5 (mesmo resultado)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TESTE INTERATIVO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>🧪 Teste Interativo</h2>
+            <input type="number" id="testeNumero" class="input-field" placeholder="Digite um número decimal (ex: 10.5789)">
+            <button onclick="testarMetodos()">Testar Todos os Métodos</button>
+            
+            <div class="resultado" id="res-toString"></div>
+            <div class="resultado" id="res-toFixed"></div>
+            <div class="resultado" id="res-isInteger"></div>
+            <div class="resultado" id="res-parseFloat"></div>
+            <div class="resultado" id="res-parseInt"></div>
+            <div class="resultado" id="res-Mathfloor"></div>
+            <div class="resultado" id="res-Mathceil"></div>
+            <div class="resultado" id="res-Mathround"></div>
+            <div class="resultado" id="res-raiz"></div>
+        </div>
+
+        <div class="importante">
+            <strong>📝 Resumo dos Métodos de Números:</strong><br>
+            ✅ toString() - Conversão para string<br>
+            ✅ toFixed() - Formatação de casas decimais<br>
+            ✅ Number.isInteger() - Verificação de inteiro<br>
+            ✅ Number.isNaN() - Verificação de NaN<br>
+            ✅ parseFloat() - Conversão para decimal<br>
+            ✅ parseInt() - Conversão para inteiro<br>
+            ✅ Number() - Conversão para número<br>
+            ✅ Math.floor() - Arredondar para baixo<br>
+            ✅ Math.ceil() - Arredondar para cima<br>
+            ✅ Math.round() - Arredondar para o mais próximo<br>
+            ✅ Math.max() - Maior número<br>
+            ✅ Math.min() - Menor número<br>
+            ✅ Math.random() - Número aleatório<br>
+            ✅ Math.pow() - Potência<br>
+            ✅ ** - Potência (moderno)<br>
+            ✅ Math.sqrt() - Raiz quadrada
+        </div>
+    </div>
+
+    <script>
+        function testarMetodos() {
+            const num = parseFloat(document.getElementById('testeNumero').value);
+            
+            if (isNaN(num)) {
+                alert('Por favor, digite um número válido.');
+                return;
+            }
+            
+            document.getElementById('res-toString').innerHTML = 
+                `toString(): ${num.toString()} (tipo: ${typeof num.toString()})`;
+            
+            document.getElementById('res-toFixed').innerHTML = 
+                `toFixed(2): ${num.toFixed(2)} (tipo: ${typeof num.toFixed(2)})`;
+            
+            document.getElementById('res-isInteger').innerHTML = 
+                `Number.isInteger(): ${Number.isInteger(num)}`;
+            
+            document.getElementById('res-parseFloat').innerHTML = 
+                `parseFloat("${num}"): ${parseFloat(num.toString())}`;
+            
+            document.getElementById('res-parseInt').innerHTML = 
+                `parseInt("${num}"): ${parseInt(num.toString())}`;
+            
+            document.getElementById('res-Mathfloor').innerHTML = 
+                `Math.floor(${num}): ${Math.floor(num)}`;
+            
+            document.getElementById('res-Mathceil').innerHTML = 
+                `Math.ceil(${num}): ${Math.ceil(num)}`;
+            
+            document.getElementById('res-Mathround').innerHTML = 
+                `Math.round(${num}): ${Math.round(num)}`;
+            
+            document.getElementById('res-raiz').innerHTML = 
+                `Raiz quadrada (${num}): ${num ** 0.5}`;
+        }
+    </script>
+</body>
+</html>

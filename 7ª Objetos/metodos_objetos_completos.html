@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos em JavaScript - Guia Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .importante {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Objetos em JavaScript - Guia Completo</h1>
+        <p>Guia completo com todos os conceitos de objetos explicados detalhadamente.</p>
+
+        <!-- ============================================ -->
+        <!-- 1. CRIAÇÃO DE OBJETO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. Criação de Objeto</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Cria um objeto literal usando chaves `{}`.<br>
+                <strong>Quando usar:</strong> Para agrupar dados relacionados em uma estrutura.<br>
+                <strong>Importante:</strong> Objetos são coleções de pares chave-valor.
+            </div>
+            <div class="exemplo">
+                const pessoa1 = {<br>
+                &nbsp;&nbsp;nome: 'Abner'<br>
+                };<br>
+                <br>
+                console.log(pessoa1); // {nome: 'Abner'}
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> {nome: 'Abner'}
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. ACESSO A PROPRIEDADES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. Acesso a Propriedades</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Acessa o valor de uma propriedade do objeto.<br>
+                <strong>Quando usar:</strong> Para ler ou modificar valores do objeto.<br>
+                <strong>Importante:</strong> Use ponto `.` para propriedades comuns, colchetes `[]` para propriedades dinâmicas.
+            </div>
+            <div class="exemplo">
+                const pessoa1 = {<br>
+                &nbsp;&nbsp;nome: 'Abner'<br>
+                };<br>
+                <br>
+                console.log(pessoa1.nome); // 'Abner'<br>
+                console.log(pessoa1['nome']); // 'Abner'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner', 'Abner'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. MÚLTIPLAS PROPRIEDADES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. Múltiplas Propriedades</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Objeto com várias propriedades.<br>
+                <strong>Quando usar:</strong> Para representar entidades complexas.<br>
+                <strong>Importante:</strong> Separe propriedades com vírgula.
+            </div>
+            <div class="exemplo">
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23<br>
+                };<br>
+                <br>
+                console.log(pessoa.nome); // 'Abner'<br>
+                console.log(pessoa.sobrenome); // 'Silva'<br>
+                console.log(pessoa.idade); // 23
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner', 'Silva', 23
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. FUNÇÃO FACTORY -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. Função Factory</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Função que cria e retorna objetos.<br>
+                <strong>Quando usar:</strong> Para criar múltiplos objetos similares.<br>
+                <strong>Importante:</strong> Reutiliza código para criar objetos.
+            </div>
+            <div class="exemplo">
+                function criaPessoa(nome, sobrenome, idade) {<br>
+                &nbsp;&nbsp;return {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;nome: nome,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;sobrenome: sobrenome,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;idade: idade<br>
+                &nbsp;&nbsp;};<br>
+                }<br>
+                <br>
+                const pessoa2 = criaPessoa('Samira', 'Silva', 23);<br>
+                const pessoa3 = criaPessoa('Abner', 'Furutani', 23);<br>
+                <br>
+                console.log(pessoa2.nome); // 'Samira'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Samira'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. SHORTHAND PROPERTY NAMES (ES6) -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. Shorthand Property Names (ES6)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Simplifica quando nome da propriedade é igual ao da variável.<br>
+                <strong>Quando usar:</strong> Para código mais limpo e moderno.<br>
+                <strong>Importante:</strong> Funciona apenas quando nome da propriedade = nome da variável.
+            </div>
+            <div class="exemplo">
+                function criaPessoa(nome, sobrenome, idade) {<br>
+                &nbsp;&nbsp;return { nome, sobrenome, idade };<br>
+                }<br>
+                <br>
+                const pessoa = criaPessoa('Abner', 'Silva', 23);<br>
+                console.log(pessoa.nome); // 'Abner'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner'
+            </div>
+            <div class="observacao">
+                <strong>Forma tradicional:</strong> { nome: nome }<br>
+                <strong>Forma moderna:</strong> { nome }
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. MÉTODOS EM OBJETOS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. Métodos em Objetos</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Funções dentro de objetos que executam ações.<br>
+                <strong>Quando usar:</strong> Para adicionar comportamento aos objetos.<br>
+                <strong>Importante:</strong> Métodos podem acessar e modificar propriedades do objeto.
+            </div>
+            <div class="exemplo">
+                const pessoa5 = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23,<br>
+                <br>
+                &nbsp;&nbsp;fala() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.log('Ola mundo!');<br>
+                &nbsp;&nbsp;}<br>
+                };<br>
+                <br>
+                pessoa5.fala(); // 'Ola mundo!'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Ola mundo!'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. THIS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>7. This</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> `this` se refere ao próprio objeto.<br>
+                <strong>Quando usar:</strong> Para acessar propriedades do objeto dentro de métodos.<br>
+                <strong>Importante:</strong> Permite que métodos acessem dados do próprio objeto.
+            </div>
+            <div class="exemplo">
+                const pessoa5 = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23,<br>
+                <br>
+                &nbsp;&nbsp;fala() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.log(`${this.nome} ${this.sobrenome} ${this.idade}`);<br>
+                &nbsp;&nbsp;}<br>
+                };<br>
+                <br>
+                pessoa5.fala(); // 'Abner Silva 23'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner Silva 23'
+            </div>
+            <div class="importante">
+                <strong>⚠️ IMPORTANTE:</strong> `this` se refere ao objeto que está chamando o método.
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. MODIFICANDO PROPRIEDADES COM MÉTODOS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>8. Modificando Propriedades com Métodos</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Métodos que alteram valores das propriedades.<br>
+                <strong>Quando usar:</strong> Para encapsular lógica de modificação.<br>
+                <strong>Importante:</strong> Use `this` para acessar e modificar propriedades.
+            </div>
+            <div class="exemplo">
+                const pessoa5 = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23,<br>
+                <br>
+                &nbsp;&nbsp;fala() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.log(`${this.nome} ${this.sobrenome} ${this.idade} está falando oi....`);<br>
+                &nbsp;&nbsp;},<br>
+                <br>
+                &nbsp;&nbsp;incrementaIdade() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;this.idade++;<br>
+                &nbsp;&nbsp;}<br>
+                };<br>
+                <br>
+                pessoa5.fala(); // 'Abner Silva 23 está falando oi....'<br>
+                pessoa5.incrementaIdade();<br>
+                console.log(pessoa5.idade); // 24
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner Silva 23 está falando oi....', 24
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. ADICIONANDO PROPRIEDADES DINAMICAMENTE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>9. Adicionando Propriedades Dinamicamente</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona novas propriedades após a criação do objeto.<br>
+                <strong>Quando usar:</strong> Quando precisa adicionar dados em tempo de execução.<br>
+                <strong>Importante:</strong> Objetos em JavaScript são mutáveis.
+            </div>
+            <div class="exemplo">
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner'<br>
+                };<br>
+                <br>
+                pessoa.sobrenome = 'Silva';<br>
+                pessoa.idade = 23;<br>
+                <br>
+                console.log(pessoa); // {nome: 'Abner', sobrenome: 'Silva', idade: 23}
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> {nome: 'Abner', sobrenome: 'Silva', idade: 23}
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. DELETANDO PROPRIEDADES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>10. Deletando Propriedades</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove uma propriedade do objeto.<br>
+                <strong>Quando usar:</strong> Quando não precisa mais de uma propriedade.<br>
+                <strong>Importante:</strong> Use o operador `delete`.
+            </div>
+            <div class="exemplo">
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23<br>
+                };<br>
+                <br>
+                delete pessoa.idade;<br>
+                console.log(pessoa); // {nome: 'Abner', sobrenome: 'Silva'}
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> {nome: 'Abner', sobrenome: 'Silva'}
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. VERIFICANDO PROPRIEDADES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>11. Verificando Propriedades</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Verifica se uma propriedade existe no objeto.<br>
+                <strong>Quando usar:</strong> Para evitar erros ao acessar propriedades inexistentes.<br>
+                <strong>Importante:</strong> Use `in` ou `hasOwnProperty()`.
+            </div>
+            <div class="exemplo">
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva'<br>
+                };<br>
+                <br>
+                console.log('nome' in pessoa); // true<br>
+                console.log('idade' in pessoa); // false<br>
+                console.log(pessoa.hasOwnProperty('nome')); // true
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> true, false, true
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. LISTANDO PROPRIEDADES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>12. Listando Propriedades</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Obtém todas as chaves ou valores do objeto.<br>
+                <strong>Quando usar:</strong> Para iterar sobre as propriedades do objeto.<br>
+                <strong>Importante:</strong> Use `Object.keys()`, `Object.values()` ou `Object.entries()`.
+            </div>
+            <div class="exemplo">
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23<br>
+                };<br>
+                <br>
+                console.log(Object.keys(pessoa)); // ['nome', 'sobrenome', 'idade']<br>
+                console.log(Object.values(pessoa)); // ['Abner', 'Silva', 23]<br>
+                console.log(Object.entries(pessoa)); // [['nome', 'Abner'], ['sobrenome', 'Silva'], ['idade', 23]]
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> ['nome', 'sobrenome', 'idade'], ['Abner', 'Silva', 23], [['nome', 'Abner'], ['sobrenome', 'Silva'], ['idade', 23]]
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. OBJETO COMO PARÂMETRO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>13. Objeto como Parâmetro</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Passa objetos como parâmetros de funções.<br>
+                <strong>Quando usar:</strong> Para passar dados complexos para funções.<br>
+                <strong>Importante:</strong> Objetos são passados por referência.
+            </div>
+            <div class="exemplo">
+                function apresentar(pessoa) {<br>
+                &nbsp;&nbsp;console.log(`${pessoa.nome} tem ${pessoa.idade} anos`);<br>
+                }<br>
+                <br>
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;idade: 23<br>
+                };<br>
+                <br>
+                apresentar(pessoa); // 'Abner tem 23 anos'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner tem 23 anos'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 14. DESTRUCTURING DE OBJETOS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>14. Destructuring de Objetos</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Extrai propriedades de objetos para variáveis.<br>
+                <strong>Quando usar:</strong> Para código mais limpo e legível.<br>
+                <strong>Importante:</strong> Forma moderna de extrair dados de objetos.
+            </div>
+            <div class="exemplo">
+                const pessoa = {<br>
+                &nbsp;&nbsp;nome: 'Abner',<br>
+                &nbsp;&nbsp;sobrenome: 'Silva',<br>
+                &nbsp;&nbsp;idade: 23<br>
+                };<br>
+                <br>
+                const { nome, sobrenome, idade } = pessoa;<br>
+                <br>
+                console.log(nome); // 'Abner'<br>
+                console.log(sobrenome); // 'Silva'<br>
+                console.log(idade); // 23
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Abner', 'Silva', 23
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TESTE INTERATIVO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>🧪 Teste Interativo</h2>
+            <input type="text" id="inputNome" class="input-field" placeholder="Nome">
+            <input type="text" id="inputSobrenome" class="input-field" placeholder="Sobrenome">
+            <input type="number" id="inputIdade" class="input-field" placeholder="Idade">
+            <button onclick="criarObjeto()">Criar Objeto</button>
+            <button onclick="falar()">Falar</button>
+            <button onclick="incrementar()">Incrementar Idade</button>
+            
+            <div class="resultado" id="res-objeto"></div>
+            <div class="resultado" id="res-fala"></div>
+            <div class="resultado" id="res-idade"></div>
+        </div>
+
+        <div class="importante">
+            <strong>📝 Resumo dos Conceitos de Objetos:</strong><br>
+            ✅ Criação de Objeto<br>
+            ✅ Acesso a Propriedades<br>
+            ✅ Múltiplas Propriedades<br>
+            ✅ Função Factory<br>
+            ✅ Shorthand Property Names (ES6)<br>
+            ✅ Métodos em Objetos<br>
+            ✅ This<br>
+            ✅ Modificando Propriedades com Métodos<br>
+            ✅ Adicionando Propriedades Dinamicamente<br>
+            ✅ Deletando Propriedades<br>
+            ✅ Verificando Propriedades<br>
+            ✅ Listando Propriedades<br>
+            ✅ Objeto como Parâmetro<br>
+            ✅ Destructuring de Objetos
+        </div>
+    </div>
+
+    <script>
+        let pessoaTeste = null;
+
+        function criarObjeto() {
+            const nome = document.getElementById('inputNome').value;
+            const sobrenome = document.getElementById('inputSobrenome').value;
+            const idade = parseInt(document.getElementById('inputIdade').value);
+            
+            if (!nome || !sobrenome || isNaN(idade)) {
+                alert('Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+            
+            pessoaTeste = {
+                nome: nome,
+                sobrenome: sobrenome,
+                idade: idade,
+                
+                fala() {
+                    return `${this.nome} ${this.sobrenome} ${this.idade} está falando oi....`;
+                },
+                
+                incrementaIdade() {
+                    this.idade++;
+                }
+            };
+            
+            document.getElementById('res-objeto').innerHTML = 
+                `Objeto criado: ${JSON.stringify(pessoaTeste)}`;
+        }
+
+        function falar() {
+            if (!pessoaTeste) {
+                alert('Crie um objeto primeiro.');
+                return;
+            }
+            
+            document.getElementById('res-fala').innerHTML = pessoaTeste.fala();
+        }
+
+        function incrementar() {
+            if (!pessoaTeste) {
+                alert('Crie um objeto primeiro.');
+                return;
+            }
+            
+            pessoaTeste.incrementaIdade();
+            document.getElementById('res-idade').innerHTML = 
+                `Nova idade: ${pessoaTeste.idade}`;
+        }
+    </script>
+</body>
+</html>

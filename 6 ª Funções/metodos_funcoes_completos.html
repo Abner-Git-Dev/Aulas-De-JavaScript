@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções em JavaScript - Guia Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .importante {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Funções em JavaScript - Guia Completo</h1>
+        <p>Guia completo com todos os tipos de funções e conceitos explicados detalhadamente.</p>
+
+        <!-- ============================================ -->
+        <!-- 1. FUNÇÃO TRADICIONAL -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. Função Tradicional (Named Function)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Declara uma função com nome usando a palavra-chave `function`.<br>
+                <strong>Quando usar:</strong> Quando você precisa criar uma função reutilizável com nome.<br>
+                <strong>Importante:</strong> Pode ser chamada antes de ser declarada (hoisting).
+            </div>
+            <div class="exemplo">
+                function saudacao(nome) {<br>
+                &nbsp;&nbsp;console.log(`Bom dia ${nome}`);<br>
+                }<br>
+                <br>
+                saudacao('Abner'); // 'Bom dia Abner'<br>
+                saudacao('Samira'); // 'Bom dia Samira'
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Bom dia Abner', 'Bom dia Samira'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. FUNÇÃO COM RETURN -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. Função com Return</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna um valor que pode ser armazenado em uma variável.<br>
+                <strong>Quando usar:</strong> Quando você precisa usar o resultado da função em outras operações.<br>
+                <strong>Importante:</strong> `return` encerra a função e retorna o valor especificado.
+            </div>
+            <div class="exemplo">
+                function soma(x, y) {<br>
+                &nbsp;&nbsp;const resultado = x + y;<br>
+                &nbsp;&nbsp;return resultado;<br>
+                }<br>
+                <br>
+                const resultado = soma(2, 2);<br>
+                console.log(resultado); // 4
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 4
+            </div>
+            <div class="observacao">
+                <strong>Diferença:</strong> Funções sem return apenas executam, funções com return retornam valores.
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. PARÂMETROS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. Parâmetros</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Define valores que a função recebe quando é chamada.<br>
+                <strong>Quando usar:</strong> Quando você precisa que a função trabalhe com dados diferentes.<br>
+                <strong>Importante:</strong> Se não passar parâmetros, eles serão `undefined`.
+            </div>
+            <div class="exemplo">
+                function soma(x, y) {<br>
+                &nbsp;&nbsp;return x + y;<br>
+                }<br>
+                <br>
+                console.log(soma(2, 3)); // 5<br>
+                console.log(soma(10, 5)); // 15<br>
+                console.log(soma()); // NaN (undefined + undefined)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 5, 15, NaN
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. PARÂMETROS PADRÃO (DEFAULT PARAMETERS) -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. Parâmetros Padrão (Default Parameters)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Define valores padrão para parâmetros caso não sejam passados.<br>
+                <strong>Quando usar:</strong> Quando você quer que a função tenha valores de fallback.<br>
+                <strong>Importante:</strong> Evita `undefined` quando parâmetros não são passados.
+            </div>
+            <div class="exemplo">
+                function soma(x = 1, y = 1) {<br>
+                &nbsp;&nbsp;return x + y;<br>
+                }<br>
+                <br>
+                console.log(soma()); // 2 (1 + 1)<br>
+                console.log(soma(4)); // 5 (4 + 1)<br>
+                console.log(soma(4, 3)); // 7 (4 + 3)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 2, 5, 7
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. FUNÇÃO ANÔNIMA -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. Função Anônima (Anonymous Function)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Cria uma função sem nome e atribui a uma variável.<br>
+                <strong>Quando usar:</strong> Quando você precisa passar funções como parâmetro ou atribuir a variáveis.<br>
+                <strong>Importante:</strong> Recomendado usar ponto e vírgula no final da atribuição.
+            </div>
+            <div class="exemplo">
+                const raiz = function(n) {<br>
+                &nbsp;&nbsp;return n ** 0.5;<br>
+                };<br>
+                <br>
+                console.log(raiz(9)); // 3<br>
+                console.log(raiz(16)); // 4
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3, 4
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. ARROW FUNCTION -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. Arrow Function (Função Flecha)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Forma moderna e concisa de escrever funções em JavaScript (ES6).<br>
+                <strong>Quando usar:</strong> Para funções curtas e callbacks. É a forma mais moderna.<br>
+                <strong>Importante:</strong> Não tem seu próprio `this`, o que pode ser vantagem ou desvantagem.
+            </div>
+            <div class="exemplo">
+                const raiz = (n) => {<br>
+                &nbsp;&nbsp;return n ** 0.5;<br>
+                };<br>
+                <br>
+                console.log(raiz(9)); // 3
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. ARROW FUNCTION SIMPLIFICADA -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>7. Arrow Function Simplificada</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Forma mais concisa de arrow function quando tem apenas uma linha.<br>
+                <strong>Quando usar:</strong> Para funções simples de uma linha.<br>
+                <strong>Importante:</strong> Remove chaves e `return` implícito.
+            </div>
+            <div class="exemplo">
+                const raiz = (n) => n ** 0.5;<br>
+                <br>
+                console.log(raiz(9)); // 3<br>
+                console.log(raiz(16)); // 4
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3, 4
+            </div>
+            <div class="observacao">
+                <strong>Regras de simplificação:</strong><br>
+                - 1 parâmetro: pode remover parênteses<br>
+                - 1 linha: pode remover chaves e return<br>
+                - 0 parâmetros: precisa de parênteses vazios<br>
+                - +1 parâmetros: precisa de parênteses
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. ARROW FUNCTION SEM PARÊNTESES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>8. Arrow Function com 1 Parâmetro (Sem Parênteses)</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove parênteses quando há apenas um parâmetro.<br>
+                <strong>Quando usar:</strong> Para funções com apenas um parâmetro.<br>
+                <strong>Importante:</strong> Apenas quando há exatamente um parâmetro.
+            </div>
+            <div class="exemplo">
+                const raiz = n => n ** 0.5;<br>
+                const dobro = n => n * 2;<br>
+                <br>
+                console.log(raiz(9)); // 3<br>
+                console.log(dobro(5)); // 10
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 3, 10
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. ARROW FUNCTION SEM PARÂMETROS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>9. Arrow Function Sem Parâmetros</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Arrow function que não recebe parâmetros.<br>
+                <strong>Quando usar:</strong> Para funções que não precisam de dados externos.<br>
+                <strong>Importante:</strong> Precisa usar parênteses vazios `()`.
+            </div>
+            <div class="exemplo">
+                const saudacao = () => 'Olá';<br>
+                const numeroAleatorio = () => Math.random();<br>
+                <br>
+                console.log(saudacao()); // 'Olá'<br>
+                console.log(numeroAleatorio()); // número aleatório
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Olá', número aleatório
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. ARROW FUNCTION COM MÚLTIPLOS PARÂMETROS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>10. Arrow Function com Múltiplos Parâmetros</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Arrow function com dois ou mais parâmetros.<br>
+                <strong>Quando usar:</strong> Para funções que precisam de múltiplos dados.<br>
+                <strong>Importante:</strong> Precisa usar parênteses.
+            </div>
+            <div class="exemplo">
+                const soma = (a, b) => a + b;<br>
+                const multiplicar = (a, b, c) => a * b * c;<br>
+                <br>
+                console.log(soma(2, 3)); // 5<br>
+                console.log(multiplicar(2, 3, 4)); // 24
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 5, 24
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. CONCATENAÇÃO DE STRINGS EM FUNÇÕES -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>11. Concatenação de Strings em Funções</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Quando você passa strings para uma função que usa `+`, ocorre concatenação.<br>
+                <strong>Quando usar:</strong> Cuidado ao passar strings para funções matemáticas.<br>
+                <strong>Importante:</strong> Use `Number()` ou `parseFloat()` para converter strings em números.
+            </div>
+            <div class="exemplo">
+                function soma(x, y) {<br>
+                &nbsp;&nbsp;return x + y;<br>
+                }<br>
+                <br>
+                console.log(soma('Abner', 'Silva')); // 'AbnerSilva' (concatenação)<br>
+                console.log(soma(Number('5'), Number('3'))); // 8 (soma matemática)
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'AbnerSilva', 8
+            </div>
+            <div class="importante">
+                <strong>⚠️ IMPORTANTE:</strong> O operador `+` concatena strings e soma números. Sempre converta strings para números se quiser operações matemáticas.
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. FUNÇÃO COM MÚLTIPLAS LINHAS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>12. Função com Múltiplas Linhas</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Funções que executam múltiplas operações.<br>
+                <strong>Quando usar:</strong> Quando a lógica é mais complexa.<br>
+                <strong>Importante:</strong> Precisa usar chaves e `return` explícito.
+            </div>
+            <div class="exemplo">
+                function calcular(x, y) {<br>
+                &nbsp;&nbsp;const soma = x + y;<br>
+                &nbsp;&nbsp;const multiplicacao = x * y;<br>
+                &nbsp;&nbsp;return {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;soma,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;multiplicacao<br>
+                &nbsp;&nbsp;};<br>
+                }<br>
+                <br>
+                console.log(calcular(2, 3)); // {soma: 5, multiplicacao: 6}
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> {soma: 5, multiplicacao: 6}
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. HOISTING -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>13. Hoisting</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Funções tradicionais podem ser chamadas antes de serem declaradas.<br>
+                <strong>Quando usar:</strong> Entender o comportamento do JavaScript.<br>
+                <strong>Importante:</strong> Arrow functions e funções anônimas não têm hoisting.
+            </div>
+            <div class="exemplo">
+                // Chamando antes de declarar<br>
+                saudacao('Abner'); // Funciona!<br>
+                <br>
+                function saudacao(nome) {<br>
+                &nbsp;&nbsp;console.log(`Olá ${nome}`);<br>
+                }
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Olá Abner' (funciona por causa do hoisting)
+            </div>
+            <div class="observacao">
+                <strong>Não funciona com:</strong> const saudacao = () => ... (dá erro ReferenceError)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TESTE INTERATIVO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>🧪 Teste Interativo</h2>
+            <input type="number" id="inputNum1" class="input-field" placeholder="Primeiro número">
+            <input type="number" id="inputNum2" class="input-field" placeholder="Segundo número">
+            <button onclick="testarFuncoes()">Testar Funções</button>
+            
+            <div class="resultado" id="res-soma"></div>
+            <div class="resultado" id="res-dobro"></div>
+            <div class="resultado" id="res-raiz"></div>
+            <div class="resultado" id="res-multiplicacao"></div>
+        </div>
+
+        <div class="importante">
+            <strong>📝 Resumo dos Tipos de Funções:</strong><br>
+            ✅ Função Tradicional (Named Function)<br>
+            ✅ Função com Return<br>
+            ✅ Parâmetros<br>
+            ✅ Parâmetros Padrão (Default Parameters)<br>
+            ✅ Função Anônima (Anonymous Function)<br>
+            ✅ Arrow Function<br>
+            ✅ Arrow Function Simplificada<br>
+            ✅ Arrow Function com 1 Parâmetro<br>
+            ✅ Arrow Function Sem Parâmetros<br>
+            ✅ Arrow Function com Múltiplos Parâmetros<br>
+            ✅ Concatenação de Strings<br>
+            ✅ Função com Múltiplas Linhas<br>
+            ✅ Hoisting
+        </div>
+    </div>
+
+    <script>
+        // Funções para teste
+        function soma(x, y) {
+            return x + y;
+        }
+
+        const dobro = n => n * 2;
+        const raiz = n => n ** 0.5;
+        const multiplicar = (a, b) => a * b;
+
+        function testarFuncoes() {
+            const num1 = parseFloat(document.getElementById('inputNum1').value);
+            const num2 = parseFloat(document.getElementById('inputNum2').value);
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Por favor, digite números válidos.');
+                return;
+            }
+            
+            document.getElementById('res-soma').innerHTML = 
+                `soma(${num1}, ${num2}): ${soma(num1, num2)}`;
+            
+            document.getElementById('res-dobro').innerHTML = 
+                `dobro(${num1}): ${dobro(num1)}`;
+            
+            document.getElementById('res-raiz').innerHTML = 
+                `raiz(${num1}): ${raiz(num1)}`;
+            
+            document.getElementById('res-multiplicacao').innerHTML = 
+                `multiplicar(${num1}, ${num2}): ${multiplicar(num1, num2)}`;
+        }
+    </script>
+</body>
+</html>
