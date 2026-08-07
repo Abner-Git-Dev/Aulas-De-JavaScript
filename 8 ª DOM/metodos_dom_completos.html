@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM e Eventos em JavaScript - Guia Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .importante {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .demo-box {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 DOM e Eventos em JavaScript - Guia Completo</h1>
+        <p>Guia completo com todos os conceitos de DOM e eventos explicados detalhadamente.</p>
+
+        <!-- ============================================ -->
+        <!-- 1. O QUE É DOM -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. O que é DOM?</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> DOM (Document Object Model) é a representação do HTML como objetos JavaScript.<br>
+                <strong>Quando usar:</strong> Sempre que precisar manipular elementos da página.<br>
+                <strong>Importante:</strong> DOM permite que JavaScript interaja com a página web.
+            </div>
+            <div class="exemplo">
+                <!-- HTML --><br>
+                &lt;h1 id="titulo"&gt;Olá Mundo&lt;/h1&gt;<br>
+                <br>
+                <!-- JavaScript --><br>
+                const titulo = document.getElementById('titulo');<br>
+                console.log(titulo); // Elemento h1
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Elemento h1 selecionado
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. SELECIONAR POR ID -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. Selecionar por ID</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Seleciona um elemento único pelo seu ID.<br>
+                <strong>Quando usar:</strong> Quando precisa selecionar um elemento específico.<br>
+                <strong>Importante:</strong> ID deve ser único na página.
+            </div>
+            <div class="exemplo">
+                const elemento = document.getElementById('meuId');<br>
+                console.log(elemento);
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Elemento com ID 'meuId'
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. SELECIONAR POR CLASSE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. Selecionar por Classe</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Seleciona elementos pela classe.<br>
+                <strong>Quando usar:</strong> Quando precisa selecionar múltiplos elementos com mesma classe.<br>
+                <strong>Importante:</strong> Retorna HTMLCollection (não array).
+            </div>
+            <div class="exemplo">
+                const elementos = document.getElementsByClassName('minhaClasse');<br>
+                console.log(elementos); // HTMLCollection
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> HTMLCollection com elementos da classe
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. SELECIONAR POR TAG -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. Selecionar por Tag</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Seleciona elementos pelo nome da tag HTML.<br>
+                <strong>Quando usar:</strong> Quando precisa selecionar todos os elementos de um tipo.<br>
+                <strong>Importante:</strong> Retorna HTMLCollection.
+            </div>
+            <div class="exemplo">
+                const paragrafos = document.getElementsByTagName('p');<br>
+                console.log(paragrafos); // HTMLCollection de parágrafos
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> HTMLCollection de parágrafos
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. QUERYSELECTOR -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. querySelector</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Seleciona o primeiro elemento que corresponde ao seletor CSS.<br>
+                <strong>Quando usar:</strong> Forma mais flexível de selecionar elementos.<br>
+                <strong>Importante:</strong> Usa sintaxe CSS (#id, .classe, tag, etc).
+            </div>
+            <div class="exemplo">
+                const elemento = document.querySelector('.minhaClasse');<br>
+                const elemento2 = document.querySelector('#meuId');<br>
+                const elemento3 = document.querySelector('p');
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Primeiro elemento que corresponde ao seletor
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. QUERYSELECTORALL -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. querySelectorAll</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Seleciona todos os elementos que correspondem ao seletor CSS.<br>
+                <strong>Quando usar:</strong> Quando precisa selecionar múltiplos elementos.<br>
+                <strong>Importante:</strong> Retorna NodeList (parecido com array).
+            </div>
+            <div class="exemplo">
+                const elementos = document.querySelectorAll('.minhaClasse');<br>
+                console.log(elementos); // NodeList
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> NodeList com todos os elementos
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. INNERHTML -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>7. innerHTML</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Altera ou retorna o conteúdo HTML de um elemento.<br>
+                <strong>Quando usar:</strong> Quando precisa inserir HTML dentro de um elemento.<br>
+                <strong>Importante:</strong> Interpreta tags HTML (cuidado com XSS).
+            </div>
+            <div class="exemplo">
+                const div = document.querySelector('.minhaDiv');<br>
+                div.innerHTML = '&lt;strong&gt;Texto em negrito&lt;/strong&gt;';
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> <strong>Texto em negrito</strong>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. TEXTCONTENT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>8. textContent</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Altera ou retorna apenas o texto de um elemento (sem HTML).<br>
+                <strong>Quando usar:</strong> Quando precisa apenas de texto puro.<br>
+                <strong>Importante:</strong> Mais seguro que innerHTML (não interpreta HTML).
+            </div>
+            <div class="exemplo">
+                const div = document.querySelector('.minhaDiv');<br>
+                div.textContent = 'Texto puro';<br>
+                // &lt;strong&gt;não&lt;/strong&gt; será exibido literalmente
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Texto puro (sem interpretação HTML)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. VALUE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>9. value</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna ou altera o valor de inputs (text, number, etc).<br>
+                <strong>Quando usar:</strong> Para pegar ou definir valores de formulários.<br>
+                <strong>Importante:</strong> Funciona apenas em elementos de formulário.
+            </div>
+            <div class="exemplo">
+                const input = document.querySelector('.meuInput');<br>
+                console.log(input.value); // Valor digitado<br>
+                input.value = 'Novo valor'; // Define novo valor
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Valor do input
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. ADDEVENTLISTENER -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>10. addEventListener</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona um "ouvinte" de eventos a um elemento.<br>
+                <strong>Quando usar:</strong> Quando precisa executar código quando algo acontece.<br>
+                <strong>Importante:</strong> Pode adicionar múltiplos listeners ao mesmo elemento.
+            </div>
+            <div class="exemplo">
+                const botao = document.querySelector('.botao');<br>
+                <br>
+                botao.addEventListener('click', function() {<br>
+                &nbsp;&nbsp;console.log('Botão clicado!');<br>
+                });
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Botão clicado!' quando o botão for clicado
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. PREVENTDEFAULT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>11. preventDefault</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Impede o comportamento padrão de um evento.<br>
+                <strong>Quando usar:</strong> Para impedir recarregamento de formulários, links, etc.<br>
+                <strong>Importante:</strong> Essencial para formulários com JavaScript.
+            </div>
+            <div class="exemplo">
+                const form = document.querySelector('.form');<br>
+                <br>
+                form.addEventListener('submit', function(evento) {<br>
+                &nbsp;&nbsp;evento.preventDefault(); // Impede recarregamento<br>
+                &nbsp;&nbsp;console.log('Formulário enviado sem recarregar');<br>
+                });
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Formulário enviado sem recarregar a página
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. EVENTO CLICK -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>12. Evento Click</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Executa código quando elemento é clicado.<br>
+                <strong>Quando usar:</strong> Para botões, links, etc.<br>
+                <strong>Importante:</strong> Funciona em mouse e touch.
+            </div>
+            <div class="exemplo">
+                const botao = document.querySelector('.botao');<br>
+                <br>
+                botao.addEventListener('click', function() {<br>
+                &nbsp;&nbsp;console.log('Clicado!');<br>
+                });
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Clicado!' quando botão é clicado
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. EVENTO SUBMIT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>13. Evento Submit</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Executa código quando formulário é enviado.<br>
+                <strong>Quando usar:</strong> Para processar dados de formulários.<br>
+                <strong>Importante:</strong> Sempre usar com preventDefault().
+            </div>
+            <div class="exemplo">
+                const form = document.querySelector('.form');<br>
+                <br>
+                form.addEventListener('submit', function(evento) {<br>
+                &nbsp;&nbsp;evento.preventDefault();<br>
+                &nbsp;&nbsp;console.log('Processando formulário...');<br>
+                });
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> 'Processando formulário...' ao enviar
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 14. EVENTO KEYUP -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>14. Evento Keyup</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Executa código quando tecla é solta.<br>
+                <strong>Quando usar:</strong> Para validar inputs em tempo real.<br>
+                <strong>Importante:</strong> Útil para campos de busca, validação, etc.
+            </div>
+            <div class="exemplo">
+                const input = document.querySelector('.input');<br>
+                <br>
+                input.addEventListener('keyup', function() {<br>
+                &nbsp;&nbsp;console.log('Tecla solta:', input.value);<br>
+                });
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Valor do input a cada tecla solta
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 15. CRIAR ELEMENTO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>15. Criar Elemento</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Cria um novo elemento HTML.<br>
+                <strong>Quando usar:</strong> Para adicionar elementos dinamicamente.<br>
+                <strong>Importante:</strong> Elemento precisa ser adicionado ao DOM.
+            </div>
+            <div class="exemplo">
+                const novoElemento = document.createElement('div');<br>
+                novoElemento.textContent = 'Novo elemento';<br>
+                document.body.appendChild(novoElemento);
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Novo div adicionado ao body
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 16. APPENDCHILD -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>16. appendChild</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona um elemento como último filho de outro.<br>
+                <strong>Quando usar:</strong> Para adicionar elementos ao DOM.<br>
+                <strong>Importante:</strong> Move o elemento se já estiver no DOM.
+            </div>
+            <div class="exemplo">
+                const pai = document.querySelector('.pai');<br>
+                const filho = document.createElement('div');<br>
+                filho.textContent = 'Filho';<br>
+                pai.appendChild(filho);
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Filho adicionado ao elemento pai
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 17. REMOVECHILD -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>17. removeChild</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove um elemento filho do DOM.<br>
+                <strong>Quando usar:</strong> Para remover elementos dinamicamente.<br>
+                <strong>Importante:</strong> Precisa especificar o elemento a remover.
+            </div>
+            <div class="exemplo">
+                const pai = document.querySelector('.pai');<br>
+                const filho = document.querySelector('.filho');<br>
+                pai.removeChild(filho);
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Filho removido do elemento pai
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 18. CLASSLIST.ADD -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>18. classList.add</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona uma classe ao elemento.<br>
+                <strong>Quando usar:</strong> Para estilizar ou identificar elementos.<br>
+                <strong>Importante:</strong> Não duplica classes já existentes.
+            </div>
+            <div class="exemplo">
+                const elemento = document.querySelector('.elemento');<br>
+                elemento.classList.add('novaClasse');
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Classe 'novaClasse' adicionada
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 19. CLASSLIST.REMOVE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>19. classList.remove</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove uma classe do elemento.<br>
+                <strong>Quando usar:</strong> Para remover estilos ou identificações.<br>
+                <strong>Importante:</strong> Não dá erro se classe não existir.
+            </div>
+            <div class="exemplo">
+                const elemento = document.querySelector('.elemento');<br>
+                elemento.classList.remove('minhaClasse');
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Classe 'minhaClasse' removida
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 20. CLASSLIST.TOGGLE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>20. classList.toggle</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona classe se não existe, remove se existe.<br>
+                <strong>Quando usar:</strong> Para alternar estados (ativo/inativo).<br>
+                <strong>Importante:</strong> Retorna true se adicionou, false se removeu.
+            </div>
+            <div class="exemplo">
+                const elemento = document.querySelector('.elemento');<br>
+                elemento.classList.toggle('ativa'); // Alterna
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Classe 'ativa' alternada
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 21. SETATTRIBUTE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>21. setAttribute</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Define ou altera um atributo do elemento.<br>
+                <strong>Quando usar:</strong> Para definir atributos como src, href, etc.<br>
+                <strong>Importante:</strong> Sobrescreve atributos existentes.
+            </div>
+            <div class="exemplo">
+                const img = document.querySelector('img');<br>
+                img.setAttribute('src', 'imagem.jpg');<br>
+                img.setAttribute('alt', 'Descrição');
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Atributos src e alt definidos
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 22. GETATTRIBUTE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>22. getAttribute</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Retorna o valor de um atributo do elemento.<br>
+                <strong>Quando usar:</strong> Para ler atributos como src, href, etc.<br>
+                <strong>Importante:</strong> Retorna null se atributo não existir.
+            </div>
+            <div class="exemplo">
+                const img = document.querySelector('img');<br>
+                const src = img.getAttribute('src');<br>
+                console.log(src);
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Valor do atributo src
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 23. STYLE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>23. style</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Altera estilos CSS inline do elemento.<br>
+                <strong>Quando usar:</strong> Para alterar estilos dinamicamente.<br>
+                <strong>Importante:</strong> Propriedades CSS com hífen usam camelCase.
+            </div>
+            <div class="exemplo">
+                const elemento = document.querySelector('.elemento');<br>
+                elemento.style.color = 'red';<br>
+                elemento.style.backgroundColor = 'blue';<br>
+                elemento.style.fontSize = '20px';
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Estilos inline aplicados
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- TESTE INTERATIVO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>🧪 Teste Interativo</h2>
+            
+            <div class="demo-box">
+                <h3>Formulário de Teste</h3>
+                <form class="form-teste">
+                    <p>Nome: <input type="text" class="nome-teste"></p>
+                    <p>Sobrenome: <input type="text" class="sobrenome-teste"></p>
+                    <p>Peso: <input type="number" class="peso-teste"></p>
+                    <p>Altura: <input type="number" class="altura-teste"></p>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+            
+            <div class="demo-box">
+                <h3>Botão de Click</h3>
+                <button class="btn-click">Clique aqui</button>
+                <div class="resultado-click"></div>
+            </div>
+            
+            <div class="demo-box">
+                <h3>Input com Keyup</h3>
+                <input type="text" class="input-keyup" placeholder="Digite algo...">
+                <div class="resultado-keyup"></div>
+            </div>
+            
+            <div class="demo-box">
+                <h3>Toggle Classe</h3>
+                <button class="btn-toggle">Alternar Classe</button>
+                <div class="box-toggle" style="width: 100px; height: 100px; background-color: blue;"></div>
+            </div>
+            
+            <div class="demo-box">
+                <h3>Resultados do Formulário</h3>
+                <div class="resultado-form"></div>
+            </div>
+        </div>
+
+        <div class="importante">
+            <strong>📝 Resumo dos Conceitos de DOM e Eventos:</strong><br>
+            ✅ O que é DOM<br>
+            ✅ Selecionar por ID<br>
+            ✅ Selecionar por Classe<br>
+            ✅ Selecionar por Tag<br>
+            ✅ querySelector<br>
+            ✅ querySelectorAll<br>
+            ✅ innerHTML<br>
+            ✅ textContent<br>
+            ✅ value<br>
+            ✅ addEventListener<br>
+            ✅ preventDefault<br>
+            ✅ Evento Click<br>
+            ✅ Evento Submit<br>
+            ✅ Evento Keyup<br>
+            ✅ Criar Elemento<br>
+            ✅ appendChild<br>
+            ✅ removeChild<br>
+            ✅ classList.add<br>
+            ✅ classList.remove<br>
+            ✅ classList.toggle<br>
+            ✅ setAttribute<br>
+            ✅ getAttribute<br>
+            ✅ style
+        </div>
+    </div>
+
+    <script>
+        // Teste de formulário
+        const formTeste = document.querySelector('.form-teste');
+        const resultadoForm = document.querySelector('.resultado-form');
+        const pessoasTeste = [];
+        
+        if (formTeste) {
+            formTeste.addEventListener('submit', function(evento) {
+                evento.preventDefault();
+                
+                const nome = formTeste.querySelector('.nome-teste');
+                const sobrenome = formTeste.querySelector('.sobrenome-teste');
+                const peso = formTeste.querySelector('.peso-teste');
+                const altura = formTeste.querySelector('.altura-teste');
+                
+                pessoasTeste.push({
+                    nome: nome.value,
+                    sobrenome: sobrenome.value,
+                    peso: peso.value,
+                    altura: altura.value
+                });
+                
+                resultadoForm.innerHTML += `<p>${nome.value} ${sobrenome.value} ${peso.value}Kg ${altura.value}</p>`;
+                
+                // Limpar inputs
+                nome.value = '';
+                sobrenome.value = '';
+                peso.value = '';
+                altura.value = '';
+            });
+        }
+        
+        // Teste de click
+        const btnClick = document.querySelector('.btn-click');
+        const resultadoClick = document.querySelector('.resultado-click');
+        
+        if (btnClick) {
+            btnClick.addEventListener('click', function() {
+                resultadoClick.innerHTML = '<p>Botão clicado!</p>';
+            });
+        }
+        
+        // Teste de keyup
+        const inputKeyup = document.querySelector('.input-keyup');
+        const resultadoKeyup = document.querySelector('.resultado-keyup');
+        
+        if (inputKeyup) {
+            inputKeyup.addEventListener('keyup', function() {
+                resultadoKeyup.innerHTML = `<p>Digitado: ${inputKeyup.value}</p>`;
+            });
+        }
+        
+        // Teste de toggle classe
+        const btnToggle = document.querySelector('.btn-toggle');
+        const boxToggle = document.querySelector('.box-toggle');
+        
+        if (btnToggle && boxToggle) {
+            btnToggle.addEventListener('click', function() {
+                boxToggle.classList.toggle('ativa');
+                if (boxToggle.classList.contains('ativa')) {
+                    boxToggle.style.backgroundColor = 'red';
+                } else {
+                    boxToggle.style.backgroundColor = 'blue';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
