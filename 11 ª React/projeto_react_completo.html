@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto React Completo - Cadastro de Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .codigo {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .titulo-arquivo {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Projeto React Completo - Cadastro de Usuários</h1>
+        <p>Todos os códigos do projeto de cadastro de usuários em React.</p>
+
+        <!-- ============================================ -->
+        <!-- MAIN.JSX -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. main.jsx</h2>
+            <span class="titulo-arquivo">src/main.jsx</span>
+            <div class="codigo">
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Home from './pages/Home'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+   &lt;Home /&gt;
+  &lt;/React.StrictMode&gt;,
+)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- INDEX.CSS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. index.css</h2>
+            <span class="titulo-arquivo">src/index.css</span>
+            <div class="codigo">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #363467 0%, rgba(30, 29, 79, 0.8) 100%);
+}
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- HOME/INDEX.JSX -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. Home/index.jsx</h2>
+            <span class="titulo-arquivo">src/Home/index.jsx</span>
+            <div class="codigo">
+import './style.css'
+import Trash from '../../assets/trash.svg'
+
+function Home() {
+
+  const users = [{
+    id: '2342asdasds',
+    name: 'Rodolfo',
+    age: 33,
+    email: 'rod@email.com'
+  },
+  {
+    id: '2342asdasdadsas',
+    name: 'Abner',
+    age: 23,
+    email: 'abn@email.com'
+  },
+  {
+    id: '2342as32131',
+    name: 'Samira',
+    age: 22,
+    email: 'sami@email.com'
+  },
+  ]
+  return (
+
+
+
+    &lt;div className='container'&gt;
+      &lt;form&gt;
+        &lt;h1&gt;Cadastro De Usuários&lt;/h1&gt;
+        &lt;input placeholder='Nome' name='nome' type='text' /&gt;
+        &lt;input placeholder='Idade' name='idade' type='number' /&gt;
+        &lt;input placeholder='Email' name='email' type='email' /&gt;
+        &lt;button type='button' className='cadastrar-button'&gt;Cadastrar&lt;/button&gt;
+      &lt;/form&gt;
+
+      {users.map(user =&gt; (
+        &lt;div key={user.id} className='card'&gt;
+          &lt;div&gt;
+            &lt;p&gt;Nome: &lt;span&gt;{user.name}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Idade: &lt;span&gt;{user.age}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Email: &lt;span&gt;{user.email}&lt;/span&gt;&lt;/p&gt;
+            &lt;button&gt;
+              &lt;img src={Trash} /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+
+
+      ))}
+
+    &lt;/div&gt;
+
+  );
+}
+
+export default Home
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- HOME/STYLE.CSS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. Home/style.css</h2>
+            <span class="titulo-arquivo">src/Home/style.css</span>
+            <div class="codigo">
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+h1 {
+  color: aliceblue;
+  font-size: 28px;
+  text-align: center;
+}
+
+form {
+   display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  border-radius: 10px;
+  background-color:#2e2d4e;
+  max-width: 50%;
+  width: 400px;
+  margin-bottom: 20px;
+
+}
+
+ .cadastrar-button {
+  border-radius: 30px;
+  background-color: #8b8ae1;
+  height: 40px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+& button:hover {
+
+  opacity: 0.5;
+
+}
+
+& input {
+   border: 1px solid #48456c;
+   border-radius: 30px;
+   height: 40px;
+   background-color: #363653;
+   color:#ffff;
+   font-size: 16px;
+   padding-left: 10px;
+   outline: none;
+
+
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2e2d4e;
+  margin: 10px;
+  padding: 10px;
+  width: 400px;
+  border-radius: 10px;
+
+}
+
+& p {
+
+  color: #fff;
+  font-weight: bold;
+
+  & span{
+    font-weight: normal;
+  }
+
+}
+
+& button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+& button:hover{
+   opacity: 0.5;
+
+}
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- COMANDOS NPM -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. Comandos NPM</h2>
+            <span class="titulo-arquivo">Terminal</span>
+            <div class="codigo">
+# Criar projeto Vite
+npm create vite
+
+# Entrar no projeto
+cd nome-do-projeto
+
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
+npm run dev
+
+# Build para produção
+npm run build
+
+# Preview do build
+npm run preview
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ESTRUTURA DE PASTAS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. Estrutura de Pastas</h2>
+            <span class="titulo-arquivo">Estrutura do Projeto</span>
+            <div class="codigo">
+devclub-cadastro-usuarios/
+├── src/
+│   ├── Home/
+│   │   ├── index.jsx
+│   │   └── style.css
+│   ├── assets/
+│   │   └── trash.svg
+│   ├── index.css
+│   └── main.jsx
+├── node_modules/
+├── index.html
+├── package.json
+└── vite.config.js
+            </div>
+        </div>
+
+        <div class="secao">
+            <h2>📝 Observações Importantes</h2>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li>Componentes React sempre começam com letra maiúscula</li>
+                <li>Use <code>className</code> em vez de <code>class</code> no JSX</li>
+                <li>Use <code>camelCase</code> para eventos (onClick, onChange)</li>
+                <li>Sempre use <code>key</code> único ao usar <code>map()</code></li>
+                <li>Importe imagens com caminho relativo correto</li>
+                <li>CSS modules ajudam a evitar conflitos de estilos</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

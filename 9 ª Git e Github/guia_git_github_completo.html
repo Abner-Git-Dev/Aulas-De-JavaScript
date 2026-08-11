@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git e GitHub - Guia Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .secao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .explicacao {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .exemplo {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .resultado {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .observacao {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .importante {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Git e GitHub - Guia Completo</h1>
+        <p>Guia completo com todos os comandos e conceitos de Git e GitHub explicados detalhadamente.</p>
+
+        <!-- ============================================ -->
+        <!-- 1. O QUE É GIT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>1. O que é Git?</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Sistema de controle de versão distribuído.<br>
+                <strong>Quando usar:</strong> Para rastrear mudanças em código e colaborar em equipe.<br>
+                <strong>Importante:</strong> Git é local, roda no seu computador.
+            </div>
+            <div class="exemplo">
+                Git rastreia todas as mudanças no seu código<br>
+                Permite voltar a versões anteriores<br>
+                Facilita colaboração em equipe
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 2. O QUE É GITHUB -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>2. O que é GitHub?</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Plataforma de hospedagem de repositórios Git.<br>
+                <strong>Quando usar:</strong> Para armazenar e compartilhar código online.<br>
+                <strong>Importante:</strong> GitHub é online, na nuvem.
+            </div>
+            <div class="exemplo">
+                GitHub armazena seus repositórios Git<br>
+                Permite colaboração remota<br>
+                Oferece ferramentas como issues, pull requests
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. GIT CONFIG -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>3. git config</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Configura suas informações no Git.<br>
+                <strong>Quando usar:</strong> Primeira vez que usa Git no computador.<br>
+                <strong>Importante:</strong> Precisa configurar nome e email.
+            </div>
+            <div class="exemplo">
+                git config --global user.name "Seu Nome"<br>
+                git config --global user.email "seu@email.com"
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Git configurado com seu nome e email
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 4. GIT INIT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>4. git init</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Inicia um repositório Git no diretório atual.<br>
+                <strong>Quando usar:</strong> Quando começa um novo projeto.<br>
+                <strong>Importante:</strong> Cria pasta .git oculta.
+            </div>
+            <div class="exemplo">
+                git init
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Repositório Git inicializado
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 5. GIT CLONE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>5. git clone</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Copia um repositório existente para seu computador.<br>
+                <strong>Quando usar:</strong> Para baixar um projeto do GitHub.<br>
+                <strong>Importante:</strong> Cria cópia completa do repositório.
+            </div>
+            <div class="exemplo">
+                git clone https://github.com/usuario/repositorio.git
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Repositório copiado para seu computador
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 6. GIT STATUS -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>6. git status</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Mostra o estado do repositório.<br>
+                <strong>Quando usar:</strong> Para verificar mudanças não commitadas.<br>
+                <strong>Importante:</strong> Mostra arquivos modificados, adicionados, etc.
+            </div>
+            <div class="exemplo">
+                git status
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Estado atual do repositório
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 7. GIT ADD -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>7. git add</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Adiciona arquivos à área de staging.<br>
+                <strong>Quando usar:</strong> Antes de fazer commit.<br>
+                <strong>Importante:</strong> Prepara arquivos para serem commitados.
+            </div>
+            <div class="exemplo">
+                git add arquivo.js           // Arquivo específico<br>
+                git add .                    // Todos os arquivos<br>
+                git add *.js                 // Todos os arquivos .js
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Arquivos na área de staging
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 8. GIT COMMIT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>8. git commit</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Salva mudanças no repositório local.<br>
+                <strong>Quando usar:</strong> Após adicionar arquivos com git add.<br>
+                <strong>Importante:</strong> Sempre inclua mensagem descritiva.
+            </div>
+            <div class="exemplo">
+                git commit -m "Mensagem descritiva"<br>
+                git commit -am "Mensagem"    // Add + commit juntos
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Mudanças salvas no repositório local
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 9. GIT PUSH -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>9. git push</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Envia commits locais para o GitHub.<br>
+                <strong>Quando usar:</strong> Para atualizar repositório remoto.<br>
+                <strong>Importante:</strong> Precisa ter commits locais para enviar.
+            </div>
+            <div class="exemplo">
+                git push                    // Push padrão<br>
+                git push origin main        // Push para branch específico<br>
+                git push -u origin main    // Primeiro push com upstream
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Commits enviados para GitHub
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 10. GIT PULL -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>10. git pull</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Baixa mudanças do GitHub para seu computador.<br>
+                <strong>Quando usar:</strong> Para atualizar seu repositório local.<br>
+                <strong>Importante:</strong> Combina git fetch + git merge.
+            </div>
+            <div class="exemplo">
+                git pull                    // Pull padrão<br>
+                git pull origin main        // Pull de branch específico
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Mudanças baixadas do GitHub
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 11. GIT LOG -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>11. git log</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Mostra histórico de commits.<br>
+                <strong>Quando usar:</strong> Para ver mudanças anteriores.<br>
+                <strong>Importante:</strong> Mostra hash, autor, data, mensagem.
+            </div>
+            <div class="exemplo">
+                git log                    // Histórico completo<br>
+                git log --oneline          // Uma linha por commit<br>
+                git log --graph            // Com gráfico visual
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Histórico de commits
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 12. GIT BRANCH -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>12. git branch</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Gerencia branches (ramificações).<br>
+                <strong>Quando usar:</strong> Para trabalhar em features separadas.<br>
+                <strong>Importante:</strong> Branches permitem trabalho paralelo.
+            </div>
+            <div class="exemplo">
+                git branch                 // Lista branches<br>
+                git branch nome-branch     // Cria novo branch<br>
+                git branch -d nome-branch  // Deleta branch
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Branches gerenciados
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 13. GIT CHECKOUT -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>13. git checkout</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Muda entre branches ou restaura arquivos.<br>
+                <strong>Quando usar:</strong> Para trocar de branch ou voltar versão.<br>
+                <strong>Importante:</strong> Mudanças não salvas podem ser perdidas.
+            </div>
+            <div class="exemplo">
+                git checkout nome-branch    // Muda para branch<br>
+                git checkout -- arquivo.js   // Restaura arquivo
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Branch alterado ou arquivo restaurado
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 14. GIT MERGE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>14. git merge</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Combina branches.<br>
+                <strong>Quando usar:</strong> Para integrar mudanças de outro branch.<br>
+                <strong>Importante:</strong> Pode causar conflitos.
+            </div>
+            <div class="exemplo">
+                git merge nome-branch       // Merge branch atual
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Branches combinados
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 15. GIT DIFF -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>15. git diff</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Mostra diferenças entre arquivos.<br>
+                <strong>Quando usar:</strong> Para ver mudanças não commitadas.<br>
+                <strong>Importante:</strong> Mostra linhas adicionadas/removidas.
+            </div>
+            <div class="exemplo">
+                git diff                    // Mudanças não staging<br>
+                git diff --staged           // Mudanças staging<br>
+                git diff branch1 branch2     // Diferença entre branches
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Diferenças entre arquivos
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 16. GIT RESET -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>16. git reset</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Desfaze commits ou staging.<br>
+                <strong>Quando usar:</strong> Para corrigir erros.<br>
+                <strong>Importante:</strong> Cuidado, pode perder mudanças.
+            </div>
+            <div class="exemplo">
+                git reset                   // Remove do staging<br>
+                git reset --hard HEAD~1     // Desfaz último commit<br>
+                git reset --soft HEAD~1     // Desfaz commit, mantém staging
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Commits ou staging desfeitos
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 17. GIT RM -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>17. git rm</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Remove arquivos do Git.<br>
+                <strong>Quando usar:</strong> Para deletar arquivos do repositório.<br>
+                <strong>Importante:</strong> Remove do Git e do disco.
+            </div>
+            <div class="exemplo">
+                git rm arquivo.js           // Remove arquivo<br>
+                git rm --cached arquivo.js  // Remove apenas do Git
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Arquivo removido do Git
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ============================================ -->
+        <!-- 18. GIT IGNORE -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>18. .gitignore</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Arquivo que especifica o que ignorar.<br>
+                <strong>Quando usar:</strong> Para não commitar arquivos desnecessários.<br>
+                <strong>Importante:</strong> Padrões comuns: node_modules, .env, etc.
+            </div>
+            <div class="exemplo">
+                node_modules/<br>
+                .env<br>
+                .DS_Store<br>
+                *.log
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Arquivos ignorados pelo Git
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 19. CRIAR REPOSITÓRIO NO GITHUB -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>19. Criar Repositório no GitHub</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Cria novo repositório no GitHub.<br>
+                <strong>Quando usar:</strong> Para começar um novo projeto online.<br>
+                <strong>Importante:</strong> Pode ser público ou privado.
+            </div>
+            <div class="exemplo">
+                1. Acesse github.com<br>
+                2. Clique em "+" → "New repository"<br>
+                3. Dê nome e descrição<br>
+                4. Escolha público/privado<br>
+                5. Clique em "Create repository"
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Repositório criado no GitHub
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 20. CONECTAR LOCAL COM REMOTO -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>20. Conectar Local com Remoto</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Conecta repositório local ao GitHub.<br>
+                <strong>Quando usar:</strong> Após criar repositório no GitHub.<br>
+                <strong>Importante:</strong> Precisa da URL do repositório.
+            </div>
+            <div class="exemplo">
+                git remote add origin https://github.com/usuario/repositorio.git<br>
+                git branch -M main<br>
+                git push -u origin main
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Repositório conectado ao GitHub
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 21. FORÇAR PUSH -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>21. git push --force</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Força push sobrescrevendo remoto.<br>
+                <strong>Quando usar:</strong> Apenas em emergências (cuidado!).<br>
+                <strong>Importante:</strong> Pode perder mudanças de outros.
+            </div>
+            <div class="exemplo">
+                git push --force           // Força push<br>
+                git push --force-with-lease // Mais seguro
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Push forçado (use com cuidado!)
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 22. GIT STASH -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>22. git stash</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Salva mudanças temporariamente.<br>
+                <strong>Quando usar:</strong> Para trabalhar em outra tarefa.<br>
+                <strong>Importante:</strong> Não commita, apenas guarda.
+            </div>
+            <div class="exemplo">
+                git stash                  // Salva mudanças<br>
+                git stash list             // Lista stashes<br>
+                git stash pop              // Restaura stash
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Mudanças salvas temporariamente
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 23. GIT FETCH -->
+        <!-- ============================================ -->
+        <div class="secao">
+            <h2>23. git fetch</h2>
+            <div class="explicacao">
+                <strong>O que faz:</strong> Baixa mudanças sem mesclar.<br>
+                <strong>Quando usar:</strong> Para ver mudanças antes de merge.<br>
+                <strong>Importante:</strong> Diferente de pull (não merge automaticamente).
+            </div>
+            <div class="exemplo">
+                git fetch                  // Baixa mudanças<br>
+                git fetch origin           // Baixa de origin
+            </div>
+            <div class="resultado">
+                <strong>Resultado:</strong> Mudanças baixadas sem merge
+            </div>
+        </div>
+
+        <div class="importante">
+            <strong>📝 Resumo dos Comandos de Git:</strong><br>
+            ✅ git config - Configura usuário<br>
+            ✅ git init - Inicia repositório<br>
+            ✅ git clone - Copia repositório<br>
+            ✅ git status - Estado do repositório<br>
+            ✅ git add - Adiciona ao staging<br>
+            ✅ git commit - Salva mudanças<br>
+            ✅ git push - Envia para GitHub<br>
+            ✅ git pull - Baixa do GitHub<br>
+            ✅ git log - Histórico de commits<br>
+            ✅ git branch - Gerencia branches<br>
+            ✅ git checkout - Muda branch/restaura<br>
+            ✅ git merge - Combina branches<br>
+            ✅ git diff - Mostra diferenças<br>
+            ✅ git reset - Desfaz commits<br>
+            ✅ git rm - Remove arquivos<br>
+            ✅ .gitignore - Ignora arquivos<br>
+            ✅ git stash - Salva temporariamente<br>
+            ✅ git fetch - Baixa sem merge
+        </div>
+
+        <div class="observacao">
+            <strong>💡 Dica Importante:</strong> Use `git status` frequentemente para verificar o estado do repositório antes de fazer operações importantes.
+        </div>
+    </div>
+</body>
+</html>
