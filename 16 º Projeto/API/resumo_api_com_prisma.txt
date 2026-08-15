@@ -1,0 +1,328 @@
+================================================================================
+                    RESUMO API COM PRISMA - PARA ANOTAR NO CADERNO
+================================================================================
+
+CÓDIGO COMPLETO DA API COM PRISMA
+================================================================================
+
+import express from "express"
+import pkg from '@prisma/client'
+const { PrismaClient } = pkg
+
+const prisma = new PrismaClient()
+
+const app = express()
+app.use(express.json());
+
+app.post('/usuarios', async (req, res) =>{
+
+  await prisma.user.create({
+        data:{
+            email: req.body.email,
+            name: req.body.name,
+            age: req.body.age
+        }
+    })
+
+    users.push(req.body)
+
+    res.status(201).json(req.body)
+})
+app.get('/usuarios', async (req, res) =>{
+
+   const users = await prisma.user.findMany()
+    
+
+ res.status(200).json(users)
+
+})
+
+app.listen(3000)
+
+
+EXPLICAÇÃO LINHA POR LINHA
+================================================================================
+
+1. import express from "express"
+   - O que faz: Importa a biblioteca Express
+   - Para que serve: Para criar APIs e servidores web
+   - Observação: Usa sintaxe ES6 (import)
+
+
+2. import pkg from '@prisma/client'
+   - O que faz: Importa o cliente Prisma como default export
+   - Para que serve: Para usar Prisma no código
+   - Observação: @prisma/client é CommonJS, precisa importar como default
+
+
+3. const { PrismaClient } = pkg
+   - O que faz: Desestrutura PrismaClient do pacote importado
+   - Para que serve: Para poder instanciar o cliente Prisma
+   - Observação: Desestruturação para pegar apenas PrismaClient
+
+
+5. const prisma = new PrismaClient()
+   - O que faz: Cria uma instância do cliente Prisma
+   - Para que serve: Para interagir com o banco de dados
+   - Observação: Uma instância para toda a aplicação
+
+
+7. const app = express()
+   - O que faz: Cria uma instância do Express
+   - Para que serve: Para configurar rotas e middlewares
+   - Observação: 'app' é o padrão da comunidade
+
+
+8. app.use(express.json())
+   - O que faz: Adiciona middleware para ler JSON
+   - Para que serve: Para ler dados enviados no corpo da requisição
+   - Observação: Essencial para POST e PUT
+
+
+11. app.post('/usuarios', async (req, res) =>{
+    - O que faz: Cria rota POST para '/usuarios'
+    - Para que serve: Endpoint para criar usuários
+    - async: Indica que a função é assíncrona (usa await)
+    - Observação: POST é usado para criar recursos
+
+
+13. await prisma.user.create({
+    - O que faz: Cria um novo usuário no banco de dados
+    - Para que serve: Salva o usuário no MongoDB
+    - await: Espera a operação do banco terminar antes de continuar
+    - Observação: Operações de banco são assíncronas
+
+
+14-18. data:{
+        email: req.body.email,
+        name: req.body.name,
+        age: req.body.age
+    }
+    - O que faz: Define os dados do usuário a ser criado
+    - Para que serve: Passa os dados recebidos para o banco
+    - Observação: Campos devem bater com o schema.prisma
+
+
+21. users.push(req.body)
+    - O que faz: Adiciona usuário ao array em memória
+    - Para que serve: Backup em memória (não necessário com Prisma)
+    - Observação: Pode ser removido, pois Prisma já salva no banco
+
+
+23. res.status(201).json(req.body)
+    - O que faz: Envia status 201 e os dados do usuário
+    - Para que serve: Confirma criação e retorna dados
+    - Observação: 201 é o status code correto para criação
+
+
+25. app.get('/usuarios', async (req, res) =>{
+    - O que faz: Cria rota GET para '/usuarios'
+    - Para que serve: Endpoint para listar usuários
+    - async: Indica que a função é assíncrona (usa await)
+    - Observação: GET é usado para ler recursos
+
+
+27. const users = await prisma.user.findMany()
+    - O que faz: Busca todos os usuários no banco de dados
+    - Para que serve: Lista todos os usuários cadastrados
+    - await: Espera a operação do banco terminar antes de continuar
+    - Observação: findMany() retorna array com todos os registros
+
+
+30. res.status(200).json(users)
+    - O que faz: Envia status 200 e o array de usuários
+    - Para que serve: Retorna todos os usuários ao cliente
+    - Observação: 200 é o status code padrão para sucesso
+
+
+34. app.listen(3000)
+    - O que faz: Inicia o servidor na porta 3000
+    - Para que serve: Faz a API ficar disponível
+    - Observação: API fica em http://localhost:3000
+
+
+ASYNC E AWAIT - EXPLICAÇÃO DETALHADA
+================================================================================
+
+O QUE É ASYNC/AWAIT?
+================================================================================
+
+async/await é uma sintaxe do JavaScript para trabalhar com código assíncrono 
+de forma mais legível, similar a código síncrono.
+
+
+ASYNC
+================================================================================
+
+- O que é: Palavra-chave que marca uma função como assíncrona
+- O que faz: Permite usar await dentro da função
+- O que retorna: Sempre retorna uma Promise
+- Quando usar: Quando a função tem operações assíncronas
+
+Exemplo:
+async function criarUsuario() {
+  // código assíncrono aqui
+}
+
+const app.post('/usuarios', async (req, res) => {
+  // função assíncrona para rota POST
+})
+
+
+AWAIT
+================================================================================
+
+- O que é: Palavra-chave que pausa a execução até uma Promise resolver
+- O que faz: Espera uma operação assíncrona terminar antes de continuar
+- Onde usar: Dentro de funções marcadas com async
+- Quando usar: Para operações que demoram (banco de dados, API, arquivos)
+
+Exemplo:
+const usuario = await prisma.user.create()
+// O código para aqui até prisma.user.create() terminar
+console.log(usuario) // só executa depois que terminar
+
+
+POR QUE USAR ASYNC/AWAIT?
+================================================================================
+
+1. Operações de banco de dados são assíncronas
+   - prisma.user.create() retorna uma Promise
+   - prisma.user.findMany() retorna uma Promise
+   - Precisamos esperar essas operações terminarem
+
+2. Código mais legível
+   - Sem async/await: .then() e .catch() (callback hell)
+   - Com async/await: Código parece síncrono
+
+3. Evita erros
+   - Sem await: O código continua antes da operação terminar
+   - Com await: Garante que a operação terminou
+
+
+EXEMPLO SEM ASYNC/AWAIT (ANTIGO)
+================================================================================
+
+app.post('/usuarios', (req, res) => {
+  prisma.user.create({
+    data: req.body
+  })
+  .then(user => {
+    res.status(201).json(user)
+  })
+  .catch(error => {
+    res.status(500).json({ erro: error.message })
+  })
+})
+
+
+EXEMPLO COM ASYNC/AWAIT (MODERNO)
+================================================================================
+
+app.post('/usuarios', async (req, res) => {
+  try {
+    const user = await prisma.user.create({
+      data: req.body
+    })
+    res.status(201).json(user)
+  } catch (error) {
+    res.status(500).json({ erro: error.message })
+  }
+})
+
+
+FLUXO DE EXECUÇÃO COM AWAIT
+================================================================================
+
+1. Código chega no await
+2. Execução PAUSA
+3. Operação assíncrona roda em segundo plano
+4. Quando termina, execução RETOMA
+5. Código continua normalmente
+
+Exemplo:
+console.log('1')
+await prisma.user.create() // pausa aqui
+console.log('2') // só executa depois que terminar
+
+Saída:
+1
+(espera banco de dados)
+2
+
+
+ERROS COMUNS SEM AWAIT
+================================================================================
+
+1. Dados undefined
+   - Se não usar await, a variável fica undefined
+   - Exemplo: const user = prisma.user.create() // user = undefined
+
+2. Erro de concorrência
+   - Código continua antes da operação terminar
+   - Pode causar erros inesperados
+
+3. Promise pendente
+   - A Promise nunca é resolvida
+   - Código pode travar
+
+
+TRY/CATCH COM ASYNC/AWAIT
+================================================================================
+
+Para tratar erros em funções async:
+
+app.post('/usuarios', async (req, res) => {
+  try {
+    const user = await prisma.user.create({
+      data: req.body
+    })
+    res.status(201).json(user)
+  } catch (error) {
+    res.status(500).json({ erro: error.message })
+  }
+})
+
+- try: Código que pode dar erro
+- catch: Código que executa se der erro
+
+
+PRISMA CLIENT - MÉTODOS PRINCIPAIS
+================================================================================
+
+prisma.user.create()
+- Cria um novo registro
+- Retorna o registro criado
+- É assíncrono (precisa de await)
+
+prisma.user.findMany()
+- Busca todos os registros
+- Retorna array com todos
+- É assíncrono (precisa de await)
+
+prisma.user.findUnique()
+- Busca um registro específico
+- Usa where para filtrar
+- É assíncrono (precisa de await)
+
+prisma.user.update()
+- Atualiza um registro
+- Usa where e data
+- É assíncrono (precisa de await)
+
+prisma.user.delete()
+- Deleta um registro
+- Usa where para filtrar
+- É assíncrono (precisa de await)
+
+
+RESUMO ASYNC/AWAIT
+================================================================================
+
+✅ async: Marca função como assíncrona
+✅ await: Espera Promise resolver
+✅ Use em operações de banco de dados
+✅ Código mais legível e seguro
+✅ Sempre use try/catch para tratar erros
+
+================================================================================

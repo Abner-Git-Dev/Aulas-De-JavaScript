@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guia do Projeto — Cadastro de Usuários</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1c1b33;
+    --panel: #2e2d4e;
+    --panel-alt: #363653;
+    --border: #48456c;
+    --accent: #8b8ae1;
+    --accent-soft: #b3b2ec;
+    --text: #f2f2ff;
+    --text-dim: #b7b6d4;
+    --code-bg: #201f3a;
+    --ok: #7ee0a8;
+    --warn: #f3b25c;
+    --danger: #f38ba0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image: radial-gradient(circle at 20% 0%, rgba(139,138,225,0.12), transparent 40%),
+                       radial-gradient(circle at 80% 20%, rgba(139,138,225,0.08), transparent 35%);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  header.hero {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  header.hero .kicker {
+    color: var(--accent-soft);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  header.hero h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin: 10px 0 12px;
+  }
+
+  header.hero p {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+
+  nav.toc h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-soft);
+    margin: 0 0 14px;
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+    columns: 2;
+    gap: 24px;
+  }
+
+  nav.toc li { margin-bottom: 8px; break-inside: avoid; }
+
+  nav.toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  nav.toc a:hover { color: var(--accent); }
+
+  section {
+    margin-bottom: 48px;
+    scroll-margin-top: 24px;
+  }
+
+  section .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .badge.frontend { background: rgba(139,138,225,0.18); color: var(--accent-soft); }
+  .badge.backend { background: rgba(126,224,168,0.15); color: var(--ok); }
+  .badge.tooling { background: rgba(243,178,92,0.15); color: var(--warn); }
+  .badge.style { background: rgba(243,139,160,0.15); color: var(--danger); }
+
+  section h2 {
+    font-size: 22px;
+    margin: 0 0 6px;
+  }
+
+  section .desc {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+    color: var(--accent-soft);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  .filename {
+    display: inline-block;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 12.5px;
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
+    color: var(--accent-soft);
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    color: #d9d8ff;
+  }
+
+  .kw { color: #9d8cf5; }
+  .str { color: #7ee0a8; }
+  .fn { color: #8fc1f0; }
+  .com { color: #6f6c94; font-style: italic; }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 700px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    nav.toc ol { columns: 1; }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-bottom: 8px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    color: var(--accent-soft);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  td { color: var(--text-dim); }
+
+  .callout {
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    margin-bottom: 12px;
+    border: 1px solid;
+  }
+
+  .callout.warn {
+    background: rgba(243,178,92,0.08);
+    border-color: rgba(243,178,92,0.35);
+    color: #f3d5a8;
+  }
+
+  .callout.danger {
+    background: rgba(243,139,160,0.08);
+    border-color: rgba(243,139,160,0.35);
+    color: #f5c3cf;
+  }
+
+  .callout strong { color: var(--text); }
+
+  footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12.5px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  a.back-to-top {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--accent-soft);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero" id="topo">
+    <div class="kicker">Guia de Estudos</div>
+    <h1>Cadastro de Usuários — React + Express + Prisma</h1>
+    <p>Resumo de tudo que foi usado na construção do projeto: front-end em React, back-end em Express com Prisma, testes de API no Thunder Client e estilização em CSS.</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Índice</h2>
+    <ol>
+      <li><a href="#estrutura">1. Estrutura do projeto</a></li>
+      <li><a href="#hooks">2. React Hooks usados</a></li>
+      <li><a href="#componente">3. Componente Home.jsx</a></li>
+      <li><a href="#api-service">4. Serviço de API (axios)</a></li>
+      <li><a href="#backend">5. Backend (Express + Prisma)</a></li>
+      <li><a href="#thunder">6. Testando com Thunder Client</a></li>
+      <li><a href="#css">7. Estilização (CSS)</a></li>
+      <li><a href="#erros">8. Erros encontrados e correções</a></li>
+      <li><a href="#seguranca">9. Ponto de atenção: segurança</a></li>
+      <li><a href="#tecnologias">10. Tecnologias usadas — explicação detalhada</a></li>
+      <li><a href="#comandos">11. Comandos usados no terminal</a></li>
+      <li><a href="#codigo-completo">12. Código completo, linha por linha</a></li>
+    </ol>
+  </nav>
+
+  <section id="estrutura">
+    <span class="badge tooling">Estrutura</span>
+    <h2>1. Estrutura do projeto</h2>
+    <p class="desc">Projeto criado com Vite. Ponto de entrada em <code>main.jsx</code>, que renderiza o componente <code>Home</code> dentro da <code>div#root</code> definida no <code>index.html</code>.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>index.html</h3>
+        <p>HTML base do Vite. Carrega a fonte Poppins do Google Fonts e o script principal <code>/src/main.jsx</code> como módulo ES.</p>
+      </div>
+      <div class="card">
+        <h3>main.jsx</h3>
+        <p>Usa <code>ReactDOM.createRoot</code> para montar a aplicação na <code>div#root</code>, envolvendo o componente <code>Home</code> em <code>&lt;React.StrictMode&gt;</code>.</p>
+      </div>
+    </div>
+
+    <div class="filename">src/main.jsx</div>
+    <pre><code><span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>
+<span class="kw">import</span> ReactDOM <span class="kw">from</span> <span class="str">'react-dom/client'</span>
+<span class="kw">import</span> Home <span class="kw">from</span> <span class="str">'./pages/Home'</span>
+<span class="kw">import</span> <span class="str">'./index.css'</span>
+
+ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElementById</span>(<span class="str">'root'</span>)).<span class="fn">render</span>(
+  &lt;React.StrictMode&gt;
+   &lt;Home /&gt;
+  &lt;/React.StrictMode&gt;,
+)</code></pre>
+  </section>
+
+  <section id="hooks">
+    <span class="badge frontend">React</span>
+    <h2>2. React Hooks usados</h2>
+    <p class="desc">Três hooks nativos do React foram usados no componente <code>Home</code>.</p>
+
+    <table>
+      <tr><th>Hook</th><th>Para que serve</th><th>Onde foi usado</th></tr>
+      <tr>
+        <td><code>useState</code></td>
+        <td>Guarda a lista de usuários em estado, disparando re-render quando muda.</td>
+        <td><code>const [users, setUsers] = useState([])</code></td>
+      </tr>
+      <tr>
+        <td><code>useEffect</code></td>
+        <td>Executa código quando o componente é montado — nesse caso, buscar os usuários assim que a tela carrega.</td>
+        <td><code>useEffect(() =&gt; { getUsers() }, [])</code></td>
+      </tr>
+      <tr>
+        <td><code>useRef</code></td>
+        <td>Referência direta a elementos DOM (inputs), sem precisar de estado controlado, para ler o valor digitado na hora de cadastrar.</td>
+        <td><code>inputName</code>, <code>inputAge</code>, <code>inputEmail</code></td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="componente">
+    <span class="badge frontend">Front-end</span>
+    <h2>3. Componente Home.jsx</h2>
+    <p class="desc">Componente principal: busca usuários da API, exibe em cards, permite cadastrar (POST) e deletar (DELETE).</p>
+
+    <div class="filename">src/pages/Home/index.jsx</div>
+    <pre><code><span class="kw">import</span> { useEffect , useState , useRef} <span class="kw">from</span> <span class="str">'react'</span>
+<span class="kw">import</span> <span class="str">'./style.css'</span>
+<span class="kw">import</span> Trash <span class="kw">from</span> <span class="str">'../../assets/trash.svg'</span>
+<span class="kw">import</span> api <span class="kw">from</span> <span class="str">'../../services/api'</span>
+
+<span class="com">//useEffect e useState = React Hooks</span>
+
+<span class="kw">function</span> <span class="fn">Home</span>() {
+
+  <span class="kw">const</span> [users, setUsers] = <span class="fn">useState</span>([])
+
+  <span class="kw">const</span> inputName = <span class="fn">useRef</span>()
+  <span class="kw">const</span> inputAge = <span class="fn">useRef</span>()
+  <span class="kw">const</span> inputEmail = <span class="fn">useRef</span>()
+
+  <span class="kw">async function</span> <span class="fn">getUsers</span>() {
+    <span class="kw">const</span> usersFromApi = <span class="kw">await</span> api.<span class="fn">get</span>(<span class="str">'/usuarios'</span>)
+    <span class="fn">setUsers</span>(usersFromApi.data)
+  }
+
+  <span class="kw">async function</span> <span class="fn">createUsers</span>(){
+    <span class="kw">await</span> api.<span class="fn">post</span>(<span class="str">'/usuarios'</span>, {
+      name: inputName.current.value,
+      age: inputAge.current.value,
+      email: inputEmail.current.value
+    })
+    <span class="fn">getUsers</span>()
+  }
+
+  <span class="kw">async function</span> <span class="fn">deleteUsers</span>(id) {
+    <span class="kw">await</span> api.<span class="fn">delete</span>(<span class="str">`/usuarios/${id}`</span>)
+    <span class="fn">getUsers</span>()
+  }
+
+  <span class="fn">useEffect</span>(() =&gt; {
+    <span class="fn">getUsers</span>()
+  }, [])
+
+  <span class="kw">return</span> (
+    &lt;div className=<span class="str">'container'</span>&gt;
+      &lt;form&gt;
+        &lt;h1&gt;Cadastro De Usuários&lt;/h1&gt;
+        &lt;input placeholder=<span class="str">"Nome"</span> name=<span class="str">"nome"</span> type=<span class="str">"text"</span> ref={inputName}/&gt;
+        &lt;input placeholder=<span class="str">"Idade"</span> name=<span class="str">"idade"</span> type=<span class="str">"number"</span> ref={inputAge}/&gt;
+        &lt;input placeholder=<span class="str">"Email"</span> name=<span class="str">"email"</span> type=<span class="str">"email"</span> ref={inputEmail}/&gt;
+        &lt;button type=<span class="str">"button"</span> className=<span class="str">'cadastrar-button'</span> onClick={createUsers}&gt;Cadastrar&lt;/button&gt;
+      &lt;/form&gt;
+
+      {users.<span class="fn">map</span>(user =&gt; (
+        &lt;div key={user.id} className=<span class="str">'card'</span>&gt;
+          &lt;div&gt;
+            &lt;p&gt;Nome: &lt;span&gt;{user.name}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Idade: &lt;span&gt;{user.age}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Email: &lt;span&gt;{user.email}&lt;/span&gt;&lt;/p&gt;
+            &lt;button onClick={() =&gt; deleteUsers(user.id)}&gt;
+              &lt;img src={Trash} /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+<span class="kw">export default</span> Home</code></pre>
+  </section>
+
+  <section id="api-service">
+    <span class="badge frontend">Front-end</span>
+    <h2>4. Serviço de API (axios)</h2>
+    <p class="desc">Instância do axios com URL base configurada, usada para centralizar as chamadas HTTP em um único lugar.</p>
+
+    <div class="filename">src/services/api.js</div>
+    <pre><code><span class="kw">import</span> axios <span class="kw">from</span> <span class="str">'axios'</span>
+
+<span class="kw">const</span> api = axios.<span class="fn">create</span>({
+  baseURL: <span class="str">'http://localhost:3000'</span>
+})
+
+<span class="kw">export default</span> api</code></pre>
+  </section>
+
+  <section id="backend">
+    <span class="badge backend">Back-end</span>
+    <h2>5. Backend (Express + Prisma)</h2>
+    <p class="desc">API REST com Express, usando Prisma como ORM para acessar o banco. Quatro rotas para o CRUD de usuários.</p>
+
+    <table>
+      <tr><th>Método</th><th>Rota</th><th>Ação</th></tr>
+      <tr><td>POST</td><td><code>/usuarios</code></td><td>Cria um novo usuário</td></tr>
+      <tr><td>GET</td><td><code>/usuarios</code></td><td>Lista usuários (com filtro opcional por query)</td></tr>
+      <tr><td>PUT</td><td><code>/usuarios/:id</code></td><td>Atualiza um usuário existente</td></tr>
+      <tr><td>DELETE</td><td><code>/usuarios/:id</code></td><td>Remove um usuário</td></tr>
+    </table>
+
+    <div class="filename">server.js</div>
+    <pre><code><span class="kw">import</span> express <span class="kw">from</span> <span class="str">"express"</span>
+<span class="kw">import</span> cors <span class="kw">from</span> <span class="str">"cors"</span>
+<span class="kw">import</span> pkg <span class="kw">from</span> <span class="str">'@prisma/client'</span>
+<span class="kw">const</span> { PrismaClient } = pkg
+
+<span class="kw">const</span> prisma = <span class="kw">new</span> <span class="fn">PrismaClient</span>()
+<span class="kw">const</span> app = <span class="fn">express</span>()
+app.<span class="fn">use</span>(express.<span class="fn">json</span>())
+app.<span class="fn">use</span>(<span class="fn">cors</span>())
+
+app.<span class="fn">post</span>(<span class="str">'/usuarios'</span>, <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">await</span> prisma.user.<span class="fn">create</span>({
+    data: {
+      email: req.body.email,
+      name: req.body.name,
+      age: req.body.age
+    }
+  })
+  res.<span class="fn">status</span>(201).<span class="fn">json</span>(req.body)
+})
+
+app.<span class="fn">get</span>(<span class="str">'/usuarios'</span>, <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">let</span> users = []
+  <span class="kw">if</span> (req.query) {
+    users = <span class="kw">await</span> prisma.user.<span class="fn">findMany</span>({
+      where: {
+        name: req.query.name,
+        email: req.query.email,
+        age: req.query.age
+      }
+    })
+  } <span class="kw">else</span> {
+    users = <span class="kw">await</span> prisma.user.<span class="fn">findMany</span>()
+  }
+  res.<span class="fn">status</span>(200).<span class="fn">json</span>(users)
+})
+
+app.<span class="fn">put</span>(<span class="str">'/usuarios/:id'</span>, <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">const</span> updated = <span class="kw">await</span> prisma.user.<span class="fn">update</span>({
+    where: { id: req.params.id },
+    data: {
+      email: req.body.email,
+      name: req.body.name,
+      age: req.body.age
+    }
+  })
+  res.<span class="fn">status</span>(200).<span class="fn">json</span>(updated)
+})
+
+app.<span class="fn">delete</span>(<span class="str">'/usuarios/:id'</span>, <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">await</span> prisma.user.<span class="fn">delete</span>({
+    where: { id: req.params.id }
+  })
+  res.<span class="fn">status</span>(200).<span class="fn">json</span>({ message: <span class="str">'Usuário deletado com Sucesso!'</span> })
+})
+
+app.<span class="fn">listen</span>(3000)</code></pre>
+
+    <div class="callout warn">
+      <strong>Correções aplicadas nesta versão do guia:</strong> no <code>GET</code>, o código original tinha <code>prisma.user.findMany</code> sem os parênteses <code>()</code> no <code>else</code> — isso retorna a função, não os dados. No <code>PUT</code>, havia um <code>users.push(req.body)</code> que não existia mais nesse escopo; foi trocado por retornar o registro atualizado direto do Prisma.
+    </div>
+  </section>
+
+  <section id="thunder">
+    <span class="badge tooling">Testes</span>
+    <h2>6. Testando com Thunder Client</h2>
+    <p class="desc">Extensão do VS Code usada para testar as quatro rotas (GET, POST, PUT, DELETE) manualmente, sem precisar do front-end pronto.</p>
+
+    <div class="filename">Body de exemplo — POST /usuarios</div>
+    <pre><code>{
+  <span class="str">"email"</span>: <span class="str">"Lui@email.com"</span>,
+  <span class="str">"name"</span>: <span class="str">"Luiz"</span>,
+  <span class="str">"age"</span>: <span class="str">"21"</span>
+}</code></pre>
+  </section>
+
+  <section id="css">
+    <span class="badge style">Estilo</span>
+    <h2>7. Estilização (CSS)</h2>
+    <p class="desc">Layout escuro com cards arredondados, usando <em>CSS nesting</em> nativo (<code>&amp;</code>) para aninhar seletores como <code>button:hover</code> e <code>span</code>.</p>
+
+    <div class="filename">src/pages/Home/style.css</div>
+    <pre><code>.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #2e2d4e;
+  max-width: 50%;
+  width: 400px;
+}
+
+.cadastrar-button {
+  border-radius: 30px;
+  background-color: #8b8ae1;
+  height: 40px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2e2d4e;
+  margin: 10px;
+  padding: 10px;
+  width: 400px;
+  border-radius: 10px;
+
+  & p {
+    color: #fff;
+    font-weight: bold;
+
+    & span {
+      font-weight: normal;
+    }
+  }
+
+  & button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}</code></pre>
+  </section>
+
+  <section id="erros">
+    <span class="badge tooling">Debug</span>
+    <h2>8. Erros encontrados e correções</h2>
+    <p class="desc">Problemas reais que apareceram durante o desenvolvimento e como foram resolvidos.</p>
+
+    <div class="card">
+      <h3>1. Expected "}" but found EOF</h3>
+      <p>A função <code>getUsers</code> não tinha o <code>}</code> de fechamento, fazendo com que <code>createUsers</code>, <code>deleteUsers</code> e o resto do arquivo ficassem aninhados dentro dela por engano. Corrigido fechando <code>getUsers</code> antes de declarar as próximas funções.</p>
+    </div>
+
+    <div class="card">
+      <h3>2. Atributos JSX colados</h3>
+      <p><code>type="email"ref={inputEmail}</code> — faltava espaço entre os atributos <code>type</code> e <code>ref</code>, o que quebra o parser JSX.</p>
+    </div>
+
+    <div class="card">
+      <h3>3. findMany sem parênteses</h3>
+      <p>No back-end, <code>prisma.user.findMany</code> (sem <code>()</code>) retorna a referência da função, não o resultado da busca — precisa ser <code>prisma.user.findMany()</code>.</p>
+    </div>
+
+    <div class="card">
+      <h3>4. Variável users inexistente no PUT</h3>
+      <p>Sobrou um <code>users.push(req.body)</code> de uma versão anterior do código (com array em memória) que não fazia mais sentido depois da migração para Prisma.</p>
+    </div>
+  </section>
+
+  <section id="seguranca">
+    <span class="badge style">Atenção</span>
+    <h2>9. Ponto de atenção: segurança</h2>
+    <div class="callout danger">
+      <strong>Credenciais de banco não devem ficar no código.</strong> Usuário e senha do banco apareceram comentados no final do <code>server.js</code>. Isso é um risco real caso o repositório seja publicado (ex: GitHub). O ideal é mover essas informações para um arquivo <code>.env</code> (usando o pacote <code>dotenv</code>) e nunca commitar esse arquivo — além de trocar a senha caso ela já tenha sido exposta em algum lugar.
+    </div>
+  </section>
+
+  <section id="tecnologias">
+    <span class="badge tooling">Aprofundado</span>
+    <h2>10. Tecnologias usadas — explicação detalhada</h2>
+    <p class="desc">Aqui vai o que cada peça do projeto realmente é, para que serve e por que foi escolhida.</p>
+
+    <div class="card">
+      <h3>React</h3>
+      <p>Biblioteca JavaScript para construir interfaces de usuário baseadas em <strong>componentes</strong> — pedaços reutilizáveis de UI que têm seu próprio estado e lógica. Em vez de manipular o HTML diretamente (como no JS puro), você descreve "como a tela deveria ficar" para um dado estado, e o React se encarrega de atualizar o DOM real quando esse estado muda. No projeto, o <code>Home</code> é o componente principal que representa toda a tela de cadastro.</p>
+    </div>
+
+    <div class="card">
+      <h3>Vite</h3>
+      <p>Ferramenta de build usada para criar e rodar o projeto React. Ele é responsável por servir os arquivos em desenvolvimento com atualização instantânea (Hot Module Replacement) e por empacotar tudo para produção. É o motivo de existir o <code>index.html</code> com <code>&lt;script type="module" src="/src/main.jsx"&gt;</code> — o Vite trabalha com módulos ES nativos.</p>
+    </div>
+
+    <div class="card">
+      <h3>useState</h3>
+      <p>Hook do React que cria uma <strong>variável de estado</strong>. Diferente de uma variável comum, quando você atualiza um estado (com a função retornada, ex: <code>setUsers</code>), o React re-renderiza o componente automaticamente para refletir o novo valor na tela. No projeto, <code>users</code> guarda a lista vinda da API, e toda vez que <code>setUsers</code> é chamado, os cards na tela são redesenhados.</p>
+    </div>
+
+    <div class="card">
+      <h3>useEffect</h3>
+      <p>Hook que executa um "efeito colateral" — código que interage com algo fora do React, como uma chamada de API, um timer, ou manipulação direta do DOM. O array de dependências no final (<code>[]</code>) controla quando esse código roda: com array vazio, ele roda <strong>uma única vez</strong>, logo depois que o componente aparece na tela. É por isso que <code>getUsers()</code> dentro do <code>useEffect</code> busca os usuários assim que a página carrega.</p>
+    </div>
+
+    <div class="card">
+      <h3>useRef</h3>
+      <p>Hook que cria uma referência que aponta diretamente para um elemento do DOM (ou guarda um valor que não precisa causar re-render ao mudar). No projeto, cada input (nome, idade, email) tem um <code>ref</code> associado, e o valor digitado é lido via <code>inputName.current.value</code> na hora de cadastrar — uma alternativa mais simples a usar <code>useState</code> para cada campo do formulário (chamado de "input não controlado").</p>
+    </div>
+
+    <div class="card">
+      <h3>Axios</h3>
+      <p>Biblioteca para fazer requisições HTTP (GET, POST, PUT, DELETE) a partir do JavaScript, tanto no navegador quanto no Node. É uma alternativa ao <code>fetch</code> nativo, com sintaxe mais simples e recursos como interceptadores e configuração de instância. No projeto, <code>axios.create({ baseURL: ... })</code> cria uma instância pré-configurada apontando pro backend, evitando repetir a URL completa em cada chamada.</p>
+    </div>
+
+    <div class="card">
+      <h3>API REST</h3>
+      <p>Um padrão de comunicação entre front-end e back-end baseado em métodos HTTP e URLs que representam "recursos". Aqui o recurso é <code>/usuarios</code>, e cada método HTTP tem um significado: <code>GET</code> busca, <code>POST</code> cria, <code>PUT</code> atualiza, <code>DELETE</code> remove. O front-end (React) nunca fala direto com o banco de dados — ele sempre passa por essa API.</p>
+    </div>
+
+    <div class="card">
+      <h3>Express</h3>
+      <p>Framework para Node.js usado para criar servidores web e APIs de forma simples. Ele cuida de receber requisições HTTP, rotear para a função certa (<code>app.get</code>, <code>app.post</code>, etc.) e enviar a resposta. É a base do <code>server.js</code> — sem ele, você teria que lidar manualmente com o módulo <code>http</code> nativo do Node, que é bem mais verboso.</p>
+    </div>
+
+    <div class="card">
+      <h3>CORS (Cross-Origin Resource Sharing)</h3>
+      <p>Por padrão, navegadores bloqueiam requisições feitas de um domínio/porta para outro diferente (por segurança). Como o front (ex: <code>localhost:5173</code>) e o back (<code>localhost:3000</code>) rodam em portas diferentes, é preciso liberar isso explicitamente. O middleware <code>app.use(cors())</code> no Express adiciona os cabeçalhos necessários para o navegador permitir essa comunicação.</p>
+    </div>
+
+    <div class="card">
+      <h3>express.json()</h3>
+      <p>Middleware do Express que interpreta o corpo (body) das requisições recebidas como JSON e transforma em um objeto JavaScript acessível via <code>req.body</code>. Sem ele, <code>req.body</code> chegaria vazio ou indefinido, mesmo que o front-end esteja enviando dados corretamente.</p>
+    </div>
+
+    <div class="card">
+      <h3>Prisma</h3>
+      <p>ORM (Object-Relational Mapper) para Node.js — uma camada que traduz operações no banco de dados (criar, buscar, atualizar, deletar) em chamadas de métodos JavaScript, sem precisar escrever SQL manualmente. <code>prisma.user.create()</code>, <code>findMany()</code>, <code>update()</code> e <code>delete()</code> são exemplos disso. O Prisma também gera automaticamente os tipos e a estrutura com base num arquivo de schema (<code>schema.prisma</code>), o que ajuda a evitar erros de digitação em nomes de campos.</p>
+    </div>
+
+    <div class="card">
+      <h3>async / await</h3>
+      <p>Sintaxe do JavaScript para lidar com código assíncrono (operações que demoram, como chamadas de rede ou de banco de dados) de forma que se lê como código síncrono, linha por linha. Uma função marcada com <code>async</code> pode usar <code>await</code> na frente de uma Promise para "pausar" a execução até o resultado voltar, sem travar o restante da aplicação. Praticamente todas as funções do projeto que falam com a API ou com o banco usam esse padrão.</p>
+    </div>
+
+    <div class="card">
+      <h3>Template literals (crase)</h3>
+      <p>Strings delimitadas por crase (<code>`</code>) que permitem inserir variáveis diretamente no texto usando <code>${variavel}</code>, sem precisar concatenar com <code>+</code>. Usado em <code>`/usuarios/${id}`</code> para montar a URL da requisição de exclusão com o id dinâmico do usuário.</p>
+    </div>
+
+    <div class="card">
+      <h3>Array.map()</h3>
+      <p>Método nativo de arrays em JavaScript que cria um novo array transformando cada item do array original. No React, é o padrão usado para transformar uma lista de dados (os usuários) em uma lista de elementos JSX (os cards), um pra cada usuário — por isso <code>users.map(user =&gt; (...))</code> dentro do <code>return</code>.</p>
+    </div>
+
+    <div class="card">
+      <h3>Thunder Client</h3>
+      <p>Extensão do VS Code que funciona como um cliente HTTP (similar ao Postman), usada para testar rotas de API manualmente — montando o método, a URL e o corpo da requisição — sem precisar que o front-end esteja pronto. Foi usada aqui pra validar as quatro rotas (GET, POST, PUT, DELETE) antes de ligar tudo ao React.</p>
+    </div>
+
+    <div class="card">
+      <h3>CSS Nesting (aninhamento nativo com &amp;)</h3>
+      <p>Recurso relativamente novo do CSS que permite aninhar seletores dentro de outros, parecido com o que o Sass/SCSS já fazia — mas nativo do navegador. O <code>&amp;</code> representa o seletor pai. No projeto, <code>.card { & p { ... } }</code> aplica o estilo a todo <code>&lt;p&gt;</code> dentro de <code>.card</code>, sem precisar escrever <code>.card p</code> separadamente.</p>
+    </div>
+
+    <div class="card">
+      <h3>Flexbox</h3>
+      <p>Modelo de layout do CSS usado para alinhar e distribuir elementos em uma linha ou coluna de forma flexível. Usado no <code>.container</code> (organiza tudo em coluna, centralizado) e no <code>.card</code> (organiza texto e botão lado a lado, com espaço entre eles via <code>justify-content: space-between</code>).</p>
+    </div>
+  </section>
+
+  <section id="comandos">
+    <span class="badge tooling">Terminal</span>
+    <h2>11. Comandos usados no terminal</h2>
+    <p class="desc">Sequência de comandos para montar o projeto do zero — front-end (React + Vite) e back-end (Express + Prisma) — e colocar tudo rodando.</p>
+
+    <div class="card">
+      <h3>Criar o projeto React (front-end)</h3>
+      <p>Cria a base do projeto usando o Vite com template React.</p>
+      <pre><code>npm create vite@latest nome-do-projeto -- --template react
+<span class="kw">cd</span> nome-do-projeto
+npm install</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Rodar o front-end (modo desenvolvimento)</h3>
+      <p>Inicia o servidor local do Vite, com hot-reload — normalmente sobe em <code>http://localhost:5173</code>.</p>
+      <pre><code>npm run dev</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Instalar o axios no front-end</h3>
+      <p>Biblioteca usada no <code>services/api.js</code> para fazer as requisições HTTP à API.</p>
+      <pre><code>npm install axios</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Criar o projeto do back-end</h3>
+      <p>Inicializa um projeto Node.js do zero, gerando o <code>package.json</code>.</p>
+      <pre><code><span class="kw">mkdir</span> backend
+<span class="kw">cd</span> backend
+npm init -y</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Habilitar ES Modules (import/export)</h3>
+      <p>Para poder usar <code>import</code>/<code>export</code> (em vez de <code>require</code>) no <code>server.js</code>, é preciso adicionar essa linha no <code>package.json</code> do back-end:</p>
+      <pre><code>{
+  <span class="str">"type"</span>: <span class="str">"module"</span>
+}</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Instalar Express e CORS</h3>
+      <p>Framework do servidor e middleware para liberar requisições entre front e back em portas diferentes.</p>
+      <pre><code>npm install express cors</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Instalar e configurar o Prisma</h3>
+      <p>Instala o Prisma como dependência de desenvolvimento, o client (usado no código) e inicializa a estrutura do ORM (gera a pasta <code>prisma/</code> com o <code>schema.prisma</code> e o arquivo <code>.env</code>).</p>
+      <pre><code>npm install prisma --save-dev
+npm install @prisma/client
+npx prisma init</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Rodar a migração do banco</h3>
+      <p>Depois de definir o model <code>User</code> no <code>schema.prisma</code>, esse comando cria as tabelas de fato no banco de dados com base nesse schema.</p>
+      <pre><code>npx prisma migrate dev --name init</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Abrir o Prisma Studio (opcional)</h3>
+      <p>Interface visual no navegador para ver e editar os dados do banco diretamente, sem precisar de SQL.</p>
+      <pre><code>npx prisma studio</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Rodar o back-end</h3>
+      <p>Executa o servidor Express. Com <code>node</code> puro, é preciso reiniciar manualmente a cada alteração; com <code>nodemon</code>, ele reinicia sozinho.</p>
+      <pre><code><span class="com">// rodar uma vez</span>
+node server.js
+
+<span class="com">// ou, instalando o nodemon pra reiniciar sozinho a cada mudança</span>
+npm install --save-dev nodemon
+npx nodemon server.js</code></pre>
+    </div>
+
+    <div class="callout warn">
+      <strong>Resumo do fluxo completo pra rodar o projeto:</strong> abrir dois terminais — um dentro da pasta do back-end rodando <code>node server.js</code> (ou <code>npx nodemon server.js</code>) na porta 3000, e outro dentro da pasta do front-end rodando <code>npm run dev</code> na porta 5173. Com os dois no ar, o React consegue falar com a API normalmente.
+    </div>
+  </section>
+
+  <section id="codigo-completo">
+    <span class="badge frontend">Código completo</span>
+    <h2>12. Código completo, linha por linha</h2>
+    <p class="desc">Todos os arquivos do projeto, com explicação detalhada do que cada trecho faz.</p>
+
+    <h3 style="margin-top:28px; color:var(--text); font-size:17px;">📄 index.html</h3>
+    <div class="filename">Raiz do projeto</div>
+    <pre><code>&lt;!doctype html&gt;
+&lt;html lang=<span class="str">"en"</span>&gt;
+&lt;head&gt;
+  &lt;link rel=<span class="str">"preconnect"</span> href=<span class="str">"https://fonts.googleapis.com"</span>&gt;
+  &lt;link rel=<span class="str">"preconnect"</span> href=<span class="str">"https://fonts.gstatic.com"</span> crossorigin&gt;
+  &lt;link href=<span class="str">"https://fonts.googleapis.com/css2?family=Poppins..."</span> rel=<span class="str">"stylesheet"</span>&gt;
+  &lt;meta charset=<span class="str">"UTF-8"</span> /&gt;
+  &lt;link rel=<span class="str">"icon"</span> type=<span class="str">"image/svg+xml"</span> href=<span class="str">"/favicon.svg"</span> /&gt;
+  &lt;meta name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span> /&gt;
+  &lt;title&gt;devclub-cadastro-usuarios&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=<span class="str">"root"</span>&gt;&lt;/div&gt;
+  &lt;script type=<span class="str">"module"</span> src=<span class="str">"/src/main.jsx"</span>&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <div class="card">
+      <p><strong>O que faz cada parte:</strong></p>
+      <p>• <code>&lt;link rel="preconnect"&gt;</code> avisa o navegador com antecedência que ele vai baixar recursos do Google Fonts, acelerando o carregamento da fonte.<br/>
+      • O segundo <code>&lt;link&gt;</code> importa de fato a fonte <strong>Poppins</strong> em vários pesos (100 a 900), usada em todo o CSS do projeto.<br/>
+      • <code>&lt;meta charset="UTF-8"&gt;</code> garante que acentos e caracteres especiais (como "ç", "ã") sejam exibidos corretamente.<br/>
+      • <code>&lt;meta name="viewport"&gt;</code> faz o site se adaptar a telas de celular, em vez de renderizar como se fosse desktop.<br/>
+      • <code>&lt;div id="root"&gt;</code> é o elemento vazio onde o React vai "injetar" toda a aplicação — é o único elemento do HTML que existe antes do JavaScript rodar.<br/>
+      • <code>&lt;script type="module" src="/src/main.jsx"&gt;</code> carrega o arquivo que efetivamente inicia o React. O <code>type="module"</code> é necessário porque esse arquivo usa <code>import</code>/<code>export</code>.</p>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--text); font-size:17px;">📄 src/main.jsx</h3>
+    <div class="filename">Ponto de entrada do React</div>
+    <pre><code><span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>
+<span class="kw">import</span> ReactDOM <span class="kw">from</span> <span class="str">'react-dom/client'</span>
+<span class="kw">import</span> Home <span class="kw">from</span> <span class="str">'./pages/Home'</span>
+<span class="kw">import</span> <span class="str">'./index.css'</span>
+
+ReactDOM.<span class="fn">createRoot</span>(document.<span class="fn">getElementById</span>(<span class="str">'root'</span>)).<span class="fn">render</span>(
+  &lt;React.StrictMode&gt;
+   &lt;Home /&gt;
+  &lt;/React.StrictMode&gt;,
+)</code></pre>
+    <div class="card">
+      <p><strong>O que faz cada linha:</strong></p>
+      <p>• <code>import React from 'react'</code> traz a biblioteca principal do React.<br/>
+      • <code>import ReactDOM from 'react-dom/client'</code> traz a parte do React responsável por conectar com o DOM do navegador (diferente do React Native, por exemplo, que usaria outra biblioteca).<br/>
+      • <code>import Home from './pages/Home'</code> importa o componente principal da aplicação.<br/>
+      • <code>import './index.css'</code> aplica estilos globais (fora dos componentes específicos).<br/>
+      • <code>ReactDOM.createRoot(...)</code> cria a "raiz" da aplicação React, apontando pro elemento <code>&lt;div id="root"&gt;</code> do HTML.<br/>
+      • <code>.render(...)</code> desenha o conteúdo dentro dessa raiz — nesse caso, o componente <code>&lt;Home /&gt;</code>.<br/>
+      • <code>&lt;React.StrictMode&gt;</code> é um componente que não renderiza nada visível, mas ativa verificações extras em desenvolvimento (como detectar efeitos colaterais inseguros) — só ajuda a pegar bugs cedo, não afeta produção.</p>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--text); font-size:17px;">📄 src/pages/Home/index.jsx</h3>
+    <div class="filename">Componente principal da tela</div>
+    <pre><code><span class="kw">import</span> { useEffect , useState , useRef} <span class="kw">from</span> <span class="str">'react'</span>
+<span class="kw">import</span> <span class="str">'./style.css'</span>
+<span class="kw">import</span> Trash <span class="kw">from</span> <span class="str">'../../assets/trash.svg'</span>
+<span class="kw">import</span> api <span class="kw">from</span> <span class="str">'../../services/api'</span>
+
+<span class="kw">function</span> <span class="fn">Home</span>() {
+  <span class="kw">const</span> [users, setUsers] = <span class="fn">useState</span>([])
+  <span class="kw">const</span> inputName = <span class="fn">useRef</span>()
+  <span class="kw">const</span> inputAge = <span class="fn">useRef</span>()
+  <span class="kw">const</span> inputEmail = <span class="fn">useRef</span>()
+
+  <span class="kw">async function</span> <span class="fn">getUsers</span>() {
+    <span class="kw">const</span> usersFromApi = <span class="kw">await</span> api.<span class="fn">get</span>(<span class="str">'/usuarios'</span>)
+    <span class="fn">setUsers</span>(usersFromApi.data)
+  }
+
+  <span class="kw">async function</span> <span class="fn">createUsers</span>(){
+    <span class="kw">await</span> api.<span class="fn">post</span>(<span class="str">'/usuarios'</span>, {
+      name: inputName.current.value,
+      age: inputAge.current.value,
+      email: inputEmail.current.value
+    })
+    <span class="fn">getUsers</span>()
+  }
+
+  <span class="kw">async function</span> <span class="fn">deleteUsers</span>(id) {
+    <span class="kw">await</span> api.<span class="fn">delete</span>(<span class="str">`/usuarios/${id}`</span>)
+    <span class="fn">getUsers</span>()
+  }
+
+  <span class="fn">useEffect</span>(() =&gt; {
+    <span class="fn">getUsers</span>()
+  }, [])
+
+  <span class="kw">return</span> (
+    &lt;div className=<span class="str">'container'</span>&gt;
+      &lt;form&gt;
+        &lt;h1&gt;Cadastro De Usuários&lt;/h1&gt;
+        &lt;input placeholder=<span class="str">"Nome"</span> name=<span class="str">"nome"</span> type=<span class="str">"text"</span> ref={inputName}/&gt;
+        &lt;input placeholder=<span class="str">"Idade"</span> name=<span class="str">"idade"</span> type=<span class="str">"number"</span> ref={inputAge}/&gt;
+        &lt;input placeholder=<span class="str">"Email"</span> name=<span class="str">"email"</span> type=<span class="str">"email"</span> ref={inputEmail}/&gt;
+        &lt;button type=<span class="str">"button"</span> className=<span class="str">'cadastrar-button'</span> onClick={createUsers}&gt;Cadastrar&lt;/button&gt;
+      &lt;/form&gt;
+
+      {users.<span class="fn">map</span>(user =&gt; (
+        &lt;div key={user.id} className=<span class="str">'card'</span>&gt;
+          &lt;div&gt;
+            &lt;p&gt;Nome: &lt;span&gt;{user.name}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Idade: &lt;span&gt;{user.age}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Email: &lt;span&gt;{user.email}&lt;/span&gt;&lt;/p&gt;
+            &lt;button onClick={() =&gt; deleteUsers(user.id)}&gt;
+              &lt;img src={Trash} /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+<span class="kw">export default</span> Home</code></pre>
+    <div class="card">
+      <p><strong>Imports (linhas 1-4):</strong> trazem os três hooks do React, o CSS específico dessa página, o ícone de lixeira (SVG) usado no botão de deletar, e a instância do axios configurada em <code>services/api.js</code>.</p>
+    </div>
+    <div class="card">
+      <p><strong>Estados e refs (linhas 8-11):</strong> <code>users</code> começa como array vazio e vai guardar a lista vinda da API. As três <code>useRef</code> apontam para os inputs do formulário, permitindo ler o valor digitado sem precisar de um <code>useState</code> pra cada campo.</p>
+    </div>
+    <div class="card">
+      <p><strong>getUsers():</strong> faz um <code>GET</code> em <code>/usuarios</code> via axios. O axios sempre devolve a resposta dentro de um objeto — por isso o dado real está em <code>usersFromApi.data</code>, que é passado pro <code>setUsers</code> para atualizar o estado (e, consequentemente, a tela).</p>
+    </div>
+    <div class="card">
+      <p><strong>createUsers():</strong> faz um <code>POST</code> em <code>/usuarios</code>, enviando um objeto com os valores lidos direto do DOM via <code>.current.value</code> de cada ref. Depois do cadastro, chama <code>getUsers()</code> de novo pra recarregar a lista com o novo usuário incluído — uma forma simples de manter a tela sincronizada sem gerenciar o array manualmente.</p>
+    </div>
+    <div class="card">
+      <p><strong>deleteUsers(id):</strong> recebe o <code>id</code> do usuário a ser removido, faz um <code>DELETE</code> em <code>/usuarios/{id}</code> (usando template literal pra montar a URL dinamicamente) e recarrega a lista.</p>
+    </div>
+    <div class="card">
+      <p><strong>useEffect:</strong> roda <code>getUsers()</code> assim que o componente aparece na tela pela primeira vez (array de dependências vazio <code>[]</code> = "só na montagem").</p>
+    </div>
+    <div class="card">
+      <p><strong>JSX (return):</strong> o formulário tem três inputs controlados por ref e um botão que, ao ser clicado, chama <code>createUsers</code>. Abaixo do formulário, <code>users.map(...)</code> percorre o array de usuários e gera um <code>&lt;div className="card"&gt;</code> pra cada um, exibindo nome, idade e email, além de um botão com ícone de lixeira que chama <code>deleteUsers(user.id)</code>. O <code>key={user.id}</code> é obrigatório em listas no React — ajuda ele a identificar qual item mudou, foi adicionado ou removido, sem precisar redesenhar a lista inteira.</p>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--text); font-size:17px;">📄 src/pages/Home/style.css</h3>
+    <div class="filename">Estilos específicos da tela Home</div>
+    <div class="card">
+      <p>Já detalhado na <a href="#css">seção 7</a> — mas resumindo a lógica: <code>.container</code> usa <strong>flexbox em coluna</strong> pra centralizar tudo verticalmente; <code>form</code> vira uma "caixa" escura arredondada com espaçamento entre os campos (<code>gap</code>); <code>.cadastrar-button</code> estiliza o botão de envio; e <code>.card</code> usa <strong>flexbox em linha</strong> com <code>justify-content: space-between</code> pra empurrar o texto pra esquerda e o botão de deletar pra direita.</p>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--text); font-size:17px;">📄 src/services/api.js</h3>
+    <div class="filename">Configuração do axios</div>
+    <pre><code><span class="kw">import</span> axios <span class="kw">from</span> <span class="str">'axios'</span>
+
+<span class="kw">const</span> api = axios.<span class="fn">create</span>({
+  baseURL: <span class="str">'http://localhost:3000'</span>
+})
+
+<span class="kw">export default</span> api</code></pre>
+    <div class="card">
+      <p><strong>axios.create({ baseURL })</strong> cria uma "cópia customizada" do axios já configurada com a URL base do servidor. Assim, no componente, em vez de escrever <code>axios.get('http://localhost:3000/usuarios')</code> toda vez, basta <code>api.get('/usuarios')</code>. Isso centraliza a URL em um único lugar — se o backend mudar de endereço (ex: for pra produção), só precisa trocar aqui.</p>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--text); font-size:17px;">📄 server.js (back-end)</h3>
+    <div class="filename">Servidor Express + Prisma</div>
+    <div class="card">
+      <p>Código completo já está na <a href="#backend">seção 5</a>. Explicação linha a linha do essencial:</p>
+      <p>• <code>import express from "express"</code> e <code>const app = express()</code> criam a aplicação do servidor.<br/>
+      • <code>import pkg from '@prisma/client'; const { PrismaClient } = pkg</code> — importa o client do Prisma de um jeito compatível com ES Modules (o pacote é exportado como <code>CommonJS</code>, por isso o import "estranho" desestruturando depois).<br/>
+      • <code>const prisma = new PrismaClient()</code> cria a instância que conversa com o banco de dados.<br/>
+      • <code>app.use(express.json())</code> permite ler <code>req.body</code> em JSON.<br/>
+      • <code>app.use(cors())</code> libera requisições vindas de outra porta (o front-end).<br/>
+      • Cada <code>app.METODO('/rota', async (req, res) =&gt; {...})</code> define um endpoint: <code>req</code> traz os dados da requisição (<code>req.body</code>, <code>req.params</code>, <code>req.query</code>), <code>res</code> é usado pra devolver a resposta (<code>res.status(codigo).json(dados)</code>).<br/>
+      • <code>req.params.id</code> pega o <code>:id</code> da URL (ex: <code>/usuarios/5</code> → <code>id = "5"</code>).<br/>
+      • <code>req.query</code> pega parâmetros depois do <code>?</code> na URL (ex: <code>/usuarios?name=Luiz</code>).<br/>
+      • <code>app.listen(3000)</code> coloca o servidor escutando na porta 3000.</p>
+    </div>
+
+    <div class="callout warn">
+      Todo o código já vinha com pequenos ajustes necessários (parênteses faltando no <code>findMany</code>, resposta correta no <code>PUT</code>) — essas correções estão detalhadas na <a href="#erros">seção 8</a>.
+    </div>
+  </section>
+
+  <footer>
+    Guia gerado a partir do histórico de desenvolvimento do projeto de cadastro de usuários.
+    <br/>
+    <a class="back-to-top" href="#topo">↑ Voltar ao topo</a>
+  </footer>
+
+</div>
+</body>
+</html>

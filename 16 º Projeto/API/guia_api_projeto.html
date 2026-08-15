@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia API Projeto - Explicação Detalhada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #2e2d4e;
+            border-bottom: 3px solid #8b8ae1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .codigo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .explicacao {
+            background: #f8f9fa;
+            border-left: 4px solid #8b8ae1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .explicacao-item {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .explicacao-item strong {
+            color: #2e2d4e;
+        }
+        .linha {
+            background: #e9ecef;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .linha-numero {
+            color: #8b8ae1;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Guia API Projeto - Explicação Detalhada</h1>
+
+        <div class="section">
+            <h2>Código Completo da API com Prisma</h2>
+            <div class="codigo">
+import express from "express"
+import pkg from '@prisma/client'
+const { PrismaClient } = pkg
+
+const prisma = new PrismaClient()
+
+const app = express()
+app.use(express.json());
+
+app.post('/usuarios', async (req, res) =>{
+
+  await prisma.user.create({
+        data:{
+            email: req.body.email,
+            name: req.body.name,
+            age: req.body.age
+        }
+    })
+
+    users.push(req.body)
+
+    res.status(201).json(req.body)
+})
+app.get('/usuarios', async (req, res) =>{
+
+   const users = await prisma.user.findMany()
+    
+
+ res.status(200).json(users)
+
+})
+
+app.listen(3000)
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Explicação Linha por Linha</h2>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">1</span>import express from "express"</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Importa a biblioteca Express</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Para criar APIs e servidores web</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> O Express é um framework web para Node.js que facilita criar APIs.</div>
+                <div class="explicacao-item"><strong>Observação:</strong> Usa sintaxe ES6 (import)</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">2</span>import pkg from '@prisma/client'</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Importa o cliente Prisma como default export</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Para usar Prisma no código</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> @prisma/client é CommonJS, precisa importar como default export</div>
+                <div class="explicacao-item"><strong>Observação:</strong> Necessário para interagir com banco de dados</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">3</span>const { PrismaClient } = pkg</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Desestrutura PrismaClient do pacote</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Para instanciar o cliente Prisma</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> Desestruturação para pegar apenas PrismaClient</div>
+                <div class="explicacao-item"><strong>Observação:</strong> PrismaClient é a classe principal do Prisma</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">5</span>const prisma = new PrismaClient()</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Cria instância do cliente Prisma</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Para interagir com banco de dados</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> Uma instância para toda a aplicação</div>
+                <div class="explicacao-item"><strong>Observação:</strong> Usada para todas as operações de banco</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">7</span>const app = express()</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Cria instância do Express</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Para configurar rotas e middlewares</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> 'app' contém todos os métodos do Express</div>
+                <div class="explicacao-item"><strong>Observação:</strong> 'app' é o padrão da comunidade</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">8</span>app.use(express.json())</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Adiciona middleware para ler JSON</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Para ler dados do corpo da requisição</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> Converte JSON para objeto em req.body</div>
+                <div class="explicacao-item"><strong>Observação:</strong> ESSENCIAL para POST e PUT</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">11</span>app.post('/usuarios', async (req, res) =>{</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Cria rota POST para '/usuarios'</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Endpoint para criar usuários</div>
+                <div class="explicacao-item"><strong>async:</strong> Marca função como assíncrona (usa await)</div>
+                <div class="explicacao-item"><strong>Observação:</strong> POST é usado para criar recursos</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">13</span>await prisma.user.create({</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Cria usuário no banco de dados</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Salva usuário no MongoDB</div>
+                <div class="explicacao-item"><strong>await:</strong> Espera operação do banco terminar</div>
+                <div class="explicacao-item"><strong>Observação:</strong> Operações de banco são assíncronas</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">14-18</span>data:{ email, name, age }</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Define dados do usuário</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Passa dados para o banco</div>
+                <div class="explicacao-item"><strong>Explicação:</strong> Campos devem bater com schema.prisma</div>
+                <div class="explicacao-item"><strong>Observação:</strong> email, name, age do req.body</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">21</span>users.push(req.body)</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Adiciona usuário ao array</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Backup em memória</div>
+                <div class="explicacao-item"><strong>Observação:</strong> Pode ser removido (Prisma já salva)</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">23</span>res.status(201).json(req.body)</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Envia status 201 e dados</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Confirma criação</div>
+                <div class="explicacao-item"><strong>Observação:</strong> 201 é status code para criação</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">25</span>app.get('/usuarios', async (req, res) =>{</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Cria rota GET para '/usuarios'</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Endpoint para listar usuários</div>
+                <div class="explicacao-item"><strong>async:</strong> Marca função como assíncrona</div>
+                <div class="explicacao-item"><strong>Observação:</strong> GET é usado para ler recursos</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">27</span>const users = await prisma.user.findMany()</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Busca todos usuários no banco</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Lista usuários cadastrados</div>
+                <div class="explicacao-item"><strong>await:</strong> Espera operação terminar</div>
+                <div class="explicacao-item"><strong>Observação:</strong> findMany() retorna array</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">30</span>res.status(200).json(users)</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Envia status 200 e array</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> Retorna usuários ao cliente</div>
+                <div class="explicacao-item"><strong>Observação:</strong> 200 é status code padrão</div>
+            </div>
+
+            <div class="explicacao">
+                <div class="linha"><span class="linha-numero">34</span>app.listen(3000)</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Inicia servidor na porta 3000</div>
+                <div class="explicacao-item"><strong>Para que serve:</strong> API fica disponível</div>
+                <div class="explicacao-item"><strong>Observação:</strong> http://localhost:3000</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Como Testar a API</h2>
+
+            <div class="explicacao">
+                <h3>1. Iniciar o servidor</h3>
+                <div class="codigo">
+# Iniciar servidor normal
+node server.js
+
+# Iniciar com watch (reinicia automaticamente ao salvar)
+node --watch server.js
+                </div>
+                <div class="explicacao-item"><strong>node server.js:</strong> Inicia o servidor uma vez. Precisa reiniciar manualmente após mudanças.</div>
+                <div class="explicacao-item"><strong>node --watch server.js:</strong> Inicia o servidor com modo watch. Reinicia automaticamente sempre que você salvar o arquivo server.js. Muito útil durante desenvolvimento.</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>2. Testar POST (Criar usuário)</h3>
+                <div class="codigo">
+curl -X POST http://localhost:3000/usuarios \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"Abner","idade":23,"email":"abn@email.com"}'
+                </div>
+                <div class="explicacao-item"><strong>Resposta esperada:</strong> "Ok, Post"</div>
+                <div class="explicacao-item"><strong>O que acontece:</strong> Usuário é adicionado ao array users</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>3. Testar GET (Listar usuários)</h3>
+                <div class="codigo">
+curl http://localhost:3000/usuarios
+                </div>
+                <div class="explicacao-item"><strong>Resposta esperada:</strong> Array com todos os usuários cadastrados</div>
+                <div class="explicacao-item"><strong>Exemplo:</strong> [{"nome":"Abner","idade":23,"email":"abn@email.com"}]</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>4. Usando Thunder Client (VS Code)</h3>
+                <div class="explicacao-item"><strong>O que é:</strong> Extensão do VS Code para testar APIs</div>
+                <div class="explicacao-item"><strong>Vantagem:</strong> Integrado ao VS Code, não precisa sair do editor</div>
+                <div class="explicacao-item"><strong>POST:</strong></div>
+                <div class="explicacao-item">- Clique no ícone do Thunder Client (raio)</div>
+                <div class="explicacao-item">- Método: POST</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">- Body: JSON</div>
+                <div class="explicacao-item">- Cole: {"nome":"Abner","idade":23,"email":"abn@email.com"}</div>
+                <div class="explicacao-item">- Clique em Send</div>
+                <div class="explicacao-item"><strong>GET:</strong></div>
+                <div class="explicacao-item">- Método: GET</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">- Clique em Send</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>5. Usando Postman/Insomnia</h3>
+                <div class="explicacao-item"><strong>POST:</strong></div>
+                <div class="explicacao-item">- Método: POST</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">- Headers: Content-Type: application/json</div>
+                <div class="explicacao-item">- Body (raw JSON): {"nome":"Abner","idade":23,"email":"abn@email.com"}</div>
+                <div class="explicacao-item"><strong>GET:</strong></div>
+                <div class="explicacao-item">- Método: GET</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Async e Await - Explicação Detalhada</h2>
+
+            <div class="explicacao">
+                <h3>O que é async/await?</h3>
+                <div class="explicacao-item"><strong>async/await</strong> é uma sintaxe do JavaScript para trabalhar com código assíncrono de forma mais legível, similar a código síncrono.</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>async</h3>
+                <div class="explicacao-item"><strong>O que é:</strong> Palavra-chave que marca uma função como assíncrona</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Permite usar await dentro da função</div>
+                <div class="explicacao-item"><strong>O que retorna:</strong> Sempre retorna uma Promise</div>
+                <div class="explicacao-item"><strong>Quando usar:</strong> Quando a função tem operações assíncronas</div>
+                <div class="codigo">
+async function criarUsuario() {
+  // código assíncrono aqui
+}
+
+app.post('/usuarios', async (req, res) => {
+  // função assíncrona para rota POST
+})
+                </div>
+            </div>
+
+            <div class="explicacao">
+                <h3>await</h3>
+                <div class="explicacao-item"><strong>O que é:</strong> Palavra-chave que pausa a execução até uma Promise resolver</div>
+                <div class="explicacao-item"><strong>O que faz:</strong> Espera uma operação assíncrona terminar antes de continuar</div>
+                <div class="explicacao-item"><strong>Onde usar:</strong> Dentro de funções marcadas com async</div>
+                <div class="explicacao-item"><strong>Quando usar:</strong> Para operações que demoram (banco de dados, API, arquivos)</div>
+                <div class="codigo">
+const usuario = await prisma.user.create()
+// O código para aqui até prisma.user.create() terminar
+console.log(usuario) // só executa depois que terminar
+                </div>
+            </div>
+
+            <div class="explicacao">
+                <h3>Por que usar async/await?</h3>
+                <div class="explicacao-item"><strong>1. Operações de banco de dados são assíncronas</strong></div>
+                <div class="explicacao-item">- prisma.user.create() retorna uma Promise</div>
+                <div class="explicacao-item">- prisma.user.findMany() retorna uma Promise</div>
+                <div class="explicacao-item">- Precisamos esperar essas operações terminarem</div>
+                <div class="explicacao-item"><strong>2. Código mais legível</strong></div>
+                <div class="explicacao-item">- Sem async/await: .then() e .catch() (callback hell)</div>
+                <div class="explicacao-item">- Com async/await: Código parece síncrono</div>
+                <div class="explicacao-item"><strong>3. Evita erros</strong></div>
+                <div class="explicacao-item">- Sem await: O código continua antes da operação terminar</div>
+                <div class="explicacao-item">- Com await: Garante que a operação terminou</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>Fluxo de Execução com await</h3>
+                <div class="explicacao-item">1. Código chega no await</div>
+                <div class="explicacao-item">2. Execução PAUSA</div>
+                <div class="explicacao-item">3. Operação assíncrona roda em segundo plano</div>
+                <div class="explicacao-item">4. Quando termina, execução RETOMA</div>
+                <div class="explicacao-item">5. Código continua normalmente</div>
+                <div class="codigo">
+console.log('1')
+await prisma.user.create() // pausa aqui
+console.log('2') // só executa depois que terminar
+
+Saída:
+1
+(espera banco de dados)
+2
+                </div>
+            </div>
+
+            <div class="explicacao">
+                <h3>Try/Catch com async/await</h3>
+                <div class="explicacao-item">Para tratar erros em funções async:</div>
+                <div class="codigo">
+app.post('/usuarios', async (req, res) => {
+  try {
+    const user = await prisma.user.create({
+      data: req.body
+    })
+    res.status(201).json(user)
+  } catch (error) {
+    res.status(500).json({ erro: error.message })
+  }
+})
+                </div>
+                <div class="explicacao-item"><strong>try:</strong> Código que pode dar erro</div>
+                <div class="explicacao-item"><strong>catch:</strong> Código que executa se der erro</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Fluxo Completo da API com Prisma</h2>
+
+            <div class="explicacao">
+                <h3>Fluxo de Criação (POST) com Prisma</h3>
+                <div class="explicacao-item">1. Cliente envia POST para /usuarios com dados JSON</div>
+                <div class="explicacao-item">2. Middleware express.json() converte JSON para objeto</div>
+                <div class="explicacao-item">3. Função assíncrona da rota POST é executada</div>
+                <div class="explicacao-item">4. await prisma.user.create() salva usuário no MongoDB</div>
+                <div class="explicacao-item">5. Código pausa até operação do banco terminar</div>
+                <div class="explicacao-item">6. res.status(201).json() envia resposta ao cliente</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>Fluxo de Leitura (GET) com Prisma</h3>
+                <div class="explicacao-item">1. Cliente envia GET para /usuarios</div>
+                <div class="explicacao-item">2. Função assíncrona da rota GET é executada</div>
+                <div class="explicacao-item">3. await prisma.user.findMany() busca usuários no MongoDB</div>
+                <div class="explicacao-item">4. Código pausa até operação do banco terminar</div>
+                <div class="explicacao-item">5. res.status(200).json() envia array de usuários ao cliente</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Próximos Passos (CRUD Completo)</h2>
+
+            <div class="explicacao">
+                <h3>O que falta implementar:</h3>
+                <div class="explicacao-item"><strong>✅ CREATE (POST):</strong> Já implementado - criar usuário</div>
+                <div class="explicacao-item"><strong>✅ READ (GET):</strong> Já implementado - listar usuários</div>
+                <div class="explicacao-item"><strong>⏳ UPDATE (PUT/PATCH):</strong> Falta - editar usuário</div>
+                <div class="explicacao-item"><strong>⏳ DELETE:</strong> Falta - deletar usuário</div>
+            </div>
+
+            <div class="explicacao">
+                <h3>Exemplo PUT (Editar usuário):</h3>
+                <div class="codigo">
+app.put('/usuarios/:id', (req, res) => {
+  const { id } = req.params
+  const { nome, idade, email } = req.body
+  
+  const index = users.findIndex(u => u.id == id)
+  
+  if (index === -1) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' })
+  }
+  
+  users[index] = { id: parseInt(id), nome, idade, email }
+  res.json(users[index])
+})
+                </div>
+            </div>
+
+            <div class="explicacao">
+                <h3>Exemplo DELETE (Deletar usuário):</h3>
+                <div class="codigo">
+app.delete('/usuarios/:id', (req, res) => {
+  const { id } = req.params
+  
+  const index = users.findIndex(u => u.id == id)
+  
+  if (index === -1) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' })
+  }
+  
+  users.splice(index, 1)
+  res.status(204).send()
+})
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

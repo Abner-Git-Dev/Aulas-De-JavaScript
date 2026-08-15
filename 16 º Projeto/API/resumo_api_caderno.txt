@@ -1,0 +1,227 @@
+================================================================================
+                    RESUMO DE API - PARA ANOTAR NO CADERNO
+================================================================================
+
+CÓDIGO COMPLETO DA API
+================================================================================
+
+import express from "express"
+
+const app = express()
+app.use(express.json());
+
+const users = []
+
+app.post('/usuarios', (req, res) =>{
+    users.push(req.body)
+    res.status(201).json(req.body)
+})
+
+app.get('/usuarios', (req, res) =>{
+    res.status(200).json(users)
+})
+
+app.listen(3000)
+
+
+EXPLICAÇÃO LINHA POR LINHA
+================================================================================
+
+1. import express from "express"
+   - O que faz: Importa a biblioteca Express
+   - Para que serve: Para poder usar o Express no código
+   - Explicação: O Express é um framework web para Node.js que facilita criar APIs
+   - Observação: Usa sintaxe ES6 (import). Precisa de "type": "module" no package.json
+
+
+3. const app = express()
+   - O que faz: Cria uma instância do Express
+   - Para que serve: O objeto 'app' é usado para configurar a API
+   - Explicação: O 'app' contém todos os métodos do Express: .get(), .post(), .put(), .delete()
+   - Observação: Pode ter qualquer nome, mas 'app' é o padrão
+
+
+5. app.use(express.json())
+   - O que faz: Adiciona middleware para ler JSON
+   - Para que serve: Permite ler dados enviados no corpo da requisição
+   - Explicação: Converte JSON do corpo da requisição para objeto JavaScript em req.body
+   - Observação: ESSENCIAL para qualquer API que recebe dados (POST, PUT, PATCH)
+
+
+7. const users = []
+   - O que faz: Cria um array vazio para armazenar usuários
+   - Para que serve: Simula um banco de dados em memória
+   - Explicação: Em produção, usaria banco de dados (MongoDB, PostgreSQL)
+   - Observação: Dados são perdidos ao reiniciar o servidor (apenas memória)
+
+
+9. app.post('/usuarios', (req, res) => {
+   - O que faz: Cria uma rota POST para '/usuarios'
+   - Para que serve: Endpoint para criar novos usuários
+   - Explicação: Quando alguém faz POST para http://localhost:3000/usuarios, executa esta função
+   - req: Objeto com dados da requisição (headers, params, query, body)
+   - res: Objeto para enviar resposta ao cliente
+
+
+11. users.push(req.body)
+    - O que faz: Adiciona o usuário enviado ao array
+    - Para que serve: Salva o novo usuário na "base de dados"
+    - Explicação: req.body contém os dados enviados (nome, idade, email). .push() adiciona ao array
+    - Observação: Funciona por causa do middleware express.json() na linha 5
+
+
+13. res.status(201).json(req.body)
+    - O que faz: Envia status 201 e o usuário criado em JSON
+    - Para que serve: Confirma criação e retorna o usuário criado
+    - Explicação: .status(201) define código HTTP como 201 (Created). .json() envia dados
+    - Observação: 201 é o status code correto para criação (POST)
+
+
+18. app.get('/usuarios', (req, res) => {
+    - O que faz: Cria uma rota GET para '/usuarios'
+    - Para que serve: Endpoint para listar todos os usuários
+    - Explicação: Quando alguém faz GET para http://localhost:3000/usuarios, executa esta função
+    - Observação: GET não deve alterar dados, apenas ler
+
+
+20. res.status(200).json(users)
+    - O que faz: Envia status 200 e o array de usuários em JSON
+    - Para que serve: Retorna todos os usuários cadastrados
+    - Explicação: .status(200) define código HTTP como 200 (OK). .json() converte array para JSON
+    - Observação: 200 é o status code padrão para requisições GET bem-sucedidas
+
+
+25. app.listen(3000)
+    - O que faz: Inicia o servidor na porta 3000
+    - Para que serve: Faz a API ficar disponível para receber requisições
+    - Explicação: Inicia servidor HTTP. API fica disponível em http://localhost:3000
+    - Observação: Pode adicionar callback: app.listen(3000, () => console.log('Servidor rodando'))
+
+
+COMO TESTAR A API
+================================================================================
+
+1. Iniciar o servidor
+   - node server.js (inicia uma vez, precisa reiniciar manualmente)
+   - node --watch server.js (reinicia automaticamente ao salvar)
+
+
+2. Testar POST (Criar usuário) com curl
+   curl -X POST http://localhost:3000/usuarios \
+     -H "Content-Type: application/json" \
+     -d '{"nome":"Abner","idade":23,"email":"abn@email.com"}'
+   - Resposta esperada: Usuário criado em JSON com status 201
+
+
+3. Testar GET (Listar usuários) com curl
+   curl http://localhost:3000/usuarios
+   - Resposta esperada: Array com todos os usuários cadastrados
+
+
+4. Usando Thunder Client (VS Code)
+   - Extensão do VS Code para testar APIs
+   - POST: Método POST, URL http://localhost:3000/usuarios, Body JSON com dados
+   - GET: Método GET, URL http://localhost:3000/usuarios
+
+
+5. Usando Postman/Insomnia
+   - POST: Método POST, URL, Headers Content-Type, Body raw JSON
+   - GET: Método GET, URL
+
+
+FLUXO COMPLETO DA API
+================================================================================
+
+Fluxo de Criação (POST):
+1. Cliente envia POST para /usuarios com dados JSON
+2. Middleware express.json() converte JSON para objeto
+3. Função da rota POST é executada
+4. req.body contém os dados do usuário
+5. users.push(req.body) adiciona usuário ao array
+6. res.status(201).json(req.body) envia resposta ao cliente
+
+
+Fluxo de Leitura (GET):
+1. Cliente envia GET para /usuarios
+2. Função da rota GET é executada
+3. res.status(200).json(users) converte array para JSON
+4. Cliente recebe array com todos os usuários
+
+
+CONCEITOS IMPORTANTES
+================================================================================
+
+Express.js:
+- Framework web para Node.js
+- Facilita criação de APIs
+- Fornece métodos: .get(), .post(), .put(), .delete(), .use(), .listen()
+
+Middleware:
+- Funções que executam antes das rotas
+- express.json() converte JSON para objeto
+- Essencial para ler dados do corpo da requisição
+
+req (Request):
+- Objeto com dados da requisição
+- req.body - corpo da requisição (POST, PUT)
+- req.params - parâmetros da URL (/usuarios/:id)
+- req.query - query strings (?idade=23)
+- req.headers - headers da requisição
+
+res (Response):
+- Objeto para enviar resposta
+- res.json() - envia JSON
+- res.send() - envia texto
+- res.status() - define status code
+
+Status Codes HTTP:
+- 200 OK - Requisição bem-sucedida
+- 201 Created - Recurso criado com sucesso
+- 400 Bad Request - Requisição inválida
+- 404 Not Found - Recurso não encontrado
+- 500 Internal Server Error - Erro no servidor
+
+JSON:
+- Formato de dados padrão para APIs
+- Leve, legível, universal
+- Usado para troca de dados entre sistemas
+
+
+PRÓXIMOS PASSOS (CRUD COMPLETO)
+================================================================================
+
+✅ CREATE (POST): Já implementado - criar usuário
+✅ READ (GET): Já implementado - listar usuários
+⏳ UPDATE (PUT/PATCH): Falta - editar usuário
+⏳ DELETE: Falta - deletar usuário
+
+Exemplo PUT (Editar usuário):
+app.put('/usuarios/:id', (req, res) => {
+  const { id } = req.params
+  const { nome, idade, email } = req.body
+  
+  const index = users.findIndex(u => u.id == id)
+  
+  if (index === -1) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' })
+  }
+  
+  users[index] = { id: parseInt(id), nome, idade, email }
+  res.json(users[index])
+})
+
+Exemplo DELETE (Deletar usuário):
+app.delete('/usuarios/:id', (req, res) => {
+  const { id } = req.params
+  
+  const index = users.findIndex(u => u.id == id)
+  
+  if (index === -1) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' })
+  }
+  
+  users.splice(index, 1)
+  res.status(204).send()
+})
+
+================================================================================

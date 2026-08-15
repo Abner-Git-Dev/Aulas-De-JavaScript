@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo do Projeto Integrado - React + API + Prisma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #2e2d4e;
+            border-bottom: 3px solid #8b8ae1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: #4a4a6a;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .codigo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .explicacao {
+            background: #f8f9fa;
+            border-left: 4px solid #8b8ae1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .explicacao-item {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .explicacao-item strong {
+            color: #2e2d4e;
+        }
+        .linha {
+            background: #e9ecef;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .linha-numero {
+            color: #8b8ae1;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .comando {
+            background: #2e2d4e;
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 5px 0;
+        }
+        .estrutura {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+        .nota {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #856404;
+        }
+        .aviso {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #721c24;
+        }
+        .sucesso {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Guia Completo do Projeto Integrado - React + API + Prisma</h1>
+
+        <div class="section">
+            <h2>🎯 Visão Geral do Projeto</h2>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>Objetivo:</strong> Sistema completo de cadastro de usuários com front-end React e back-end API</div>
+                <div class="explicacao-item"><strong>Front-end:</strong> React + Vite + Axios</div>
+                <div class="explicacao-item"><strong>Back-end:</strong> Express.js + Prisma + MongoDB</div>
+                <div class="explicacao-item"><strong>Funcionalidades:</strong> Criar, Listar, Editar, Deletar usuários (CRUD)</div>
+                <div class="explicacao-item"><strong>Comunicação:</strong> Axios faz requisições HTTP entre front-end e API</div>
+                <div class="explicacao-item"><strong>Banco de Dados:</strong> MongoDB via Prisma ORM</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📁 Estrutura de Pastas do Projeto</h2>
+            <div class="estrutura">
+devclub-cadastro-usuarios/          # Projeto Front-end React
+├── src/
+│   ├── assets/
+│   │   └── trash.svg              # Ícone de deletar
+│   ├── pages/
+│   │   └── Home/
+│   │       ├── index.jsx          # Componente Home principal
+│   │       └── style.css          # Estilos do Home
+│   ├── services/
+│   │   └── api.js                 # Configuração do Axios
+│   ├── index.css                  # Estilos globais
+│   ├── main.jsx                   # Entry point do React
+│   └── index.html                 # HTML principal
+├── package.json                   # Dependências do React
+└── vite.config.js                 # Configuração do Vite
+
+API/                                # Projeto Back-end API
+├── prisma/
+│   └── schema.prisma              # Schema do Prisma
+├── server.js                      # Servidor Express
+├── package.json                   # Dependências da API
+└── .env                           # Variáveis de ambiente
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💻 Comandos do Terminal Utilizados</h2>
+            
+            <h3>Comandos NPM (Front-end React)</h3>
+            <div class="comando">npm create vite@latest devclub-cadastro-usuarios -- --template react</div>
+            <div class="explicacao-item">Cria projeto React com Vite</div>
+            
+            <div class="comando">cd devclub-cadastro-usuarios</div>
+            <div class="explicacao-item">Entra na pasta do projeto</div>
+            
+            <div class="comando">npm install</div>
+            <div class="explicacao-item">Instala dependências do projeto</div>
+            
+            <div class="comando">npm install axios</div>
+            <div class="explicacao-item">Instala Axios para fazer requisições HTTP</div>
+            
+            <div class="comando">npm run dev</div>
+            <div class="explicacao-item">Inicia servidor de desenvolvimento do React (porta 5173)</div>
+            
+            <h3>Comandos NPM (Back-end API)</h3>
+            <div class="comando">npm init -y</div>
+            <div class="explicacao-item">Inicializa projeto Node.js</div>
+            
+            <div class="comando">npm install express</div>
+            <div class="explicacao-item">Instala Express para criar API</div>
+            
+            <div class="comando">npm install cors</div>
+            <div class="explicacao-item">Instala CORS para permitir requisições do front-end</div>
+            
+            <div class="comando">npm install @prisma/client</div>
+            <div class="explicacao-item">Instala cliente Prisma para interagir com banco</div>
+            
+            <div class="comando">npm install --save-dev prisma</div>
+            <div class="explicacao-item">Instala Prisma CLI como dependência de desenvolvimento</div>
+            
+            <div class="comando">npm install</div>
+            <div class="explicacao-item">Instala todas as dependências do package.json</div>
+            
+            <h3>Comandos Node</h3>
+            <div class="comando">node server.js</div>
+            <div class="explicacao-item">Executa servidor da API (precisa reiniciar manualmente)</div>
+            
+            <div class="comando">node --watch server.js</div>
+            <div class="explicacao-item">Executa servidor com auto-restart ao salvar</div>
+            
+            <h3>Comandos Prisma</h3>
+            <div class="comando">npx prisma init</div>
+            <div class="explicacao-item">Inicializa Prisma no projeto</div>
+            
+            <div class="comando">npx prisma generate</div>
+            <div class="explicacao-item">Gera cliente Prisma baseado no schema</div>
+            
+            <div class="comando">npx prisma db push</div>
+            <div class="explicacao-item">Sincroniza schema com banco de dados (MongoDB)</div>
+            
+            <div class="comando">npx prisma studio</div>
+            <div class="explicacao-item">Abre interface visual para gerenciar dados (http://localhost:5555)</div>
+            
+            <h3>Ferramentas de Teste de API</h3>
+            <div class="explicacao-item"><strong>Thunder Client:</strong> Extensão do VS Code para testar APIs</div>
+            <div class="explicacao-item">- Permite fazer requisições HTTP (GET, POST, PUT, DELETE)</div>
+            <div class="explicacao-item">- Interface similar ao Postman, mas integrada ao VS Code</div>
+            <div class="explicacao-item">- Usado para testar as rotas da API antes de integrar com React</div>
+            <div class="explicacao-item">- Salva requisições para reutilizar depois</div>
+            
+            <h3>Como Usar o Thunder Client</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>1. Instalar a Extensão:</strong></div>
+                <div class="explicacao-item">- Abra o VS Code</div>
+                <div class="explicacao-item">- Vá em Extensions (Ctrl+Shift+X)</div>
+                <div class="explicacao-item">- Pesquise "Thunder Client"</div>
+                <div class="explicacao-item">- Clique em Install</div>
+                <div class="explicacao-item"><br><strong>2. Abrir o Thunder Client:</strong></div>
+                <div class="explicacao-item">- No painel esquerdo, clique no ícone do Thunder Client (raio)</div>
+                <div class="explicacao-item">- Ou use o comando: Ctrl+Shift+P → "Thunder Client: New Request"</div>
+                <div class="explicacao-item"><br><strong>3. Criar Nova Requisição:</strong></div>
+                <div class="explicacao-item">- Clique em "New Request"</div>
+                <div class="explicacao-item">- Dê um nome para a requisição (ex: "Criar Usuário")</div>
+                <div class="explicacao-item"><br><strong>4. Configurar Requisição POST (Criar Usuário):</strong></div>
+                <div class="explicacao-item">- Método: POST</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">- Aba "Body"</div>
+                <div class="explicacao-item">- Selecione "JSON"</div>
+                <div class="explicacao-item">- Cole o JSON:</div>
+                <div class="codigo">
+{
+  "email": "teste@email.com",
+  "name": "Teste",
+  "age": "25"
+}
+                </div>
+                <div class="explicacao-item">- Clique em "Send"</div>
+                <div class="explicacao-item"><br><strong>5. Configurar Requisição GET (Listar Usuários):</strong></div>
+                <div class="explicacao-item">- Método: GET</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">- Clique em "Send"</div>
+                <div class="explicacao-item"><br><strong>6. Configurar Requisição PUT (Editar Usuário):</strong></div>
+                <div class="explicacao-item">- Método: PUT</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios/{id}</div>
+                <div class="explicacao-item">- Substitua {id} pelo ID do usuário (ex: 67a1b2c3d4e5f6g7h8i9j0k)</div>
+                <div class="explicacao-item">- Aba "Body"</div>
+                <div class="explicacao-item">- Selecione "JSON"</div>
+                <div class="explicacao-item">- Cole o JSON com dados atualizados:</div>
+                <div class="codigo">
+{
+  "email": "novo@email.com",
+  "name": "Nome Atualizado",
+  "age": "26"
+}
+                </div>
+                <div class="explicacao-item">- Clique em "Send"</div>
+                <div class="explicacao-item"><br><strong>7. Configurar Requisição DELETE (Deletar Usuário):</strong></div>
+                <div class="explicacao-item">- Método: DELETE</div>
+                <div class="explicacao-item">- URL: http://localhost:3000/usuarios/{id}</div>
+                <div class="explicacao-item">- Substitua {id} pelo ID do usuário</div>
+                <div class="explicacao-item">- Clique em "Send"</div>
+                <div class="explicacao-item"><br><strong>8. Salvar Requisições:</strong></div>
+                <div class="explicacao-item">- Clique no ícone de disquete para salvar</div>
+                <div class="explicacao-item">- Requisições salvas ficam na coleção "Thunder Client"</div>
+                <div class="explicacao-item">- Pode reutilizar depois clicando na requisição salva</div>
+                <div class="explicacao-item"><br><strong>9. Verificar Resposta:</strong></div>
+                <div class="explicacao-item">- Status code: 200 (OK), 201 (Created), 500 (Error)</div>
+                <div class="explicacao-item">- Response body: JSON com dados retornados</div>
+                <div class="explicacao-item">- Response time: Tempo de resposta</div>
+                <div class="nota"><strong>Dica:</strong> Use o Thunder Client para testar cada rota da API antes de integrar com o React. Isso facilita identificar bugs no back-end.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Arquivos do Front-end React</h2>
+            
+            <h3>index.html - HTML Principal</h3>
+            <div class="codigo">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    rel="stylesheet"&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;title&gt;devclub-cadastro-usuarios&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>&lt;div id="root"&gt;&lt;/div&gt;:</strong> Container onde o React monta a aplicação</div>
+                <div class="explicacao-item"><strong>script type="module":</strong> Carrega o main.jsx como módulo ES6</div>
+                <div class="explicacao-item"><strong>Google Fonts:</strong> Importa fonte Poppins para o projeto</div>
+                <div class="explicacao-item"><strong>viewport:</strong> Configura responsividade para dispositivos móveis</div>
+            </div>
+            
+            <h3>main.jsx - Entry Point do React</h3>
+            <div class="codigo">
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Home from './pages/Home'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+   &lt;Home /&gt;
+  &lt;/React.StrictMode&gt;,
+)
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>import React:</strong> Importa biblioteca React</div>
+                <div class="explicacao-item"><strong>import ReactDOM:</strong> Importa ReactDOM para renderizar no DOM</div>
+                <div class="explicacao-item"><strong>import Home:</strong> Importa componente Home principal</div>
+                <div class="explicacao-item"><strong>import './index.css':</strong> Importa estilos globais</div>
+                <div class="explicacao-item"><strong>ReactDOM.createRoot:</strong> Cria root no elemento com id 'root'</div>
+                <div class="explicacao-item"><strong>.render():</strong> Renderiza componente Home dentro do root</div>
+                <div class="explicacao-item"><strong>React.StrictMode:</strong> Modo estrito para detectar problemas</div>
+            </div>
+            
+            <h3>index.css - Estilos Globais</h3>
+            <div class="codigo">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #363467 0%, rgba(30, 29, 79, 0.8) 100%);
+}
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>* { margin: 0; padding: 0; }:</strong> Remove margens e paddings padrão</div>
+                <div class="explicacao-item"><strong>box-sizing: border-box:</strong> Inclui padding e border na largura</div>
+                <div class="explicacao-item"><strong>font-family:</strong> Define fonte Poppins para todo projeto</div>
+                <div class="explicacao-item"><strong>min-height: 100vh:</strong> Altura mínima da tela</div>
+                <div class="explicacao-item"><strong>background: linear-gradient:</strong> Gradiente roxo como fundo</div>
+            </div>
+            
+            <h3>api.js - Configuração do Axios</h3>
+            <div class="codigo">
+import axios from 'axios'
+
+const api = axios.create({
+    baseURL: 'http://localhost:3000'
+})
+
+export default api
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>import axios:</strong> Importa biblioteca Axios</div>
+                <div class="explicacao-item"><strong>axios.create():</strong> Cria instância configurada do Axios</div>
+                <div class="explicacao-item"><strong>baseURL:</strong> URL base da API (todas requisições usam isso)</div>
+                <div class="explicacao-item"><strong>export default api:</strong> Exporta instância para usar em componentes</div>
+                <div class="nota"><strong>Nota:</strong> Com baseURL configurado, api.get('/usuarios') faz requisição para http://localhost:3000/usuarios</div>
+            </div>
+            
+            <h3>Home/index.jsx - Componente Principal (Integração com API)</h3>
+            <div class="codigo">
+import { useEffect , useState , useRef} from 'react'
+import './style.css'
+import Trash from '../../assets/trash.svg'
+import api from '../../services/api'
+
+function Home() {
+
+  const [users, setUsers] = useState ([])
+  
+  const inputName = useRef()
+  const inputAge = useRef()
+  const inputEmail = useRef()
+
+   async function getUsers() {
+    const usersFromApi = await api.get('/usuarios')
+    setUsers(usersFromApi.data)
+   }
+    
+    async function createUsers(){
+      await api.post('/usuarios', {
+        name: inputName.current.value,
+       age: inputAge.current.value,
+       email: inputEmail.current.value
+      })
+      getUsers()
+    }
+  
+     async function deleteUsers(id) {
+        await api.delete(`/usuarios/${id}`)
+      getUsers()
+    }
+
+  useEffect(() => {
+      getUsers()
+  }, [])
+ 
+  return (
+    &lt;div className='container'&gt;
+      &lt;form&gt;
+        &lt;h1&gt;Cadastro De Usuários&lt;/h1&gt;
+        &lt;input placeholder="Nome" name="nome" type="text" ref={inputName}/&gt;
+        &lt;input placeholder="Idade" name="idade" type="number" ref={inputAge}/&gt;
+        &lt;input placeholder="Email" name="email" type="email" ref={inputEmail}/&gt;
+       &lt;button type="button" className='cadastrar-button' onClick={createUsers}&gt;Cadastrar&lt;/button&gt;
+      &lt;/form&gt;
+
+      {users.map(user =&gt; (
+        &lt;div key={user.id} className='card'&gt;
+          &lt;div&gt;
+            &lt;p&gt;Nome: &lt;span&gt;{user.name}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Idade: &lt;span&gt;{user.age}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Email: &lt;span&gt;{user.email}&lt;/span&gt;&lt;/p&gt;
+            &lt;button onClick={() =&gt;deleteUsers(user.id)}&gt;
+              &lt;img src={Trash} /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+export default Home
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>Imports:</strong> useState (estado), useEffect (efeitos colaterais), useRef (referências DOM)</div>
+                <div class="explicacao-item"><strong>const [users, setUsers] = useState([]):</strong> Estado para armazenar lista de usuários</div>
+                <div class="explicacao-item"><strong>useRef:</strong> Cria referências para inputs (para pegar valores sem estado)</div>
+                <div class="explicacao-item"><strong>getUsers():</strong> Função assíncrona que busca usuários da API</div>
+                <div class="explicacao-item"><strong>createUsers():</strong> Função assíncrona que cria novo usuário e recarrega lista</div>
+                <div class="explicacao-item"><strong>deleteUsers(id):</strong> Função assíncrona que deleta usuário e recarrega lista</div>
+                <div class="explicacao-item"><strong>useEffect:</strong> Executa getUsers quando componente monta (array vazio = uma vez)</div>
+                <div class="explicacao-item"><strong>ref={inputName}:</strong> Conecta ref ao input para acessar valor</div>
+                <div class="explicacao-item"><strong>inputName.current.value:</strong> Acessa valor atual do input</div>
+                <div class="explicacao-item"><strong>users.map():</strong> Mapeia array de usuários para renderizar cards</div>
+                <div class="explicacao-item"><strong>key={user.id}:</strong> Identificador único para cada item (obrigatório no React)</div>
+                <div class="explicacao-item"><strong>onClick={() =&gt;deleteUsers(user.id)}:</strong> Função arrow para passar parâmetro</div>
+            </div>
+            
+            <h3>Home/style.css - Estilos do Componente Home</h3>
+            <div class="codigo">
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+h1 {
+  color: aliceblue;
+  font-size: 28px;
+  text-align: center;
+}
+
+form {
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+   padding: 30px;
+   border-radius: 10px;
+   background-color:#2e2d4e;
+   max-width: 50%;
+   width: 400px;
+   margin-bottom: 20px;
+}
+
+ .cadastrar-button {
+  border-radius: 30px;
+  background-color: #8b8ae1;
+  height: 40px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+&amp; button:hover {
+  opacity: 0.5;
+}
+
+&amp; input {
+   border: 1px solid #48456c;
+   border-radius: 30px;
+   height: 40px;
+   background-color: #363653;
+   color:#ffff;
+   font-size: 16px;
+   padding-left: 10px;
+   outline: none;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2e2d4e;
+  margin: 10px;
+  padding: 10px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+&amp; p {
+  color: #fff;
+  font-weight: bold;
+  &amp; span{
+    font-weight: normal;
+  }
+}
+
+&amp; button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+&amp; button:hover{
+   opacity: 0.5;
+}
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>.container:</strong> Layout centralizado com flexbox</div>
+                <div class="explicacao-item"><strong>form:</strong> Formulário com fundo roxo escuro e bordas arredondadas</div>
+                <div class="explicacao-item"><strong>gap: 30px:</strong> Espaçamento entre elementos do formulário</div>
+                <div class="explicacao-item"><strong>.cadastrar-button:</strong> Botão com cor roxa e bordas arredondadas</div>
+                <div class="explicacao-item"><strong>&amp; button:hover:</strong> Efeito de transparência ao passar mouse</div>
+                <div class="explicacao-item"><strong>&amp; input:</strong> Inputs com fundo escuro e borda roxa</div>
+                <div class="explicacao-item"><strong>.card:</strong> Cards de usuários com fundo roxo escuro</div>
+                <div class="explicacao-item"><strong>justify-content: space-between:</strong> Espaça conteúdo entre lados</div>
+                <div class="explicacao-item"><strong>&amp; button (dentro de card):</strong> Botão transparente para ícone de deletar</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Arquivos do Back-end API</h2>
+            
+            <h3>server.js - Servidor Express com Prisma</h3>
+            <div class="codigo">
+import express from "express"
+import cors from "cors"
+import pkg from '@prisma/client'
+const { PrismaClient } = pkg
+
+const prisma = new PrismaClient()
+
+const app = express()
+app.use(express.json());
+app.use(cors());
+
+app.post('/usuarios', async (req, res) =&gt;{
+  await prisma.user.create({
+        data:{
+            email: req.body.email,
+            name: req.body.name,
+            age: req.body.age
+        }
+    })
+    res.status(201).json(req.body)
+})
+
+app.get('/usuarios', async (req, res) =&gt;{
+     let users = []
+     if(req.query){
+            users = await prisma.user.findMany({
+              where: {
+                name: req.query.name ,
+                email: req.query.email,
+                age: req.query.age
+              }
+            })
+     } else {
+      users = await prisma.user.findMany()
+     }
+     res.status(200).json(users)
+})
+
+app.put('/usuarios/:id', async (req, res) =&gt;{
+  await prisma.user.update({
+          where: {
+            id: req.params.id
+          },
+        data:{
+            email: req.body.email,
+            name: req.body.name,
+            age: req.body.age
+        }
+    })
+    res.status(201).json(req.body)
+})
+
+app.delete('/usuarios/:id' , async (req, res) =&gt;{
+     await prisma.user.delete({
+      where: {
+        id: req.params.id
+      }
+    })
+     res.status(200).json({ message: 'Usuário deletado com Sucesso!'})
+})
+
+app.listen(3000)
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>import express:</strong> Importa framework Express</div>
+                <div class="explicacao-item"><strong>import cors:</strong> Importa middleware CORS</div>
+                <div class="explicacao-item"><strong>import PrismaClient:</strong> Importa cliente Prisma (como default export)</div>
+                <div class="explicacao-item"><strong>const prisma = new PrismaClient():</strong> Cria instância do Prisma</div>
+                <div class="explicacao-item"><strong>app.use(express.json()):</strong> Middleware para ler JSON no corpo da requisição</div>
+                <div class="explicacao-item"><strong>app.use(cors()):</strong> Middleware CORS para permitir requisições de outras origens</div>
+                <div class="explicacao-item"><strong>app.post('/usuarios'):</strong> Rota POST para criar usuário</div>
+                <div class="explicacao-item"><strong>prisma.user.create():</strong> Cria registro no banco de dados</div>
+                <div class="explicacao-item"><strong>app.get('/usuarios'):</strong> Rota GET para listar usuários</div>
+                <div class="explicacao-item"><strong>req.query:</strong> Parâmetros de query string para filtro</div>
+                <div class="explicacao-item"><strong>prisma.user.findMany():</strong> Busca múltiplos registros</div>
+                <div class="explicacao-item"><strong>where:</strong> Condições de filtro</div>
+                <div class="explicacao-item"><strong>app.put('/usuarios/:id'):</strong> Rota PUT para editar usuário</div>
+                <div class="explicacao-item"><strong>req.params.id:</strong> Parâmetro de rota (ID do usuário)</div>
+                <div class="explicacao-item"><strong>prisma.user.update():</strong> Atualiza registro no banco</div>
+                <div class="explicacao-item"><strong>app.delete('/usuarios/:id'):</strong> Rota DELETE para deletar usuário</div>
+                <div class="explicacao-item"><strong>prisma.user.delete():</strong> Deleta registro do banco</div>
+                <div class="explicacao-item"><strong>app.listen(3000):</strong> Inicia servidor na porta 3000</div>
+            </div>
+            
+            <h3>schema.prisma - Schema do Prisma</h3>
+            <div class="codigo">
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  name      String
+  age       String
+}
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>generator client:</strong> Configura geração do cliente Prisma</div>
+                <div class="explicacao-item"><strong>provider = "prisma-client-js":</strong> Gera cliente JavaScript padrão</div>
+                <div class="explicacao-item"><strong>datasource db:</strong> Configura fonte de dados</div>
+                <div class="explicacao-item"><strong>provider = "mongodb":</strong> Usa MongoDB como banco</div>
+                <div class="explicacao-item"><strong>url = env("DATABASE_URL"):</strong> URL de conexão do arquivo .env</div>
+                <div class="explicacao-item"><strong>model User:</strong> Define modelo de dados de usuário</div>
+                <div class="explicacao-item"><strong>@id:</strong> Campo é identificador primário</div>
+                <div class="explicacao-item"><strong>@default(auto()):</strong> Valor gerado automaticamente</div>
+                <div class="explicacao-item"><strong>@map("_id"):</strong> Mapeia para _id do MongoDB</div>
+                <div class="explicacao-item"><strong>@db.ObjectId:</strong> Tipo ObjectId do MongoDB</div>
+                <div class="explicacao-item"><strong>@unique:</strong> Campo não pode ter valores repetidos</div>
+            </div>
+            
+            <h3>package.json (API) - Dependências do Back-end</h3>
+            <div class="codigo">
+{
+  "name": "api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "prisma": "^6.0.0"
+  }
+}
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>"type": "module":</strong> Habilita módulos ES6 (import/export)</div>
+                <div class="explicacao-item"><strong>@prisma/client:</strong> Cliente Prisma para usar no código</div>
+                <div class="explicacao-item"><strong>cors:</strong> Middleware CORS para permitir requisições cross-origin</div>
+                <div class="explicacao-item"><strong>express:</strong> Framework para criar API</div>
+                <div class="explicacao-item"><strong>prisma (devDependency):</strong> CLI do Prisma para gerenciar schema</div>
+            </div>
+            
+            <h3>package.json (React) - Dependências do Front-end</h3>
+            <div class="codigo">
+{
+  "name": "devclub-cadastro-usuarios",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.19.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "eslint": "^10.8.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "vite": "^8.2.0"
+  }
+}
+            </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>axios:</strong> Biblioteca para fazer requisições HTTP</div>
+                <div class="explicacao-item"><strong>react:</strong> Biblioteca React para criar UI</div>
+                <div class="explicacao-item"><strong>react-dom:</strong> ReactDOM para renderizar React no DOM</div>
+                <div class="explicacao-item"><strong>vite:</strong> Bundler rápido para desenvolvimento</div>
+                <div class="explicacao-item"><strong>@vitejs/plugin-react:</strong> Plugin do Vite para React</div>
+                <div class="explicacao-item"><strong>eslint:</strong> Linter para verificar código</div>
+                <div class="explicacao-item"><strong>"dev": "vite":</strong> Script para iniciar servidor de desenvolvimento</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔑 Conceitos Importantes Explicados</h2>
+            
+            <h3>React Hooks</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>useState:</strong> Gerencia estado local do componente</div>
+                <div class="explicacao-item">- const [valor, setValor] = useState(inicial)</div>
+                <div class="explicacao-item">- valor: valor atual do estado</div>
+                <div class="explicacao-item">- setValor: função para atualizar o estado</div>
+                <div class="explicacao-item">- Quando estado muda, componente re-renderiza</div>
+                <div class="explicacao-item"><br><strong>useEffect:</strong> Executa efeitos colaterais (ex: buscar dados)</div>
+                <div class="explicacao-item">- useEffect(() =&gt; { código }, [dependências])</div>
+                <div class="explicacao-item">- Array vazio []: executa apenas uma vez (ao montar)</div>
+                <div class="explicacao-item">- Com dependências: executa quando dependências mudam</div>
+                <div class="explicacao-item"><br><strong>useRef:</strong> Cria referência mutável que persiste entre renders</div>
+                <div class="explicacao-item">- const ref = useRef()</div>
+                <div class="explicacao-item">- ref.current acessa o valor</div>
+                <div class="explicacao-item">- Usado para acessar DOM sem causar re-renderização</div>
+            </div>
+            
+            <h3>Axios</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>O que é:</strong> Biblioteca para fazer requisições HTTP</div>
+                <div class="explicacao-item"><strong>Métodos principais:</strong></div>
+                <div class="explicacao-item">- api.get(url): Faz requisição GET</div>
+                <div class="explicacao-item">- api.post(url, data): Faz requisição POST</div>
+                <div class="explicacao-item">- api.put(url, data): Faz requisição PUT</div>
+                <div class="explicacao-item">- api.delete(url): Faz requisição DELETE</div>
+                <div class="explicacao-item"><strong>Vantagens:</strong></div>
+                <div class="explicacao-item">- Suporte automático a JSON</div>
+                <div class="explicacao-item">- Interceptores de request/response</div>
+                <div class="explicacao-item">- Cancelamento de requisições</div>
+                <div class="explicacao-item">- Melhor que fetch para APIs complexas</div>
+            </div>
+            
+            <h3>Express.js</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>O que é:</strong> Framework web para Node.js</div>
+                <div class="explicacao-item"><strong>Métodos HTTP:</strong></div>
+                <div class="explicacao-item">- app.get(): Rota para ler dados</div>
+                <div class="explicacao-item">- app.post(): Rota para criar dados</div>
+                <div class="explicacao-item">- app.put(): Rota para atualizar dados</div>
+                <div class="explicacao-item">- app.delete(): Rota para deletar dados</div>
+                <div class="explicacao-item"><strong>Middleware:</strong></div>
+                <div class="explicacao-item">- app.use(): Adiciona middleware</div>
+                <div class="explicacao-item">- express.json(): Converte JSON para objeto</div>
+                <div class="explicacao-item">- cors(): Permite requisições de outras origens</div>
+                <div class="explicacao-item"><strong>req e res:</strong></div>
+                <div class="explicacao-item">- req: Objeto com dados da requisição</div>
+                <div class="explicacao-item">- res: Objeto para enviar resposta</div>
+                <div class="explicacao-item">- req.body: Corpo da requisição</div>
+                <div class="explicacao-item">- req.params: Parâmetros de rota</div>
+                <div class="explicacao-item">- req.query: Parâmetros de query string</div>
+            </div>
+            
+            <h3>Prisma ORM</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>O que é:</strong> ORM (Object-Relational Mapping) para Node.js</div>
+                <div class="explicacao-item"><strong>Vantagens:</strong></div>
+                <div class="explicacao-item">- Type-safe com TypeScript</div>
+                <div class="explicacao-item">- Auto-completion no código</div>
+                <div class="explicacao-item">- Schema-first (define modelo em arquivo)</div>
+                <div class="explicacao-item">- Suporta múltiplos bancos (PostgreSQL, MySQL, MongoDB)</div>
+                <div class="explicacao-item"><strong>Métodos principais:</strong></div>
+                <div class="explicacao-item">- prisma.user.create(): Cria registro</div>
+                <div class="explicacao-item">- prisma.user.findMany(): Busca múltiplos registros</div>
+                <div class="explicacao-item">- prisma.user.findUnique(): Busca um registro específico</div>
+                <div class="explicacao-item">- prisma.user.update(): Atualiza registro</div>
+                <div class="explicacao-item">- prisma.user.delete(): Deleta registro</div>
+                <div class="explicacao-item"><strong>where:</strong> Condições para buscar/atualizar/deletar</div>
+                <div class="explicacao-item"><strong>data:</strong> Dados para criar/atualizar</div>
+            </div>
+            
+            <h3>CORS (Cross-Origin Resource Sharing)</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>O que é:</strong> Mecanismo de segurança do navegador</div>
+                <div class="explicacao-item"><strong>Problema:</strong> Navegador bloqueia requisições de origens diferentes</div>
+                <div class="explicacao-item"><strong>Exemplo:</strong> React (localhost:5173) não pode acessar API (localhost:3000) sem CORS</div>
+                <div class="explicacao-item"><strong>Solução:</strong> Adicionar middleware cors no Express</div>
+                <div class="explicacao-item">- app.use(cors()) permite requisições de qualquer origem</div>
+                <div class="explicacao-item">- Pode configurar origens específicas para mais segurança</div>
+            </div>
+            
+            <h3>Async/Await</h3>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>async:</strong> Marca função como assíncrona</div>
+                <div class="explicacao-item">- Permite usar await dentro da função</div>
+                <div class="explicacao-item">- Sempre retorna uma Promise</div>
+                <div class="explicacao-item"><strong>await:</strong> Espera Promise resolver antes de continuar</div>
+                <div class="explicacao-item">- Só pode usar dentro de funções async</div>
+                <div class="explicacao-item">- Código pausa até operação terminar</div>
+                <div class="explicacao-item"><strong>Por que usar:</strong></div>
+                <div class="explicacao-item">- Operações de banco de dados são assíncronas</div>
+                <div class="explicacao-item">- Requisições HTTP são assíncronas</div>
+                <div class="explicacao-item">- Código mais legível que .then()/.catch()</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔄 Fluxo Completo da Aplicação</h2>
+            
+            <h3>Fluxo de Criação de Usuário</h3>
+            <div class="explicacao">
+                <div class="explicacao-item">1. Usuário preenche formulário no React</div>
+                <div class="explicacao-item">2. Clica no botão "Cadastrar"</div>
+                <div class="explicacao-item">3. Função createUsers() é executada</div>
+                <div class="explicacao-item">4. Axios faz POST para http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">5. Middleware CORS permite requisição</div>
+                <div class="explicacao-item">6. Express recebe requisição na rota POST</div>
+                <div class="explicacao-item">7. Middleware express.json() converte JSON para objeto</div>
+                <div class="explicacao-item">8. Prisma cria usuário no MongoDB</div>
+                <div class="explicacao-item">9. Express retorna status 201 e dados</div>
+                <div class="explicacao-item">10. React recebe resposta</div>
+                <div class="explicacao-item">11. Função getUsers() é chamada</div>
+                <div class="explicacao-item">12. Axios faz GET para buscar usuários atualizados</div>
+                <div class="explicacao-item">13. setUsers() atualiza estado</div>
+                <div class="explicacao-item">14. React re-renderiza com nova lista</div>
+            </div>
+            
+            <h3>Fluxo de Listagem de Usuários</h3>
+            <div class="explicacao">
+                <div class="explicacao-item">1. Componente Home monta</div>
+                <div class="explicacao-item">2. useEffect executa getUsers()</div>
+                <div class="explicacao-item">3. Axios faz GET para http://localhost:3000/usuarios</div>
+                <div class="explicacao-item">4. Express recebe requisição na rota GET</div>
+                <div class="explicacao-item">5. Prisma busca usuários no MongoDB</div>
+                <div class="explicacao-item">6. Express retorna array de usuários</div>
+                <div class="explicacao-item">7. React recebe resposta</div>
+                <div class="explicacao-item">8. setUsers() atualiza estado</div>
+                <div class="explicacao-item">9. React re-renderiza com usuários</div>
+                <div class="explicacao-item">10. users.map() renderiza cards</div>
+            </div>
+            
+            <h3>Fluxo de Deleção de Usuário</h3>
+            <div class="explicacao">
+                <div class="explicacao-item">1. Usuário clica no botão de deletar</div>
+                <div class="explicacao-item">2. Função deleteUsers(id) é executada</div>
+                <div class="explicacao-item">3. Axios faz DELETE para http://localhost:3000/usuarios/{id}</div>
+                <div class="explicacao-item">4. Express recebe requisição na rota DELETE</div>
+                <div class="explicacao-item">5. Prisma deleta usuário no MongoDB</div>
+                <div class="explicacao-item">6. Express retorna mensagem de sucesso</div>
+                <div class="explicacao-item">7. React recebe resposta</div>
+                <div class="explicacao-item">8. Função getUsers() é chamada</div>
+                <div class="explicacao-item">9. Axios faz GET para buscar usuários atualizados</div>
+                <div class="explicacao-item">10. setUsers() atualiza estado</div>
+                <div class="explicacao-item">11. React re-renderiza com nova lista</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ Erros Comuns e Soluções</h2>
+            
+            <div class="aviso">
+                <strong>Erro: CORS policy blocked</strong>
+                <div class="explicacao-item">- Causa: Front-end tentando acessar API sem CORS configurado</div>
+                <div class="explicacao-item">- Solução: Adicionar app.use(cors()) no server.js</div>
+            </div>
+            
+            <div class="aviso">
+                <strong>Erro: Unique constraint failed on User_email_key</strong>
+                <div class="explicacao-item">- Causa: Tentando criar usuário com email que já existe</div>
+                <div class="explicacao-item">- Solução: Usar email diferente ou remover @unique do schema</div>
+            </div>
+            
+            <div class="aviso">
+                <strong>Erro: setUsers is not defined</strong>
+                <div class="explicacao-item">- Causa: Nome da função setState diferente do declarado</div>
+                <div class="explicacao-item">- Solução: Verificar se nomes batem (ex: setUsers vs setUserts)</div>
+            </div>
+            
+            <div class="aviso">
+                <strong>Erro: inputName is not defined</strong>
+                <div class="explicacao-item">- Causa: useRef não foi importado ou declarado</div>
+                <div class="explicacao-item">- Solução: Importar useRef do React e declarar refs</div>
+            </div>
+            
+            <div class="aviso">
+                <strong>Erro: PrismaClientValidationError</strong>
+                <div class="explicacao-item">- Causa: Campos obrigatórios faltando ou tipos incorretos</div>
+                <div class="explicacao-item">- Solução: Verificar se todos campos do schema estão sendo enviados</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Resumo dos Conceitos Chave</h2>
+            <div class="sucesso">
+                <div class="explicacao-item"><strong>React:</strong> Biblioteca para criar interfaces de usuário com componentes</div>
+                <div class="explicacao-item"><strong>Vite:</strong> Bundler rápido para desenvolvimento React</div>
+                <div class="explicacao-item"><strong>Axios:</strong> Biblioteca para fazer requisições HTTP</div>
+                <div class="explicacao-item"><strong>Express:</strong> Framework para criar APIs em Node.js</div>
+                <div class="explicacao-item"><strong>Prisma:</strong> ORM para interagir com banco de dados</div>
+                <div class="explicacao-item"><strong>MongoDB:</strong> Banco de dados NoSQL</div>
+                <div class="explicacao-item"><strong>CORS:</strong> Mecanismo para permitir requisições cross-origin</div>
+                <div class="explicacao-item"><strong>useState:</strong> Hook para gerenciar estado</div>
+                <div class="explicacao-item"><strong>useEffect:</strong> Hook para efeitos colaterais</div>
+                <div class="explicacao-item"><strong>useRef:</strong> Hook para referências DOM</div>
+                <div class="explicacao-item"><strong>async/await:</strong> Sintaxe para código assíncrono</div>
+                <div class="explicacao-item"><strong>CRUD:</strong> Create, Read, Update, Delete (operações básicas)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎓 Próximos Passos Sugeridos</h2>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>1. Implementar edição de usuários:</strong> Adicionar formulário de edição no front-end</div>
+                <div class="explicacao-item"><strong>2. Validação de formulário:</strong> Validar campos antes de enviar</div>
+                <div class="explicacao-item"><strong>3. Tratamento de erros:</strong> Adicionar try/catch nas funções assíncronas</div>
+                <div class="explicacao-item"><strong>4. Loading states:</strong> Mostrar indicador de carregamento durante requisições</div>
+                <div class="explicacao-item"><strong>5. Paginação:</strong> Implementar paginação na listagem de usuários</div>
+                <div class="explicacao-item"><strong>6. Autenticação:</strong> Adicionar login/registro de usuários</div>
+                <div class="explicacao-item"><strong>7. Deploy:</strong> Fazer deploy da API e do front-end</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

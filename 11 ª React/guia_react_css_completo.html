@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo React + CSS - Projeto Cadastro de Usuários</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav button {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .nav button:hover {
+            transform: scale(1.05);
+        }
+        .nav button.active {
+            background: #2e2d4e;
+            color: white;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            color: #2e2d4e;
+            border-bottom: 3px solid #8b8ae1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .concept {
+            background: #f8f9fa;
+            border-left: 4px solid #8b8ae1;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .concept h3 {
+            color: #2e2d4e;
+            margin-bottom: 10px;
+        }
+        .concept .description {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .concept .code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .concept .usage {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .concept .important {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .category {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #2e2d4e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Guia Completo React + CSS</h1>
+        
+        <div class="nav">
+            <button onclick="showSection('react')" class="active">React</button>
+            <button onclick="showSection('css')">CSS</button>
+            <button onclick="showSection('index')">Index</button>
+            <button onclick="showSection('estrutura')">Estrutura</button>
+        </div>
+
+        <!-- REACT -->
+        <div id="react" class="section active">
+            <h2>🎯 Conceitos de React Usados</h2>
+
+            <div class="category">Conceitos Fundamentais</div>
+
+            <div class="concept">
+                <h3>1. Componentes Funcionais</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Funções JavaScript que retornam JSX.<br>
+                    <strong>Para que serve:</strong> Criar blocos reutilizáveis de interface.<br>
+                    <strong>Importância:</strong> Base do React, permite organizar código em partes pequenas.
+                </div>
+                <div class="code">
+function Home() {
+  return (
+    &lt;div&gt;Olá Mundo&lt;/div&gt;
+  );
+}
+export default Home;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que precisar criar um elemento de UI.
+                </div>
+                <div class="important">
+                    Componentes sempre começam com letra maiúscula.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. JSX</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Sintaxe que mistura HTML com JavaScript.<br>
+                    <strong>Para que serve:</strong> Escrever interface de forma declarativa.<br>
+                    <strong>Importância:</strong> Torna o código mais legível e intuitivo.
+                </div>
+                <div class="code">
+return (
+  &lt;div className='container'&gt;
+    &lt;h1&gt;Título&lt;/h1&gt;
+    &lt;p&gt;Texto&lt;/p&gt;
+  &lt;/div&gt;
+);
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que escrever a UI de um componente.
+                </div>
+                <div class="important">
+                    Use className em vez de class no JSX.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Importar Componentes</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Importar componentes de outros arquivos.<br>
+                    <strong>Para que serve:</strong> Usar componentes criados em outros arquivos.<br>
+                    <strong>Importância:</strong> Organização do código e reutilização.
+                </div>
+                <div class="code">
+import Home from './Home';
+import Home from './pages/Home';
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Quando precisar usar um componente em outro arquivo.
+                </div>
+                <div class="important">
+                    Caminho relativo deve estar correto.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. Renderizar Componente</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Colocar o componente na página.<br>
+                    <strong>Para que serve:</strong> Exibir o componente no navegador.<br>
+                    <strong>Importância:</strong> Ponto de entrada da aplicação.
+                </div>
+                <div class="code">
+import ReactDOM from 'react-dom/client';
+import Home from './Home';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;Home /&gt;
+);
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> No arquivo principal (main.jsx).
+                </div>
+                <div class="important">
+                    Deve haver um elemento com id="root" no HTML.
+                </div>
+            </div>
+
+            <div class="category">Manipulação de Dados</div>
+
+            <div class="concept">
+                <h3>5. map</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Método de array que itera e retorna elementos.<br>
+                    <strong>Para que serve:</strong> Renderizar listas de componentes.<br>
+                    <strong>Importância:</strong> Essencial para mostrar dados dinâmicos.
+                </div>
+                <div class="code">
+const users = [
+  { id: 1, name: 'Abner' },
+  { id: 2, name: 'Samira' }
+];
+
+{users.map(user =&gt; (
+  &lt;div key={user.id}&gt;
+    &lt;p&gt;{user.name}&lt;/p&gt;
+  &lt;/div&gt;
+))}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que precisar renderizar uma lista.
+                </div>
+                <div class="important">
+                    Sempre usar key único para cada elemento.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6. Arrays de Objetos</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Lista de objetos com dados.<br>
+                    <strong>Para que serve:</strong> Armazenar dados estruturados.<br>
+                    <strong>Importância:</strong> Forma comum de receber dados de APIs.
+                </div>
+                <div class="code">
+const users = [
+  {
+    id: '2342asdasds',
+    name: 'Rodolfo',
+    age: 33,
+    email: 'rod@email.com'
+  },
+  {
+    id: '2342asdasdadsas',
+    name: 'Abner',
+    age: 23,
+    email: 'abn@email.com'
+  }
+];
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para armazenar dados de usuários, produtos, etc.
+                </div>
+                <div class="important">
+                    Cada objeto deve ter um identificador único (id).
+                </div>
+            </div>
+
+            <div class="category">Estilização e Recursos</div>
+
+            <div class="concept">
+                <h3>7. Importar CSS</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Importar arquivo de estilos CSS.<br>
+                    <strong>Para que serve:</strong> Aplicar estilos ao componente.<br>
+                    <strong>Importância:</strong> Separação de estilo e lógica.
+                </div>
+                <div class="code">
+import './style.css';
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> No topo do componente que precisa de estilos.
+                </div>
+                <div class="important">
+                    CSS importado afeta apenas o componente e seus filhos.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>8. Importar Imagens</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Importar arquivos de imagem.<br>
+                    <strong>Para que serve:</strong> Usar imagens nos componentes.<br>
+                    <strong>Importância:</strong> Vite otimiza imagens automaticamente.
+                </div>
+                <div class="code">
+import Trash from '../../assets/trash.svg';
+
+&lt;img src={Trash} alt="trash" /&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Quando precisar exibir imagens.
+                </div>
+                <div class="important">
+                    Caminho relativo deve estar correto.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>9. className</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Atributo para adicionar classes CSS no JSX.<br>
+                    <strong>Para que serve:</strong> Aplicar estilos CSS aos elementos.<br>
+                    <strong>Importância:</strong> Diferente de class do HTML normal.
+                </div>
+                <div class="code">
+&lt;div className='container'&gt;
+&lt;button className='cadastrar-button'&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que precisar aplicar estilos CSS.
+                </div>
+                <div class="important">
+                    Em JSX, use className, não class.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>10. key</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Atributo único para identificar elementos em listas.<br>
+                    <strong>Para que serve:</strong> Ajudar React a identificar quais itens mudaram.<br>
+                    <strong>Importância:</strong> Melhora performance e evita bugs.
+                </div>
+                <div class="code">
+{users.map(user =&gt; (
+  &lt;div key={user.id}&gt;
+    {user.name}
+  &lt;/div&gt;
+))}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre ao usar map para renderizar listas.
+                </div>
+                <div class="important">
+                    Key deve ser único e estável (não usar index).
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>11. Fragment</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Agrupa elementos sem criar div extra.<br>
+                    <strong>Para que serve:</strong> Retornar múltiplos elementos sem wrapper.<br>
+                    <strong>Importância:</strong> Evita divs desnecessárias no DOM.
+                </div>
+                <div class="code">
+return (
+  &lt;&gt;
+    &lt;h1&gt;Título&lt;/h1&gt;
+    &lt;p&gt;Texto&lt;/p&gt;
+  &lt;/&gt;
+);
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Quando precisa retornar múltiplos elementos.
+                </div>
+                <div class="important">
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS -->
+        <div id="css" class="section">
+            <h2>🎨 Conceitos de CSS Usados</h2>
+
+            <div class="category">Reset e Base</div>
+
+            <div class="concept">
+                <h3>1. Reset CSS</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Remove estilos padrão do navegador.<br>
+                    <strong>Para que serve:</strong> Começar com estilos consistentes.<br>
+                    <strong>Importância:</strong> Evita diferenças entre navegadores.
+                </div>
+                <div class="code">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> No início do CSS global.
+                </div>
+                <div class="important">
+                    box-sizing: border-box facilita cálculos de tamanho.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Body Global</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Estilos aplicados ao body da página.<br>
+                    <strong>Para que serve:</strong> Definir tamanho e fundo da página.<br>
+                    <strong>Importância:</strong> Base visual da aplicação.
+                </div>
+                <div class="code">
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #363467 0%, rgba(30, 29, 79, 0.8) 100%);
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir aparência geral da página.
+                </div>
+                <div class="important">
+                    100vh = altura total da viewport, 100vw = largura total.
+                </div>
+            </div>
+
+            <div class="category">Layout com Flexbox</div>
+
+            <div class="concept">
+                <h3>3. Flexbox</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Sistema de layout unidimensional.<br>
+                    <strong>Para que serve:</strong> Alinhar e distribuir elementos.<br>
+                    <strong>Importância:</strong> Layout moderno e responsivo.
+                </div>
+                <div class="code">
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para alinhar elementos em linha ou coluna.
+                </div>
+                <div class="important">
+                    display: flex ativa o modo flexbox.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. flex-direction</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Define direção dos itens flex.<br>
+                    <strong>Para que serve:</strong> Organizar elementos em linha ou coluna.<br>
+                    <strong>Importância:</strong> Controla layout principal.
+                </div>
+                <div class="code">
+form {
+  flex-direction: column;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir se elementos ficam em linha ou coluna.
+                </div>
+                <div class="important">
+                    column = vertical, row = horizontal (padrão).
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. align-items</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Alinha itens no eixo transversal.<br>
+                    <strong>Para que serve:</strong> Centralizar elementos verticalmente.<br>
+                    <strong>Importância:</strong> Alinhamento preciso.
+                </div>
+                <div class="code">
+.container {
+  align-items: center;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para centralizar verticalmente.
+                </div>
+                <div class="important">
+                    center = centraliza, flex-start = topo, flex-end = base.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6. justify-content</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Alinha itens no eixo principal.<br>
+                    <strong>Para que serve:</strong> Distribuir espaço horizontalmente.<br>
+                    <strong>Importância:</strong> Espaçamento entre elementos.
+                </div>
+                <div class="code">
+.card {
+  justify-content: space-between;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para distribuir elementos horizontalmente.
+                </div>
+                <div class="important">
+                    space-between = espaços iguais entre itens.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>7. gap</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Espaçamento entre itens flex.<br>
+                    <strong>Para que serve:</strong> Criar espaços consistentes.<br>
+                    <strong>Importância:</strong> Mais simples que margin.
+                </div>
+                <div class="code">
+form {
+  gap: 30px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar espaçamento entre elementos.
+                </div>
+                <div class="important">
+                    Funciona apenas com display: flex ou grid.
+                </div>
+            </div>
+
+            <div class="category">Estilização Visual</div>
+
+            <div class="concept">
+                <h3>8. border-radius</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arredonda cantos dos elementos.<br>
+                    <strong>Para que serve:</strong> Criar bordas arredondadas.<br>
+                    <strong>Importância:</strong> Design moderno e suave.
+                </div>
+                <div class="code">
+form {
+  border-radius: 10px;
+}
+
+.cadastrar-button {
+  border-radius: 30px;
+}
+
+input {
+  border-radius: 30px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar cantos arredondados.
+                </div>
+                <div class="important">
+                    Valores maiores = mais arredondado, 50% = círculo.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>9. background-color</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Cor de fundo do elemento.<br>
+                    <strong>Para que serve:</strong> Definir cor de fundo.<br>
+                    <strong>Importância:</strong> Identificação visual.
+                </div>
+                <div class="code">
+form {
+  background-color: #2e2d4e;
+}
+
+.card {
+  background-color: #2e2d4e;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir cor de fundo.
+                </div>
+                <div class="important">
+                    Pode usar hex, rgb, rgba, ou nome da cor.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>10. linear-gradient</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Gradiente linear de cores.<br>
+                    <strong>Para que serve:</strong> Criar fundos com transição de cores.<br>
+                    <strong>Importância:</strong> Design visual atraente.
+                </div>
+                <div class="code">
+body {
+  background: linear-gradient(180deg, #363467 0%, rgba(30, 29, 79, 0.8) 100%);
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar fundos com gradiente.
+                </div>
+                <div class="important">
+                    180deg = de cima para baixo.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>11. color</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Cor do texto.<br>
+                    <strong>Para que serve:</strong> Definir cor do texto.<br>
+                    <strong>Importância:</strong> Legibilidade e design.
+                </div>
+                <div class="code">
+h1 {
+  color: aliceblue;
+}
+
+p {
+  color: #fff;
+}
+
+input {
+  color: #ffff;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir cor do texto.
+                </div>
+                <div class="important">
+                    Use cores com bom contraste com o fundo.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>12. font-size</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Tamanho da fonte.<br>
+                    <strong>Para que serve:</strong> Definir tamanho do texto.<br>
+                    <strong>Importância:</strong> Hierarquia visual.
+                </div>
+                <div class="code">
+h1 {
+  font-size: 28px;
+}
+
+.cadastrar-button {
+  font-size: 14px;
+}
+
+input {
+  font-size: 16px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir tamanho do texto.
+                </div>
+                <div class="important">
+                    Use unidades relativas (rem, em) para responsividade.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>13. font-weight</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Espessura da fonte.<br>
+                    <strong>Para que serve:</strong> Definir negrito ou normal.<br>
+                    <strong>Importância:</strong> Hierarquia visual.
+                </div>
+                <div class="code">
+.cadastrar-button {
+  font-weight: bold;
+}
+
+p {
+  font-weight: bold;
+}
+
+p span {
+  font-weight: normal;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para destacar texto importante.
+                </div>
+                <div class="important">
+                    bold = 700, normal = 400.
+                </div>
+            </div>
+
+            <div class="category">Espaçamento</div>
+
+            <div class="concept">
+                <h3>14. padding</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Espaçamento interno do elemento.<br>
+                    <strong>Para que serve:</strong> Criar espaço dentro do elemento.<br>
+                    <strong>Importância:</strong> Espaçamento interno do conteúdo.
+                </div>
+                <div class="code">
+form {
+  padding: 30px;
+}
+
+.card {
+  padding: 10px;
+}
+
+input {
+  padding-left: 10px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar espaço dentro do elemento.
+                </div>
+                <div class="important">
+                    padding-left = apenas esquerda, padding = todos os lados.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>15. margin</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Espaçamento externo do elemento.<br>
+                    <strong>Para que serve:</strong> Criar espaço entre elementos.<br>
+                    <strong>Importância:</strong> Espaçamento externo.
+                </div>
+                <div class="code">
+form {
+  margin-bottom: 20px;
+}
+
+.card {
+  margin: 10px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar espaço entre elementos.
+                </div>
+                <div class="important">
+                    margin-bottom = apenas abaixo, margin = todos os lados.
+                </div>
+            </div>
+
+            <div class="category">Bordas</div>
+
+            <div class="concept">
+                <h3>16. border</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Borda do elemento.<br>
+                    <strong>Para que serve:</strong> Criar borda ao redor do elemento.<br>
+                    <strong>Importância:</strong> Delimitação visual.
+                </div>
+                <div class="code">
+input {
+  border: 1px solid #48456c;
+}
+
+.cadastrar-button {
+  border: none;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar borda ou remover.
+                </div>
+                <div class="important">
+                    border: none remove a borda.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>17. outline</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Borda de foco do elemento.<br>
+                    <strong>Para que serve:</strong> Indicar elemento focado.<br>
+                    <strong>Importância:</strong> Acessibilidade.
+                </div>
+                <div class="code">
+input {
+  outline: none;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para remover borda de foco padrão.
+                </div>
+                <div class="important">
+                    outline: none pode afetar acessibilidade.
+                </div>
+            </div>
+
+            <div class="category">Dimensões</div>
+
+            <div class="concept">
+                <h3>18. width</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Largura do elemento.<br>
+                    <strong>Para que serve:</strong> Definir largura do elemento.<br>
+                    <strong>Importância:</strong> Controle de layout.
+                </div>
+                <div class="code">
+form {
+  width: 400px;
+  max-width: 50%;
+}
+
+.card {
+  width: 400px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir largura do elemento.
+                </div>
+                <div class="important">
+                    max-width limita largura máxima.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>19. height</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Altura do elemento.<br>
+                    <strong>Para que serve:</strong> Definir altura do elemento.<br>
+                    <strong>Importância:</strong> Controle de layout.
+                </div>
+                <div class="code">
+.cadastrar-button {
+  height: 40px;
+}
+
+input {
+  height: 40px;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir altura do elemento.
+                </div>
+                <div class="important">
+                    min-height e max-height também são úteis.
+                </div>
+            </div>
+
+            <div class="category">Interação</div>
+
+            <div class="concept">
+                <h3>20. cursor</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Tipo de cursor do mouse.<br>
+                    <strong>Para que serve:</strong> Indicar elemento interativo.<br>
+                    <strong>Importância:</strong> UX melhor.
+                </div>
+                <div class="code">
+.cadastrar-button {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Em elementos clicáveis.
+                </div>
+                <div class="important">
+                    pointer = mãozinha, default = seta padrão.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>21. :hover</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pseudo-classe para estado hover.<br>
+                    <strong>Para que serve:</strong> Estilo ao passar mouse.<br>
+                    <strong>Importância:</strong> Feedback visual.
+                </div>
+                <div class="code">
+.cadastrar-button:hover {
+  opacity: 0.5;
+}
+
+button:hover {
+  opacity: 0.5;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para dar feedback ao passar mouse.
+                </div>
+                <div class="important">
+                    :hover só funciona em elementos interativos.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>22. opacity</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Transparência do elemento.<br>
+                    <strong>Para que serve:</strong> Criar efeito de transparência.<br>
+                    <strong>Importância:</strong> Feedback visual.
+                </div>
+                <div class="code">
+.cadastrar-button:hover {
+  opacity: 0.5;
+}
+
+button:hover {
+  opacity: 0.5;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar efeito de transparência.
+                </div>
+                <div class="important">
+                    0 = invisível, 1 = totalmente visível.
+                </div>
+            </div>
+
+            <div class="category">Texto</div>
+
+            <div class="concept">
+                <h3>23. text-align</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Alinhamento do texto.<br>
+                    <strong>Para que serve:</strong> Alinhar texto horizontalmente.<br>
+                    <strong>Importância:</strong> Layout do texto.
+                </div>
+                <div class="code">
+h1 {
+  text-align: center;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para alinhar texto.
+                </div>
+                <div class="important">
+                    center = centralizado, left = esquerda, right = direita.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>24. placeholder</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Texto de placeholder do input.<br>
+                    <strong>Para que serve:</strong> Dar dica ao usuário.<br>
+                    <strong>Importância:</strong> UX melhor.
+                </div>
+                <div class="code">
+&lt;input placeholder='Nome' /&gt;
+&lt;input placeholder='Idade' /&gt;
+&lt;input placeholder='Email' /&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para dar dica do que preencher.
+                </div>
+                <div class="important">
+                    Placeholder não substitui label.
+                </div>
+            </div>
+        </div>
+
+        <!-- INDEX -->
+        <div id="index" class="section">
+            <h2>📄 Arquivo index.html</h2>
+
+            <div class="concept">
+                <h3>1. Estrutura do index.html</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arquivo HTML principal do projeto.<br>
+                    <strong>Para que serve:</strong> Ponto de entrada da aplicação.<br>
+                    <strong>Importância:</strong> Onde React monta a aplicação.
+                </div>
+                <div class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;link rel="icon" type="image/svg+xml" href="/vite.svg" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Vite + React&lt;/title;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Criado automaticamente pelo Vite.
+                </div>
+                <div class="important">
+                    div com id="root" é onde React monta a aplicação.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. DOCTYPE</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Declaração do tipo de documento.<br>
+                    <strong>Para que serve:</strong> Informar navegador que é HTML5.<br>
+                    <strong>Importância:</strong> Renderização correta.
+                </div>
+                <div class="code">
+&lt;!DOCTYPE html&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Primeira linha do arquivo HTML.
+                </div>
+                <div class="important">
+                    Sempre incluir no início do arquivo.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. meta charset</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Define codificação de caracteres.<br>
+                    <strong>Para que serve:</strong> Suportar caracteres especiais.<br>
+                    <strong>Importância:</strong> Acentuação correta.
+                </div>
+                <div class="code">
+&lt;meta charset="UTF-8" /&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Dentro da tag head.
+                </div>
+                <div class="important">
+                    UTF-8 suporta todos os caracteres.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. meta viewport</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Configura viewport para mobile.<br>
+                    <strong>Para que serve:</strong> Responsividade em dispositivos móveis.<br>
+                    <strong>Importância:</strong> Site responsivo.
+                </div>
+                <div class="code">
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Dentro da tag head.
+                </div>
+                <div class="important">
+                    Essencial para sites responsivos.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. div id="root"</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Elemento onde React monta a aplicação.<br>
+                    <strong>Para que serve:</strong> Ponto de montagem do React.<br>
+                    <strong>Importância:</strong> Onde a aplicação React aparece.
+                </div>
+                <div class="code">
+&lt;div id="root"&gt;&lt;/div&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Dentro da tag body.
+                </div>
+                <div class="important">
+                    Deve ter exatamente id="root".
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6. script type="module"</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Script que usa módulos ES6.<br>
+                    <strong>Para que serve:</strong> Importar/exportar módulos.<br>
+                    <strong>Importância:</strong> Funcionalidades modernas de JavaScript.
+                </div>
+                <div class="code">
+&lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para carregar arquivo principal do React.
+                </div>
+                <div class="important">
+                    type="module" habilita import/export.
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRUTURA -->
+        <div id="estrutura" class="section">
+            <h2>📁 Estrutura do Projeto</h2>
+
+            <div class="concept">
+                <h3>1. Estrutura Completa</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Organização de pastas e arquivos.<br>
+                    <strong>Para que serve:</strong> Organização do código.<br>
+                    <strong>Importância:</strong> Manutenibilidade e escalabilidade.
+                </div>
+                <div class="code">
+devclub-cadastro-usuarios/
+├── src/
+│   ├── Home/
+│   │   ├── index.jsx      # Componente Home
+│   │   └── style.css      # Estilos do Home
+│   ├── assets/
+│   │   └── trash.svg      # Imagem da lixeira
+│   ├── index.css          # Estilos globais
+│   └── main.jsx           # Arquivo principal
+├── node_modules/          # Dependências
+├── index.html             # HTML principal
+├── package.json           # Configurações do projeto
+└── vite.config.js         # Configurações do Vite
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Estrutura padrão de projeto Vite + React.
+                </div>
+                <div class="important">
+                    src/ contém todo o código fonte.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Pasta src/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta principal do código fonte.<br>
+                    <strong>Para que serve:</strong> Organizar todo o código da aplicação.<br>
+                    <strong>Importância:</strong> Separação de código e configurações.
+                </div>
+                <div class="code">
+src/
+├── Home/
+├── assets/
+├── index.css
+└── main.jsx
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Todo o código da aplicação vai aqui.
+                </div>
+                <div class="important">
+                    Não modifique arquivos fora de src/ manualmente.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Pasta Home/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta do componente Home.<br>
+                    <strong>Para que serve:</strong> Organizar código do componente.<br>
+                    <strong>Importância:</strong> Componentes auto-contidos.
+                </div>
+                <div class="code">
+Home/
+├── index.jsx    # Lógica do componente
+└── style.css    # Estilos do componente
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para cada componente principal.
+                </div>
+                <div class="important">
+                    index.jsx é o arquivo padrão importado.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. Pasta assets/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta de recursos estáticos.<br>
+                    <strong>Para que serve:</strong> Armazenar imagens, fontes, etc.<br>
+                    <strong>Importância:</strong> Organização de recursos.
+                </div>
+                <div class="code">
+assets/
+└── trash.svg    # Imagem da lixeira
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para armazenar imagens e outros recursos.
+                </div>
+                <div class="important">
+                    Vite otimiza imagens automaticamente.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. package.json</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arquivo de configuração do projeto.<br>
+                    <strong>Para que serve:</strong> Define dependências e scripts.<br>
+                    <strong>Importância:</strong> Gerenciamento do projeto.
+                </div>
+                <div class="code">
+{
+  "name": "devclub-cadastro-usuarios",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Criado automaticamente pelo Vite.
+                </div>
+                <div class="important">
+                    Não modifique manualmente a menos que necessário.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6. node_modules/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta de dependências instaladas.<br>
+                    <strong>Para que serve:</strong> Armazenar pacotes npm.<br>
+                    <strong>Importância:</strong> Dependências do projeto.
+                </div>
+                <div class="code">
+node_modules/
+├── react/
+├── react-dom/
+├── vite/
+└── ...
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Criado automaticamente pelo npm install.
+                </div>
+                <div class="important">
+                    Não modifique node_modules manualmente.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Esconde todas as seções
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active de todos os botões
+            document.querySelectorAll('.nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Mostra a seção selecionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Adiciona active ao botão clicado
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

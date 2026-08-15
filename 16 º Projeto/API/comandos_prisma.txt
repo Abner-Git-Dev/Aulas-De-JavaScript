@@ -1,0 +1,194 @@
+================================================================================
+                    COMANDOS UTILIZADOS NO CMD/TERMINAL
+================================================================================
+
+COMANDOS NPM
+================================================================================
+
+1. npm init -y
+   - O que faz: Inicializa um novo projeto Node.js
+   - Para que serve: Cria arquivo package.json com configurações padrão
+   - Observação: -y aceita todas as configurações padrão automaticamente
+
+2. npm install express
+   - O que faz: Instala o framework Express
+   - Para que serve: Para criar APIs e servidores web
+   - Observação: Adiciona express às dependencies do package.json
+
+3. npm install --save-dev nodemon
+   - O que faz: Instala o nodemon como dependência de desenvolvimento
+   - Para que serve: Reinicia o servidor automaticamente ao salvar arquivos
+   - Observação: --save-dev adiciona às devDependencies
+
+4. npm install
+   - O que faz: Instala todas as dependências do package.json
+   - Para que serve: Instala todos os pacotes listados em dependencies e devDependencies
+   - Observação: Usado após clonar projeto ou após mudar versões
+
+5. npm install @prisma/client
+   - O que faz: Instala o cliente Prisma
+   - Para que serve: Para usar Prisma no código JavaScript/TypeScript
+   - Observação: Adiciona às dependencies
+
+6. npm install axios
+   - O que faz: Instala a biblioteca Axios
+   - Para que serve: Para fazer requisições HTTP (GET, POST, PUT, DELETE) do front-end
+   - Observação: Usada para conectar front-end React com API
+
+
+COMANDOS NODE
+================================================================================
+
+7. node server.js
+   - O que faz: Executa o arquivo server.js com Node.js
+   - Para que serve: Inicia o servidor da API
+   - Observação: Precisa reiniciar manualmente após mudanças no código
+
+8. node --watch server.js
+   - O que faz: Executa o arquivo server.js com modo watch
+   - Para que serve: Reinicia o servidor automaticamente ao salvar o arquivo
+   - Observação: Muito útil durante desenvolvimento
+
+
+COMANDOS PRISMA
+================================================================================
+
+9. npx prisma db push
+   - O que faz: Sincroniza o schema do Prisma com o banco de dados
+   - Para que serve: Cria/atualiza as tabelas no banco de dados baseado no schema.prisma
+   - Observação: Usado para MongoDB neste projeto
+
+10. npx prisma studio
+   - O que faz: Abre interface visual do Prisma Studio
+   - Para que serve: Ver e editar dados do banco de dados visualmente
+   - Observação: Abre no navegador, como um admin panel para o banco
+
+
+COMANDOS PRISMA MAIS IMPORTANTES
+================================================================================
+
+🔥 npx prisma db push
+   - IMPORTANTE: Sincroniza schema com banco de dados
+   - Quando usar: Após mudar o schema.prisma
+   - Para MongoDB: Este é o comando principal
+
+🔥 npx prisma studio
+   - IMPORTANTE: Interface visual para gerenciar dados
+   - Quando usar: Para ver/editar dados sem código
+   - Abre em: http://localhost:5555
+
+🔥 npx prisma generate
+   - IMPORTANTE: Gera o cliente Prisma
+   - Quando usar: Após mudar o schema.prisma
+   - Necessário: Para usar Prisma no código
+
+🔥 npx prisma migrate dev
+   - IMPORTANTE: Cria e aplica migrações
+   - Quando usar: Para PostgreSQL, MySQL, SQLite
+   - Não usar: Para MongoDB (use db push)
+
+
+O QUE É PRISMA
+================================================================================
+
+Prisma é um ORM (Object-Relational Mapping) para Node.js e TypeScript que facilita 
+a interação com bancos de dados.
+
+Vantagens:
+- Type-safe - Tipagem automática com TypeScript
+- Auto-completion - Autocompletar no código
+- Schema-first - Define o modelo de dados em arquivo schema.prisma
+- Suporte a múltiplos bancos - PostgreSQL, MySQL, SQLite, MongoDB, etc.
+
+
+SCHEMA.PRISMA
+================================================================================
+
+Arquivo de configuração do Prisma que define o modelo de dados:
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  name      String
+  age       String
+}
+
+- datasource: Define o banco de dados (MongoDB)
+- model User: Define a estrutura da tabela de usuários
+- @id: Campo identificador
+- @unique: Campo único (não pode repetir)
+- @default(auto()): Valor gerado automaticamente
+
+
+OUTROS COMANDOS PRISMA ÚTEIS
+================================================================================
+
+npx prisma generate
+- Gera o cliente Prisma baseado no schema
+- Necessário após mudanças no schema
+
+npx prisma migrate dev
+- Cria e aplica migrações no banco de dados
+- Usa para PostgreSQL, MySQL, SQLite
+
+npx prisma studio
+- Abre interface visual para ver/editar dados
+- Como um admin panel para o banco de dados
+
+npx prisma db seed
+- Executa script de seed (dados iniciais)
+- Preenche banco com dados de teste
+
+
+PRISMA CLIENT
+================================================================================
+
+Para usar no código:
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+// Criar usuário
+const user = await prisma.user.create({
+  data: {
+    email: 'abn@email.com',
+    name: 'Abner',
+    age: '23'
+  }
+})
+
+// Listar usuários
+const users = await prisma.user.findMany()
+
+// Buscar usuário por ID
+const user = await prisma.user.findUnique({
+  where: { id: '123' }
+})
+
+// Atualizar usuário
+const user = await prisma.user.update({
+  where: { id: '123' },
+  data: { name: 'Abner Atualizado' }
+})
+
+// Deletar usuário
+const user = await prisma.user.delete({
+  where: { id: '123' }
+})
+
+
+NOTAS IMPORTANTES
+================================================================================
+
+- Prisma 7 mudou a configuração (url no datasource não funciona mais)
+- Para este projeto, usamos Prisma 6.0.0 (compatível com configuração atual)
+- MongoDB é usado como banco de dados neste projeto
+- DATABASE_URL deve estar configurado no .env
+
+================================================================================

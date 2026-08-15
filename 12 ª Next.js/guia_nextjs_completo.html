@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo Next.js - Inicialização</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav button {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .nav button:hover {
+            transform: scale(1.05);
+        }
+        .nav button.active {
+            background: #2e2d4e;
+            color: white;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            color: #2e2d4e;
+            border-bottom: 3px solid #8b8ae1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .concept {
+            background: #f8f9fa;
+            border-left: 4px solid #8b8ae1;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .concept h3 {
+            color: #2e2d4e;
+            margin-bottom: 10px;
+        }
+        .concept .description {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .concept .code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .concept .usage {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .concept .important {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .category {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #2e2d4e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Guia Completo Next.js</h1>
+        
+        <div class="nav">
+            <button onclick="showSection('inicializacao')" class="active">Inicialização</button>
+            <button onclick="showSection('estrutura')">Estrutura</button>
+            <button onclick="showSection('paginas')">Páginas</button>
+            <button onclick="showSection('componentes')">Componentes</button>
+            <button onclick="showSection('rotas')">Rotas</button>
+        </div>
+
+        <!-- INICIALIZAÇÃO -->
+        <div id="inicializacao" class="section active">
+            <h2>🚀 Inicialização do Next.js</h2>
+
+            <div class="category">Métodos de Criação</div>
+
+            <div class="concept">
+                <h3>1. create-next-app (Padrão)</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Comando oficial para criar projeto Next.js.<br>
+                    <strong>Para que serve:</strong> Criar novo projeto Next.js com configurações padrão.<br>
+                    <strong>Importância:</strong> Método mais simples e recomendado.
+                </div>
+                <div class="code">
+npx create-next-app@latest meu-projeto
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para começar um novo projeto Next.js.
+                </div>
+                <div class="important">
+                    npx executa o pacote sem instalar globalmente.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Comando Interativo</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Comando com perguntas interativas.<br>
+                    <strong>Para que serve:</strong> Personalizar configurações do projeto.<br>
+                    <strong>Importância:</strong> Controle total sobre configurações.
+                </div>
+                <div class="code">
+npx create-next-app@latest
+
+# Perguntas:
+# What is your project named? meu-projeto
+# Would you like to use TypeScript? No
+# Would you like to use ESLint? Yes
+# Would you like to use Tailwind CSS? No
+# Would you like to use `src/` directory? Yes
+# Would you like to use App Router? Yes
+# Would you like to customize the default import alias? No
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para personalizar configurações do projeto.
+                </div>
+                <div class="important">
+                    App Router é o padrão atual do Next.js 13+.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Comando com Flags</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Comando com todas as flags pré-definidas.<br>
+                    <strong>Para que serve:</strong> Criar projeto sem perguntas interativas.<br>
+                    <strong>Importância:</strong> Mais rápido para projetos padrão.
+                </div>
+                <div class="code">
+npx create-next-app@latest meu-projeto --typescript --eslint --tailwind --src-dir --app --no-import-alias
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar projeto com configurações específicas.
+                </div>
+                <div class="important">
+                    Use --help para ver todas as flags disponíveis.
+                </div>
+            </div>
+
+            <div class="category">Comandos de Desenvolvimento</div>
+
+            <div class="concept">
+                <h3>4. npm run dev</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Inicia servidor de desenvolvimento.<br>
+                    <strong>Para que serve:</strong> Rodar aplicação em modo desenvolvimento.<br>
+                    <strong>Importância:</strong> Hot reload e debug.
+                </div>
+                <div class="code">
+npm run dev
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Durante o desenvolvimento.
+                </div>
+                <div class="important">
+                    Servidor roda em http://localhost:3000 por padrão.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. npm run build</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Compila aplicação para produção.<br>
+                    <strong>Para que serve:</strong> Criar build otimizado para deploy.<br>
+                    <strong>Importância:</strong> Otimização e performance.
+                </div>
+                <div class="code">
+npm run build
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Antes de fazer deploy.
+                </div>
+                <div class="important">
+                    Cria pasta .next com arquivos compilados.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6. npm start</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Inicia servidor de produção.<br>
+                    <strong>Para que serve:</strong> Rodar aplicação em modo produção.<br>
+                    <strong>Importância:</strong> Simula ambiente de produção.
+                </div>
+                <div class="code">
+npm start
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Após npm run build.
+                </div>
+                <div class="important">
+                    Requer build prévio.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>7. npm run lint</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Executa ESLint para verificar código.<br>
+                    <strong>Para que serve:</strong> Encontrar erros e problemas de código.<br>
+                    <strong>Importância:</strong> Qualidade do código.
+                </div>
+                <div class="code">
+npm run lint
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para verificar qualidade do código.
+                </div>
+                <div class="important">
+                    ESLint ajuda a manter código consistente.
+                </div>
+            </div>
+
+            <div class="category">Pré-requisitos</div>
+
+            <div class="concept">
+                <h3>8. Node.js</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Runtime JavaScript para servidor.<br>
+                    <strong>Para que serve:</strong> Executar JavaScript fora do navegador.<br>
+                    <strong>Importância:</strong> Next.js requer Node.js.
+                </div>
+                <div class="code">
+node --version  # Verificar versão
+# Recomendado: Node.js 18.17 ou superior
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Pré-requisito para Next.js.
+                </div>
+                <div class="important">
+                    Sempre use versão LTS (Long Term Support).
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>9. npm ou yarn ou pnpm</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Gerenciador de pacotes.<br>
+                    <strong>Para que serve:</strong> Instalar dependências do projeto.<br>
+                    <strong>Importância:</strong> Gerenciamento de dependências.
+                </div>
+                <div class="code">
+npm --version    # Verificar versão npm
+yarn --version   # Verificar versão yarn
+pnpm --version   # Verificar versão pnpm
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Pré-requisito para Next.js.
+                </div>
+                <div class="important">
+                    npm vem instalado com Node.js.
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRUTURA -->
+        <div id="estrutura" class="section">
+            <h2>📁 Estrutura do Projeto Next.js</h2>
+
+            <div class="category">Estrutura Básica</div>
+
+            <div class="concept">
+                <h3>1. Estrutura Completa</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Organização padrão de pastas Next.js.<br>
+                    <strong>Para que serve:</strong> Organização do código.<br>
+                    <strong>Importância:</strong> Estrutura recomendada pelo Next.js.
+                </div>
+                <div class="code">
+meu-projeto/
+├── src/
+│   ├── app/              # App Router
+│   │   ├── page.tsx      # Página principal
+│   │   ├── layout.tsx    # Layout raiz
+│   │   └── globals.css   # Estilos globais
+│   ├── components/       # Componentes reutilizáveis
+│   └── lib/             # Funções utilitárias
+├── public/              # Arquivos estáticos
+├── next.config.js       # Configurações Next.js
+├── package.json        # Dependências
+└── tsconfig.json        # Configurações TypeScript
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Estrutura padrão com App Router.
+                </div>
+                <div class="important">
+                    app/ é o coração do App Router.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Pasta src/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta principal do código fonte.<br>
+                    <strong>Para que serve:</strong> Organizar todo o código da aplicação.<br>
+                    <strong>Importância:</strong> Separação de código e configurações.
+                </div>
+                <div class="code">
+src/
+├── app/
+├── components/
+└── lib/
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Todo o código da aplicação vai aqui.
+                </div>
+                <div class="important">
+                    Opcional, mas recomendado pelo Next.js.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Pasta app/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta do App Router.<br>
+                    <strong>Para que serve:</strong> Definir rotas e páginas.<br>
+                    <strong>Importância:</strong> Sistema de rotas do Next.js 13+.
+                </div>
+                <div class="code">
+app/
+├── page.tsx          # Página principal (/)
+├── layout.tsx        # Layout raiz
+├── globals.css       # Estilos globais
+├── about/            # Rota /about
+│   └── page.tsx
+└── users/            # Rota /users
+    └── page.tsx
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir rotas da aplicação.
+                </div>
+                <div class="important">
+                    Cada pasta vira uma rota automaticamente.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. Pasta public/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta de arquivos estáticos.<br>
+                    <strong>Para que serve:</strong> Armazenar imagens, fontes, etc.<br>
+                    <strong>Importância:</strong> Arquivos servidos diretamente.
+                </div>
+                <div class="code">
+public/
+├── images/
+│   └── logo.png
+├── favicon.ico
+└── robots.txt
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para arquivos estáticos acessíveis publicamente.
+                </div>
+                <div class="important">
+                    Arquivos em public/ são acessíveis via URL.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. next.config.js</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arquivo de configuração do Next.js.<br>
+                    <strong>Para que serve:</strong> Configurar comportamento do Next.js.<br>
+                    <strong>Importância:</strong> Personalização do framework.
+                </div>
+                <div class="code">
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ['example.com'],
+  },
+}
+
+module.exports = nextConfig
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para configurar Next.js.
+                </div>
+                <div class="important">
+                    Criado automaticamente pelo create-next-app.
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINAS -->
+        <div id="paginas" class="section">
+            <h2>📄 Páginas no Next.js</h2>
+
+            <div class="category">App Router</div>
+
+            <div class="concept">
+                <h3>1. page.tsx</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arquivo que define uma página.<br>
+                    <strong>Para que serve:</strong> Criar uma rota/página na aplicação.<br>
+                    <strong>Importância:</strong> Base do sistema de rotas.
+                </div>
+                <div class="code">
+// app/page.tsx
+export default function Home() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Página Principal&lt;/h1&gt;
+    &lt;/main&gt;
+  );
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar uma página.
+                </div>
+                <div class="important">
+                    page.tsx é obrigatório para cada rota.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. layout.tsx</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arquivo que define layout compartilhado.<br>
+                    <strong>Para que serve:</strong> Compartilhar UI entre páginas.<br>
+                    <strong>Importância:</strong> Evita repetição de código.
+                </div>
+                <div class="code">
+// app/layout.tsx
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    &lt;html lang="pt-BR"&gt;
+      &lt;body&gt;
+        &lt;nav&gt;Menu&lt;/nav&gt;
+        {children}
+        &lt;footer&gt;Rodapé&lt;/footer&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para compartilhar layout entre páginas.
+                </div>
+                <div class="important">
+                    layout.tsx é opcional, mas recomendado.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. globals.css</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Arquivo de estilos globais.<br>
+                    <strong>Para que serve:</strong> Aplicar estilos a toda aplicação.<br>
+                    <strong>Importância:</strong> Estilos base da aplicação.
+                </div>
+                <div class="code">
+// app/globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f5f5f5;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para estilos globais.
+                </div>
+                <div class="important">
+                    Importado no layout.tsx.
+                </div>
+            </div>
+
+            <div class="category">Rotas Dinâmicas</div>
+
+            <div class="concept">
+                <h3>4. Rotas Dinâmicas</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rotas com parâmetros dinâmicos.<br>
+                    <strong>Para que serve:</strong> Criar páginas com IDs variáveis.<br>
+                    <strong>Importância:</strong> Essencial para páginas de detalhes.
+                </div>
+                <div class="code">
+// app/users/[id]/page.tsx
+export default function UserPage({
+  params,
+}: {
+  params: { id: string }
+}) {
+  return &lt;div&gt;Usuário {params.id}&lt;/div&gt;
+}
+
+// Rota: /users/1, /users/2, etc.
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para páginas com parâmetros dinâmicos.
+                </div>
+                <div class="important">
+                    [id] indica parâmetro dinâmico.
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPONENTES -->
+        <div id="componentes" class="section">
+            <h2>🧩 Componentes no Next.js</h2>
+
+            <div class="category">Componentes de Servidor</div>
+
+            <div class="concept">
+                <h3>1. Server Components</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Componentes que rodam no servidor.<br>
+                    <strong>Para que serve:</strong> Renderização no servidor (SSR).<br>
+                    <strong>Importância:</strong> Padrão no Next.js 13+.
+                </div>
+                <div class="code">
+// Padrão: Server Component
+export default function ServerComponent() {
+  return &lt;div&gt;Renderizado no servidor&lt;/div&gt;
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para componentes que não precisam de interatividade.
+                </div>
+                <div class="important">
+                    Melhor performance e SEO.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Client Components</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Componentes que rodam no cliente.<br>
+                    <strong>Para que serve:</strong> Interatividade (useState, useEffect).<br>
+                    <strong>Importância:</strong> Necessário para interatividade.
+                </div>
+                <div class="code">
+'use client';
+
+import { useState } from 'react';
+
+export default function ClientComponent() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    &lt;button onClick={() => setCount(count + 1)}&gt;
+      {count}
+    &lt;/button&gt;
+  );
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para componentes com interatividade.
+                </div>
+                <div class="important">
+                    'use client' no topo do arquivo.
+                </div>
+            </div>
+
+            <div class="category">Organização</div>
+
+            <div class="concept">
+                <h3>3. Pasta components/</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Pasta para componentes reutilizáveis.<br>
+                    <strong>Para que serve:</strong> Organizar componentes da aplicação.<br>
+                    <strong>Importância:</strong> Manutenibilidade e reutilização.
+                </div>
+                <div class="code">
+src/components/
+├── Button.tsx
+├── Card.tsx
+├── Header.tsx
+└── Footer.tsx
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para componentes reutilizáveis.
+                </div>
+                <div class="important">
+                    Componentes podem ser Server ou Client.
+                </div>
+            </div>
+        </div>
+
+        <!-- ROTAS -->
+        <div id="rotas" class="section">
+            <h2>🛣️ Sistema de Rotas</h2>
+
+            <div class="category">Rotas Estáticas</div>
+
+            <div class="concept">
+                <h3>1. Rotas Estáticas</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rotas fixas definidas pela estrutura de pastas.<br>
+                    <strong>Para que serve:</strong> Criar páginas estáticas.<br>
+                    <strong>Importância:</strong> Sistema de rotas baseado em arquivos.
+                </div>
+                <div class="code">
+app/
+├── page.tsx          # /
+├── about/
+│   └── page.tsx      # /about
+├── contact/
+│   └── page.tsx      # /contact
+└── users/
+    └── page.tsx      # /users
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para páginas estáticas.
+                </div>
+                <div class="important">
+                    Cada pasta vira uma rota automaticamente.
+                </div>
+            </div>
+
+            <div class="category">Rotas Dinâmicas</div>
+
+            <div class="concept">
+                <h3>2. Rotas Dinâmicas</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rotas com parâmetros variáveis.<br>
+                    <strong>Para que serve:</strong> Criar páginas com IDs dinâmicos.<br>
+                    <strong>Importância:</strong> Essencial para páginas de detalhes.
+                </div>
+                <div class="code">
+app/
+├── users/
+│   ├── [id]/
+│   │   └── page.tsx      # /users/1, /users/2
+│   └── page.tsx          # /users
+└── posts/
+    ├── [category]/
+    │   └── [id]/
+    │       └── page.tsx  # /posts/tech/1
+    └── page.tsx          # /posts
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para páginas com parâmetros dinâmicos.
+                </div>
+                <div class="important">
+                    [nome] indica parâmetro dinâmico.
+                </div>
+            </div>
+
+            <div class="category">Navegação</div>
+
+            <div class="concept">
+                <h3>3. Link Component</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Componente para navegação entre páginas.<br>
+                    <strong>Para que serve:</strong> Navegação client-side sem reload.<br>
+                    <strong>Importância:</strong> Performance e UX melhor.
+                </div>
+                <div class="code">
+import Link from 'next/link';
+
+export default function Navigation() {
+  return (
+    &lt;nav&gt;
+      &lt;Link href="/"&gt;Home&lt;/Link&gt;
+      &lt;Link href="/about"&gt;Sobre&lt;/Link&gt;
+      &lt;Link href="/users/1"&gt;Usuário 1&lt;/Link&gt;
+    &lt;/nav&gt;
+  );
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para navegação entre páginas.
+                </div>
+                <div class="important">
+                    Use Link em vez de &lt;a&gt; para navegação interna.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. useRouter Hook</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Hook para navegação programática.<br>
+                    <strong>Para que serve:</strong> Navegar programaticamente.<br>
+                    <strong>Importância:</strong> Navegação condicional.
+                </div>
+                <div class="code">
+'use client';
+
+import { useRouter } from 'next/navigation';
+
+export default function Button() {
+  const router = useRouter();
+  
+  return (
+    &lt;button onClick={() => router.push('/about')}&gt;
+      Ir para Sobre
+    &lt;/button&gt;
+  );
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para navegação programática.
+                </div>
+                <div class="important">
+                    Requer 'use client'.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

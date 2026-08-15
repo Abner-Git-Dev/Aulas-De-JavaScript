@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo de APIs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav button {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .nav button:hover {
+            transform: scale(1.05);
+        }
+        .nav button.active {
+            background: #2e2d4e;
+            color: white;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            color: #2e2d4e;
+            border-bottom: 3px solid #8b8ae1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .concept {
+            background: #f8f9fa;
+            border-left: 4px solid #8b8ae1;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .concept h3 {
+            color: #2e2d4e;
+            margin-bottom: 10px;
+        }
+        .concept .description {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .concept .code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .concept .usage {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .concept .important {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .category {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #2e2d4e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Guia Completo de APIs</h1>
+        
+        <div class="nav">
+            <button onclick="showSection('conceitos')" class="active">Conceitos</button>
+            <button onclick="showSection('http')">HTTP</button>
+            <button onclick="showSection('rest')">REST</button>
+            <button onclick="showSection('express')">Express</button>
+            <button onclick="showSection('crud')">CRUD</button>
+        </div>
+
+        <!-- CONCEITOS -->
+        <div id="conceitos" class="section active">
+            <h2>🎯 Conceitos Fundamentais de API</h2>
+
+            <div class="category">O que é API</div>
+
+            <div class="concept">
+                <h3>1. API (Application Programming Interface)</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Interface de Programação de Aplicativos.<br>
+                    <strong>Para que serve:</strong> Permitir comunicação entre diferentes sistemas.<br>
+                    <strong>Importância:</strong> Base da comunicação entre front-end e back-end.
+                </div>
+                <div class="code">
+// Exemplo: Front-end chamando API
+fetch('https://api.exemplo.com/usuarios')
+  .then(response => response.json())
+  .then(data => console.log(data));
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que precisar comunicar sistemas diferentes.
+                </div>
+                <div class="important">
+                    API é como um "garçom" que leva pedidos entre cliente e cozinha.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Tipos de API</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Diferentes formas de comunicação via API.<br>
+                    <strong>Para que serve:</strong> Escolher o melhor tipo para cada caso.<br>
+                    <strong>Importância:</strong> Cada tipo tem suas vantagens.
+                </div>
+                <div class="code">
+// REST API (mais comum)
+GET https://api.exemplo.com/usuarios
+
+// GraphQL (alternativa)
+query {
+  usuarios {
+    nome
+    email
+  }
+}
+
+// SOAP (mais antigo, corporativo)
+&lt;soap:Envelope&gt;
+  &lt;soap:Body&gt;
+    &lt;m:GetUsuario&gt;
+      &lt;m:Id&gt;1&lt;/m:Id&gt;
+    &lt;/m:GetUsuario&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> REST é o padrão mais usado.
+                </div>
+                <div class="important">
+                    REST é o padrão da indústria para APIs web.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Cliente e Servidor</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Dois lados da comunicação API.<br>
+                    <strong>Para que serve:</strong> Entender quem faz o pedido e quem responde.<br>
+                    <strong>Importância:</strong> Base da arquitetura cliente-servidor.
+                </div>
+                <div class="code">
+// Cliente (Front-end)
+fetch('https://api.exemplo.com/usuarios')
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+// Servidor (Back-end)
+app.get('/usuarios', (req, res) => {
+  res.json({ usuarios: [...] });
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que criar ou consumir APIs.
+                </div>
+                <div class="important">
+                    Cliente faz requisição, servidor responde.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. Request (Requisição) e Response (Resposta)</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Ciclo de comunicação API.<br>
+                    <strong>Para que serve:</strong> Cliente envia request, servidor envia response.<br>
+                    <strong>Importância:</strong> Entender o fluxo de dados.
+                </div>
+                <div class="code">
+// Request (Cliente → Servidor)
+{
+  method: 'GET',
+  url: 'https://api.exemplo.com/usuarios',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+
+// Response (Servidor → Cliente)
+{
+  status: 200,
+  data: {
+    usuarios: [
+      { id: 1, nome: 'Abner' },
+      { id: 2, nome: 'Samira' }
+    ]
+  }
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que trabalhar com APIs.
+                </div>
+                <div class="important">
+                    Request = pedido, Response = resposta.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. Endpoint</h3>
+                <div class="description">
+                    <strong>O que é:</strong> URL específica de uma API.<br>
+                    <strong>Para que serve:</strong> Definir onde cada recurso está acessível.<br>
+                    <strong>Importância:</strong> Cada endpoint faz uma coisa específica.
+                </div>
+                <div class="code">
+// Endpoints de uma API de usuários
+GET    /api/usuarios          # Listar todos
+GET    /api/usuarios/:id      # Buscar um usuário
+POST   /api/usuarios          # Criar usuário
+PUT    /api/usuarios/:id      # Atualizar usuário
+DELETE /api/usuarios/:id      # Deletar usuário
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para definir rotas da API.
+                </div>
+                <div class="important">
+                    :id indica parâmetro dinâmico.
+                </div>
+            </div>
+        </div>
+
+        <!-- HTTP -->
+        <div id="http" class="section">
+            <h2>🌐 Protocolo HTTP</h2>
+
+            <div class="category">Métodos HTTP</div>
+
+            <div class="concept">
+                <h3>1. GET</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Método para buscar dados.<br>
+                    <strong>Para que serve:</strong> Recuperar informações do servidor.<br>
+                    <strong>Importância:</strong> Método mais usado, seguro e cacheável.
+                </div>
+                <div class="code">
+// Buscar todos os usuários
+GET /api/usuarios
+
+// Buscar usuário específico
+GET /api/usuarios/1
+
+// Com parâmetros de query
+GET /api/usuarios?idade=23&cidade=sp
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para ler/buscar dados.
+                </div>
+                <div class="important">
+                    GET não deve alterar dados no servidor.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. POST</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Método para criar dados.<br>
+                    <strong>Para que serve:</strong> Enviar dados para criar novo recurso.<br>
+                    <strong>Importância:</strong> Usado para cadastro e criação.
+                </div>
+                <div class="code">
+// Criar novo usuário
+POST /api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Abner",
+  "idade": 23,
+  "email": "abn@email.com"
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar novos recursos.
+                </div>
+                <div class="important">
+                    Dados vão no body da requisição.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. PUT</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Método para atualizar dados completos.<br>
+                    <strong>Para que serve:</strong> Substituir todo o recurso.<br>
+                    <strong>Importância:</strong> Atualização completa de um recurso.
+                </div>
+                <div class="code">
+// Atualizar usuário completo
+PUT /api/usuarios/1
+Content-Type: application/json
+
+{
+  "nome": "Abner Atualizado",
+  "idade": 24,
+  "email": "abn@email.com"
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para atualizar recurso inteiro.
+                </div>
+                <div class="important">
+                    PUT substitui todos os dados do recurso.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. PATCH</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Método para atualização parcial.<br>
+                    <strong>Para que serve:</strong> Atualizar apenas alguns campos.<br>
+                    <strong>Importância:</strong> Mais eficiente para atualizações parciais.
+                </div>
+                <div class="code">
+// Atualizar apenas o email
+PATCH /api/usuarios/1
+Content-Type: application/json
+
+{
+  "email": "novo@email.com"
+}
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para atualizar campos específicos.
+                </div>
+                <div class="important">
+                    PATCH atualiza apenas o que foi enviado.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. DELETE</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Método para deletar dados.<br>
+                    <strong>Para que serve:</strong> Remover um recurso do servidor.<br>
+                    <strong>Importância:</strong> Usado para exclusão de dados.
+                </div>
+                <div class="code">
+// Deletar usuário
+DELETE /api/usuarios/1
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para remover recursos.
+                </div>
+                <div class="important">
+                    DELETE geralmente não tem body.
+                </div>
+            </div>
+
+            <div class="category">Status Codes</div>
+
+            <div class="concept">
+                <h3>6. Códigos de Status HTTP</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Códigos que indicam resultado da requisição.<br>
+                    <strong>Para que serve:</strong> Informar se requisição foi bem-sucedida.<br>
+                    <strong>Importância:</strong> Essencial para tratamento de erros.
+                </div>
+                <div class="code">
+// Sucesso (2xx)
+200 OK           # Requisição bem-sucedida
+201 Created      # Recurso criado com sucesso
+204 No Content   # Requisição bem-sucedida, sem conteúdo
+
+// Redirecionamento (3xx)
+301 Moved Permanently  # URL mudou permanentemente
+302 Found             # Redirecionamento temporário
+
+// Erro do Cliente (4xx)
+400 Bad Request        # Requisição inválida
+401 Unauthorized       # Não autenticado
+403 Forbidden          # Sem permissão
+404 Not Found          # Recurso não encontrado
+
+// Erro do Servidor (5xx)
+500 Internal Server Error  # Erro no servidor
+503 Service Unavailable    # Servidor indisponível
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre que fazer requisições HTTP.
+                </div>
+                <div class="important">
+                    2xx = sucesso, 4xx = erro cliente, 5xx = erro servidor.
+                </div>
+            </div>
+
+            <div class="category">Headers</div>
+
+            <div class="concept">
+                <h3>7. Headers HTTP</h3>
+                <div class="description">
+                    <strong>O what é:</strong> Metadados da requisição/resposta.<br>
+                    <strong>Para que serve:</strong> Enviar informações adicionais.<br>
+                    <strong>Importância:</strong> Autenticação, tipo de conteúdo, etc.
+                </div>
+                <div class="code">
+// Headers comuns
+Content-Type: application/json    # Tipo do conteúdo
+Authorization: Bearer token123    # Token de autenticação
+Accept: application/json         # Tipo aceito na resposta
+User-Agent: Mozilla/5.0          # Informações do cliente
+Cache-Control: no-cache          # Controle de cache
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para enviar metadados importantes.
+                </div>
+                <div class="important">
+                    Content-Type é o header mais importante.
+                </div>
+            </div>
+        </div>
+
+        <!-- REST -->
+        <div id="rest" class="section">
+            <h2>🔄 REST API</h2>
+
+            <div class="category">Princípios REST</div>
+
+            <div class="concept">
+                <h3>1. O que é REST</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Representational State Transfer.<br>
+                    <strong>Para que serve:</strong> Arquitetura para APIs web.<br>
+                    <strong>Importância:</strong> Padrão mais usado para APIs.
+                </div>
+                <div class="code">
+// Exemplo de API RESTful
+GET    /api/usuarios          # Listar usuários
+GET    /api/usuarios/1       # Buscar usuário 1
+POST   /api/usuarios          # Criar usuário
+PUT    /api/usuarios/1       # Atualizar usuário 1
+DELETE /api/usuarios/1       # Deletar usuário 1
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar APIs web padrão.
+                </div>
+                <div class="important">
+                    REST usa métodos HTTP e recursos (URLs).
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Recursos</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Entidades da API (usuários, produtos).<br>
+                    <strong>Para que serve:</strong> Organizar a API em entidades.<br>
+                    <strong>Importância:</strong> Base da arquitetura REST.
+                </div>
+                <div class="code">
+// Recursos em uma API
+/api/usuarios          # Recurso: usuários
+/api/produtos          # Recurso: produtos
+/api/pedidos           # Recurso: pedidos
+/api/categorias        # Recurso: categorias
+
+// Sub-recursos
+/api/usuarios/1/pedidos        # Pedidos do usuário 1
+/api/produtos/1/avaliacoes    # Avaliações do produto 1
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para organizar endpoints da API.
+                </div>
+                <div class="important">
+                    Recursos devem ser substantivos (plural).
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Verbos HTTP</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Ações sobre recursos.<br>
+                    <strong>Para que serve:</strong> Definir operação CRUD.<br>
+                    <strong>Importância:</strong> Mapeamento correto de operações.
+                </div>
+                <div class="code">
+// CRUD com HTTP
+CREATE → POST    /api/usuarios
+READ   → GET     /api/usuarios
+UPDATE → PUT     /api/usuarios/1
+DELETE → DELETE  /api/usuarios/1
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para implementar operações CRUD.
+                </div>
+                <div class="important">
+                    Use verbos HTTP corretos para cada operação.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. JSON (JavaScript Object Notation)</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Formato de dados padrão para APIs.<br>
+                    <strong>Para que serve:</strong> Troca de dados entre sistemas.<br>
+                    <strong>Importância:</strong> Leve, legível e universal.
+                </div>
+                <div class="code">
+// Exemplo de JSON
+{
+  "id": 1,
+  "nome": "Abner",
+  "idade": 23,
+  "email": "abn@email.com",
+  "endereco": {
+    "rua": "Rua A",
+    "cidade": "São Paulo"
+  }
+}
+
+// Array de JSON
+[
+  {
+    "id": 1,
+    "nome": "Abner"
+  },
+  {
+    "id": 2,
+    "nome": "Samira"
+  }
+]
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para enviar/receber dados em APIs.
+                </div>
+                <div class="important">
+                    JSON é o formato padrão de APIs REST.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. Versionamento de API</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Controle de versões da API.<br>
+                    <strong>Para que serve:</strong> Manter compatibilidade com clientes antigos.<br>
+                    <strong>Importância:</strong> Evita quebrar aplicações que usam a API.
+                </div>
+                <div class="code">
+// Versionamento na URL
+/api/v1/usuarios
+/api/v2/usuarios
+
+// Versionamento no header
+GET /api/usuarios
+API-Version: v1
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Quando precisar mudar a API.
+                </div>
+                <div class="important">
+                    Versionamento na URL é mais comum.
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPRESS -->
+        <div id="express" class="section">
+            <h2>⚡ Express.js</h2>
+
+            <div class="category">Instalação e Setup</div>
+
+            <div class="concept">
+                <h3>1. Instalar Express</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Framework web para Node.js.<br>
+                    <strong>Para que serve:</strong> Criar APIs rapidamente.<br>
+                    <strong>Importância:</strong> Framework mais popular para APIs em Node.js.
+                </div>
+                <div class="code">
+# Criar projeto
+npm init -y
+
+# Instalar Express
+npm install express
+
+# Instalar nodemon (para desenvolvimento)
+npm install --save-dev nodemon
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar API com Node.js.
+                </div>
+                <div class="important">
+                    nodemon reinicia servidor automaticamente.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Servidor Básico</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Servidor Express simples.<br>
+                    <strong>Para que serve:</strong> Iniciar API básica.<br>
+                    <strong>Importância:</strong> Ponto de partida para qualquer API.
+                </div>
+                <div class="code">
+const express = require('express');
+const app = express();
+
+// Middleware para JSON
+app.use(express.json());
+
+// Rota básica
+app.get('/', (req, res) => {
+  res.json({ mensagem: 'API funcionando!' });
+});
+
+// Iniciar servidor
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para criar servidor Express.
+                </div>
+                <div class="important">
+                    express.json() é essencial para receber JSON.
+                </div>
+            </div>
+
+            <div class="category">Rotas</div>
+
+            <div class="concept">
+                <h3>3. Rotas GET</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rota para buscar dados.<br>
+                    <strong>Para que serve:</strong> Implementar operações de leitura.<br>
+                    <strong>Importância:</strong> Operação mais comum em APIs.
+                </div>
+                <div class="code">
+// Listar todos os usuários
+app.get('/usuarios', (req, res) => {
+  const usuarios = [
+    { id: 1, nome: 'Abner' },
+    { id: 2, nome: 'Samira' }
+  ];
+  res.json(usuarios);
+});
+
+// Buscar usuário por ID
+app.get('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const usuario = { id: id, nome: 'Abner' };
+  res.json(usuario);
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para implementar endpoints de leitura.
+                </div>
+                <div class="important">
+                    req.params contém parâmetros da URL.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>4. Rotas POST</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rota para criar dados.<br>
+                    <strong>Para que serve:</strong> Implementar operações de criação.<br>
+                    <strong>Importância:</strong> Essencial para cadastros.
+                </div>
+                <div class="code">
+// Criar novo usuário
+app.post('/usuarios', (req, res) => {
+  const { nome, idade, email } = req.body;
+  
+  const novoUsuario = {
+    id: Date.now(),
+    nome,
+    idade,
+    email
+  };
+  
+  res.status(201).json(novoUsuario);
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para implementar endpoints de criação.
+                </div>
+                <div class="important">
+                    req.body contém dados enviados no corpo da requisição.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>5. Rotas PUT/PATCH</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rota para atualizar dados.<br>
+                    <strong>Para que serve:</strong> Implementar operações de atualização.<br>
+                    <strong>Importância:</strong> Essencial para edição de dados.
+                </div>
+                <div class="code">
+// Atualizar usuário (PUT)
+app.put('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const { nome, idade, email } = req.body;
+  
+  const usuarioAtualizado = {
+    id,
+    nome,
+    idade,
+    email
+  };
+  
+  res.json(usuarioAtualizado);
+});
+
+// Atualizar parcial (PATCH)
+app.patch('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const dadosAtualizacao = req.body;
+  
+  // Atualiza apenas campos enviados
+  const usuarioAtualizado = { id, ...dadosAtualizacao };
+  
+  res.json(usuarioAtualizado);
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para implementar endpoints de atualização.
+                </div>
+                <div class="important">
+                    PUT atualiza tudo, PATCH atualiza parcialmente.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>6. Rotas DELETE</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Rota para deletar dados.<br>
+                    <strong>Para que serve:</strong> Implementar operações de exclusão.<br>
+                    <strong>Importância:</strong> Essencial para remoção de dados.
+                </div>
+                <div class="code">
+// Deletar usuário
+app.delete('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  
+  // Lógica para deletar usuário
+  console.log(`Usuário ${id} deletado`);
+  
+  res.status(204).send();
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para implementar endpoints de exclusão.
+                </div>
+                <div class="important">
+                    204 No Content é o status correto para DELETE.
+                </div>
+            </div>
+
+            <div class="category">Middleware</div>
+
+            <div class="concept">
+                <h3>7. Middleware</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Funções que executam antes das rotas.<br>
+                    <strong>Para que serve:</strong> Processar requisições.<br>
+                    <strong>Importância:</strong> Autenticação, logging, validação.
+                </div>
+                <div class="code">
+// Middleware de logging
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
+// Middleware de autenticação
+const autenticar = (req, res, next) => {
+  const token = req.headers.authorization;
+  
+  if (!token) {
+    return res.status(401).json({ erro: 'Não autorizado' });
+  }
+  
+  next();
+};
+
+// Usar middleware em rota
+app.get('/protegido', autenticar, (req, res) => {
+  res.json({ mensagem: 'Acesso concedido' });
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para processar requisições.
+                </div>
+                <div class="important">
+                    next() é obrigatório para continuar para próxima função.
+                </div>
+            </div>
+        </div>
+
+        <!-- CRUD -->
+        <div id="crud" class="section">
+            <h2>📝 CRUD Completo com Express</h2>
+
+            <div class="category">Projeto Completo</div>
+
+            <div class="concept">
+                <h3>1. API CRUD Completa</h3>
+                <div class="description">
+                    <strong>O que é:</strong> API com todas as operações CRUD.<br>
+                    <strong>Para que serve:</strong> Exemplo completo de API REST.<br>
+                    <strong>Importância:</strong> Base para qualquer projeto real.
+                </div>
+                <div class="code">
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// Dados em memória (simulando banco)
+let usuarios = [
+  { id: 1, nome: 'Abner', idade: 23, email: 'abn@email.com' },
+  { id: 2, nome: 'Samira', idade: 22, email: 'sami@email.com' }
+];
+
+// CREATE - Criar usuário
+app.post('/usuarios', (req, res) => {
+  const { nome, idade, email } = req.body;
+  
+  if (!nome || !idade || !email) {
+    return res.status(400).json({ erro: 'Campos obrigatórios' });
+  }
+  
+  const novoUsuario = {
+    id: Date.now(),
+    nome,
+    idade,
+    email
+  };
+  
+  usuarios.push(novoUsuario);
+  res.status(201).json(novoUsuario);
+});
+
+// READ - Listar todos
+app.get('/usuarios', (req, res) => {
+  res.json(usuarios);
+});
+
+// READ - Buscar por ID
+app.get('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const usuario = usuarios.find(u => u.id == id);
+  
+  if (!usuario) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' });
+  }
+  
+  res.json(usuario);
+});
+
+// UPDATE - Atualizar usuário
+app.put('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const { nome, idade, email } = req.body;
+  
+  const index = usuarios.findIndex(u => u.id == id);
+  
+  if (index === -1) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' });
+  }
+  
+  usuarios[index] = { id: parseInt(id), nome, idade, email };
+  res.json(usuarios[index]);
+});
+
+// DELETE - Deletar usuário
+app.delete('/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const index = usuarios.findIndex(u => u.id == id);
+  
+  if (index === -1) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' });
+  }
+  
+  usuarios.splice(index, 1);
+  res.status(204).send();
+});
+
+app.listen(3000, () => {
+  console.log('API rodando na porta 3000');
+});
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Como base para projetos reais.
+                </div>
+                <div class="important">
+                    Em produção, substitua array por banco de dados.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>2. Testando a API</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Como testar os endpoints.<br>
+                    <strong>Para que serve:</strong> Verificar se API está funcionando.<br>
+                    <strong>Importância:</strong> Essencial durante desenvolvimento.
+                </div>
+                <div class="code">
+# Testar com curl
+curl http://localhost:3000/usuarios
+
+curl -X POST http://localhost:3000/usuarios \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"João","idade":25,"email":"joao@email.com"}'
+
+curl -X PUT http://localhost:3000/usuarios/1 \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"João Atualizado","idade":26,"email":"joao@email.com"}'
+
+curl -X DELETE http://localhost:3000/usuarios/1
+
+# Ou usar ferramentas como Postman, Insomnia
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Para testar endpoints durante desenvolvimento.
+                </div>
+                <div class="important">
+                    Postman é a ferramenta mais popular para testar APIs.
+                </div>
+            </div>
+
+            <div class="concept">
+                <h3>3. Boas Práticas</h3>
+                <div class="description">
+                    <strong>O que é:</strong> Práticas recomendadas para APIs.<br>
+                    <strong>Para que serve:</strong> Criar APIs profissionais.<br>
+                    <strong>Importância:</strong> Qualidade e manutenibilidade.
+                </div>
+                <div class="code">
+// ✅ Boas Práticas
+
+// 1. Validação de dados
+if (!nome || !email) {
+  return res.status(400).json({ erro: 'Campos obrigatórios' });
+}
+
+// 2. Tratamento de erros
+try {
+  // código
+} catch (error) {
+  res.status(500).json({ erro: 'Erro interno' });
+}
+
+// 3. Status codes corretos
+res.status(201).json(dados);   // Criado
+res.status(200).json(dados);   // OK
+res.status(404).json({ erro: 'Não encontrado' });
+
+// 4. Nomes de rotas consistentes
+/api/usuarios (plural)
+/api/produtos (plural)
+
+// 5. Versionamento
+/api/v1/usuarios
+
+// 6. Documentação
+// Usar Swagger/OpenAPI
+                </div>
+                <div class="usage">
+                    <strong>Quando usar:</strong> Sempre ao criar APIs.
+                </div>
+                <div class="important">
+                    Validação e tratamento de erros são essenciais.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

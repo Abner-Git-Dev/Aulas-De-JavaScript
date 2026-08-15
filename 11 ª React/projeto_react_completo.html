@@ -5,37 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto React Completo - Cadastro de Usuários</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
-            background-color: #f5f5f5;
         }
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 0 auto;
         }
         h1 {
-            color: #333;
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 10px;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        h2 {
-            color: #007bff;
-            margin-top: 30px;
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
-        .secao {
-            background-color: #f8f9fa;
-            border-left: 4px solid #007bff;
-            padding: 20px;
-            margin: 20px 0;
+        .nav button {
+            padding: 10px 20px;
+            background: white;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .nav button:hover {
+            transform: scale(1.05);
+        }
+        .nav button.active {
+            background: #2e2d4e;
+            color: white;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            color: #2e2d4e;
+            border-bottom: 3px solid #8b8ae1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
         .codigo {
-            background-color: #1e1e1e;
+            background: #1e1e1e;
             color: #d4d4d4;
             padding: 15px;
             border-radius: 5px;
@@ -46,7 +79,7 @@
             white-space: pre;
         }
         .titulo-arquivo {
-            background-color: #007bff;
+            background: #007bff;
             color: white;
             padding: 5px 10px;
             border-radius: 3px;
@@ -54,18 +87,39 @@
             margin-bottom: 10px;
             display: inline-block;
         }
+        .explicacao {
+            background: #f8f9fa;
+            border-left: 4px solid #8b8ae1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .explicacao-item {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .explicacao-item strong {
+            color: #2e2d4e;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>📚 Projeto React Completo - Cadastro de Usuários</h1>
-        <p>Todos os códigos do projeto de cadastro de usuários em React.</p>
+        
+        <div class="nav">
+            <button onclick="showSection('main')" class="active">main.jsx</button>
+            <button onclick="showSection('indexcss')">index.css</button>
+            <button onclick="showSection('home')">Home/index.jsx</button>
+            <button onclick="showSection('stylecss')">Home/style.css</button>
+            <button onclick="showSection('comandos')">Comandos</button>
+        </div>
 
-        <!-- ============================================ -->
         <!-- MAIN.JSX -->
-        <!-- ============================================ -->
-        <div class="secao">
-            <h2>1. main.jsx</h2>
+        <div id="main" class="section active">
+            <h2>main.jsx</h2>
             <span class="titulo-arquivo">src/main.jsx</span>
             <div class="codigo">
 import React from 'react'
@@ -79,13 +133,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   &lt;/React.StrictMode&gt;,
 )
             </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>import React from 'react'</strong> - Importa a biblioteca React para criar componentes</div>
+                <div class="explicacao-item"><strong>import ReactDOM from 'react-dom/client'</strong> - Importa ReactDOM para renderizar componentes no DOM</div>
+                <div class="explicacao-item"><strong>import Home from './pages/Home'</strong> - Importa o componente Home da pasta pages</div>
+                <div class="explicacao-item"><strong>import './index.css'</strong> - Importa o arquivo de estilos globais</div>
+                <div class="explicacao-item"><strong>ReactDOM.createRoot(document.getElementById('root'))</strong> - Cria o ponto de montagem no elemento com id="root"</div>
+                <div class="explicacao-item"><strong>.render(&lt;Home /&gt;)</strong> - Renderiza o componente Home na página</div>
+                <div class="explicacao-item"><strong>&lt;React.StrictMode&gt;</strong> - Modo estrito do React para detectar problemas</div>
+            </div>
         </div>
 
-        <!-- ============================================ -->
         <!-- INDEX.CSS -->
-        <!-- ============================================ -->
-        <div class="secao">
-            <h2>2. index.css</h2>
+        <div id="indexcss" class="section">
+            <h2>index.css</h2>
             <span class="titulo-arquivo">src/index.css</span>
             <div class="codigo">
 * {
@@ -96,19 +157,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 }
 
 body {
-
   min-height: 100vh;
   width: 100vw;
   background: linear-gradient(180deg, #363467 0%, rgba(30, 29, 79, 0.8) 100%);
 }
             </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>* { margin: 0; padding: 0; }</strong> - Remove margens e paddings padrão de todos os elementos</div>
+                <div class="explicacao-item"><strong>box-sizing: border-box</strong> - Faz com que padding e border sejam incluídos na largura do elemento</div>
+                <div class="explicacao-item"><strong>font-family: "Poppins", sans-serif</strong> - Define a fonte padrão como Poppins</div>
+                <div class="explicacao-item"><strong>min-height: 100vh</strong> - Define altura mínima do body como 100% da altura da viewport</div>
+                <div class="explicacao-item"><strong>width: 100vw</strong> - Define largura do body como 100% da largura da viewport</div>
+                <div class="explicacao-item"><strong>background: linear-gradient</strong> - Cria um gradiente de cor de fundo (roxo escuro)</div>
+            </div>
         </div>
 
-        <!-- ============================================ -->
         <!-- HOME/INDEX.JSX -->
-        <!-- ============================================ -->
-        <div class="secao">
-            <h2>3. Home/index.jsx</h2>
+        <div id="home" class="section">
+            <h2>Home/index.jsx</h2>
             <span class="titulo-arquivo">src/Home/index.jsx</span>
             <div class="codigo">
 import './style.css'
@@ -171,13 +237,33 @@ function Home() {
 
 export default Home
             </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>import './style.css'</strong> - Importa o arquivo de estilos do componente Home</div>
+                <div class="explicacao-item"><strong>import Trash from '../../assets/trash.svg'</strong> - Importa a imagem da lixeira</div>
+                <div class="explicacao-item"><strong>const users = [...]</strong> - Cria um array com dados de usuários (simulando dados de API)</div>
+                <div class="explicacao-item"><strong>function Home()</strong> - Define o componente funcional Home</div>
+                <div class="explicacao-item"><strong>return (...)</strong> - Retorna o JSX que será renderizado</div>
+                <div class="explicacao-item"><strong>&lt;div className='container'&gt;</strong> - Div principal com classe 'container' para estilização</div>
+                <div class="explicacao-item"><strong>&lt;form&gt;</strong> - Formulário para cadastro de usuários</div>
+                <div class="explicacao-item"><strong>&lt;h1&gt;Cadastro De Usuários&lt;/h1&gt;</strong> - Título do formulário</div>
+                <div class="explicacao-item"><strong>&lt;input placeholder='Nome' name='nome' type='text' /&gt;</strong> - Campo de input para nome do usuário</div>
+                <div class="explicacao-item"><strong>&lt;input placeholder='Idade' name='idade' type='number' /&gt;</strong> - Campo de input para idade (aceita apenas números)</div>
+                <div class="explicacao-item"><strong>&lt;input placeholder='Email' name='email' type='email' /&gt;</strong> - Campo de input para email (valida formato de email)</div>
+                <div class="explicacao-item"><strong>&lt;button type='button' className='cadastrar-button'&gt;Cadastrar&lt;/button&gt;</strong> - Botão para cadastrar usuário (type='button' evita submit do formulário)</div>
+                <div class="explicacao-item"><strong>{users.map(user =&gt; (...))}</strong> - Itera sobre o array de usuários e renderiza cada um</div>
+                <div class="explicacao-item"><strong>key={user.id}</strong> - Identificador único para cada elemento da lista (obrigatório no React)</div>
+                <div class="explicacao-item"><strong>className='card'</strong> - Aplica classe CSS 'card' para estilização</div>
+                <div class="explicacao-item"><strong>&lt;p&gt;Nome: &lt;span&gt;{user.name}&lt;/span&gt;&lt;/p&gt;</strong> - Exibe o nome do usuário com span para estilo diferente</div>
+                <div class="explicacao-item"><strong>&lt;p&gt;Idade: &lt;span&gt;{user.age}&lt;/span&gt;&lt;/p&gt;</strong> - Exibe a idade do usuário</div>
+                <div class="explicacao-item"><strong>&lt;p&gt;Email: &lt;span&gt;{user.email}&lt;/span&gt;&lt;/p&gt;</strong> - Exibe o email do usuário</div>
+                <div class="explicacao-item"><strong>&lt;img src={Trash} /&gt;</strong> - Exibe a imagem da lixeira importada</div>
+                <div class="explicacao-item"><strong>export default Home</strong> - Exporta o componente Home como padrão</div>
+            </div>
         </div>
 
-        <!-- ============================================ -->
         <!-- HOME/STYLE.CSS -->
-        <!-- ============================================ -->
-        <div class="secao">
-            <h2>4. Home/style.css</h2>
+        <div id="stylecss" class="section">
+            <h2>Home/style.css</h2>
             <span class="titulo-arquivo">src/Home/style.css</span>
             <div class="codigo">
 .container {
@@ -267,13 +353,57 @@ form {
 
 }
             </div>
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>.container { display: flex; }</strong> - Ativa o modo flexbox para alinhar elementos</div>
+                <div class="explicacao-item"><strong>align-items: center</strong> - Centraliza elementos verticalmente</div>
+                <div class="explicacao-item"><strong>flex-direction: column</strong> - Organiza elementos em coluna (um abaixo do outro)</div>
+                <div class="explicacao-item"><strong>padding-top: 100px</strong> - Adiciona espaçamento de 100px no topo</div>
+                <div class="explicacao-item"><strong>h1 { color: aliceblue; }</strong> - Define cor do título como aliceblue (branco azulado)</div>
+                <div class="explicacao-item"><strong>font-size: 28px</strong> - Define tamanho da fonte como 28px</div>
+                <div class="explicacao-item"><strong>text-align: center</strong> - Centraliza o texto horizontalmente</div>
+                <div class="explicacao-item"><strong>form { display: flex; flex-direction: column; }</strong> - Organiza elementos do formulário em coluna</div>
+                <div class="explicacao-item"><strong>gap: 30px</strong> - Cria espaçamento de 30px entre elementos do formulário</div>
+                <div class="explicacao-item"><strong>padding: 30px</strong> - Adiciona espaçamento interno de 30px</div>
+                <div class="explicacao-item"><strong>border-radius: 10px</strong> - Arredonda cantos do formulário</div>
+                <div class="explicacao-item"><strong>background-color: #2e2d4e</strong> - Define cor de fundo do formulário (roxo escuro)</div>
+                <div class="explicacao-item"><strong>max-width: 50%</strong> - Limita largura máxima a 50% do container</div>
+                <div class="explicacao-item"><strong>width: 400px</strong> - Define largura fixa de 400px</div>
+                <div class="explicacao-item"><strong>margin-bottom: 20px</strong> - Adiciona espaçamento de 20px abaixo do formulário</div>
+                <div class="explicacao-item"><strong>.cadastrar-button { background-color: #8b8ae1; }</strong> - Define cor de fundo do botão (roxo claro)</div>
+                <div class="explicacao-item"><strong>border-radius: 30px</strong> - Arredonda cantos do botão (bem arredondado)</div>
+                <div class="explicacao-item"><strong>height: 40px</strong> - Define altura do botão como 40px</div>
+                <div class="explicacao-item"><strong>border: none</strong> - Remove borda do botão</div>
+                <div class="explicacao-item"><strong>font-weight: bold</strong> - Deixa texto do botão em negrito</div>
+                <div class="explicacao-item"><strong>cursor: pointer</strong> - Muda cursor para mãozinha ao passar mouse</div>
+                <div class="explicacao-item"><strong>& button:hover { opacity: 0.5; }</strong> - Deixa botão 50% transparente ao passar mouse</div>
+                <div class="explicacao-item"><strong>& input { border: 1px solid #48456c; }</strong> - Adiciona borda de 1px cor roxa aos inputs</div>
+                <div class="explicacao-item"><strong>border-radius: 30px</strong> - Arredonda cantos dos inputs</div>
+                <div class="explicacao-item"><strong>height: 40px</strong> - Define altura dos inputs como 40px</div>
+                <div class="explicacao-item"><strong>background-color: #363653</strong> - Define cor de fundo dos inputs (roxo médio)</div>
+                <div class="explicacao-item"><strong>color: #ffff</strong> - Define cor do texto dos inputs como branco</div>
+                <div class="explicacao-item"><strong>font-size: 16px</strong> - Define tamanho da fonte dos inputs</div>
+                <div class="explicacao-item"><strong>padding-left: 10px</strong> - Adiciona espaçamento de 10px à esquerda do texto</div>
+                <div class="explicacao-item"><strong>outline: none</strong> - Remove borda de foco padrão dos inputs</div>
+                <div class="explicacao-item"><strong>.card { display: flex; }</strong> - Ativa flexbox para o card</div>
+                <div class="explicacao-item"><strong>justify-content: space-between</strong> - Distribui elementos com espaços iguais entre eles</div>
+                <div class="explicacao-item"><strong>background-color: #2e2d4e</strong> - Define cor de fundo do card (roxo escuro)</div>
+                <div class="explicacao-item"><strong>margin: 10px</strong> - Adiciona espaçamento de 10px ao redor do card</div>
+                <div class="explicacao-item"><strong>padding: 10px</strong> - Adiciona espaçamento interno de 10px</div>
+                <div class="explicacao-item"><strong>width: 400px</strong> - Define largura do card como 400px</div>
+                <div class="explicacao-item"><strong>border-radius: 10px</strong> - Arredonda cantos do card</div>
+                <div class="explicacao-item"><strong>& p { color: #fff; }</strong> - Define cor do texto dos parágrafos como branco</div>
+                <div class="explicacao-item"><strong>font-weight: bold</strong> - Deixa texto dos parágrafos em negrito</div>
+                <div class="explicacao-item"><strong>& span { font-weight: normal; }</strong> - Deixa texto dentro de span em peso normal (não negrito)</div>
+                <div class="explicacao-item"><strong>& button { background-color: transparent; }</strong> - Deixa botão transparente (sem cor de fundo)</div>
+                <div class="explicacao-item"><strong>border: none</strong> - Remove borda do botão</div>
+                <div class="explicacao-item"><strong>cursor: pointer</strong> - Muda cursor para mãozinha</div>
+                <div class="explicacao-item"><strong>& button:hover { opacity: 0.5; }</strong> - Deixa botão 50% transparente ao passar mouse</div>
+            </div>
         </div>
 
-        <!-- ============================================ -->
-        <!-- COMANDOS NPM -->
-        <!-- ============================================ -->
-        <div class="secao">
-            <h2>5. Comandos NPM</h2>
+        <!-- COMANDOS -->
+        <div id="comandos" class="section">
+            <h2>Comandos NPM</h2>
             <span class="titulo-arquivo">Terminal</span>
             <div class="codigo">
 # Criar projeto Vite
@@ -294,42 +424,30 @@ npm run build
 # Preview do build
 npm run preview
             </div>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- ESTRUTURA DE PASTAS -->
-        <!-- ============================================ -->
-        <div class="secao">
-            <h2>6. Estrutura de Pastas</h2>
-            <span class="titulo-arquivo">Estrutura do Projeto</span>
-            <div class="codigo">
-devclub-cadastro-usuarios/
-├── src/
-│   ├── Home/
-│   │   ├── index.jsx
-│   │   └── style.css
-│   ├── assets/
-│   │   └── trash.svg
-│   ├── index.css
-│   └── main.jsx
-├── node_modules/
-├── index.html
-├── package.json
-└── vite.config.js
+            <div class="explicacao">
+                <div class="explicacao-item"><strong>npm create vite</strong> - Cria um novo projeto Vite (ferramenta de build rápida)</div>
+                <div class="explicacao-item"><strong>cd nome-do-projeto</strong> - Navega para a pasta do projeto criado</div>
+                <div class="explicacao-item"><strong>npm install</strong> - Instala todas as dependências listadas no package.json</div>
+                <div class="explicacao-item"><strong>npm run dev</strong> - Inicia o servidor de desenvolvimento com hot reload (atualização automática)</div>
+                <div class="explicacao-item"><strong>npm run build</strong> - Compila o projeto para produção (cria versão otimizada)</div>
+                <div class="explicacao-item"><strong>npm run preview</strong> - Preview do build de produção localmente</div>
             </div>
         </div>
-
-        <div class="secao">
-            <h2>📝 Observações Importantes</h2>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>Componentes React sempre começam com letra maiúscula</li>
-                <li>Use <code>className</code> em vez de <code>class</code> no JSX</li>
-                <li>Use <code>camelCase</code> para eventos (onClick, onChange)</li>
-                <li>Sempre use <code>key</code> único ao usar <code>map()</code></li>
-                <li>Importe imagens com caminho relativo correto</li>
-                <li>CSS modules ajudam a evitar conflitos de estilos</li>
-            </ul>
-        </div>
     </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
